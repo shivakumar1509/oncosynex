@@ -1,7 +1,21 @@
 :root{
-  --bg:#cfefff; --ink:#12141a; --muted:#5b6170; --panel:#ffffff; --line:#e6ebf4;
-  --brand:#7a3cff; --brand-2:#06c6a0; --btn:#a23bff; --btn-ink:#fff;
-  --radius:16px; --shadow:0 10px 28px rgba(20,20,20,.10); --shadow-soft:0 6px 16px rgba(20,20,20,.08);
+  /* Base */
+  --bg:#0f2d6b;        /* deep blue page background */
+  --ink:#ffffff;       /* main text turns white on blue */
+  --muted:#c7d2e8;     /* lighter secondary text */
+  --panel:#ffffff;     /* cards/panels stay white */
+  --line:#e6ebf4;
+
+  /* Accents (make buttons/eyebrow blue instead of purple) */
+  --brand:#1e64ff;
+  --brand-2:#06c6a0;   /* optional secondary accent */
+  --btn:#1e64ff;
+  --btn-ink:#ffffff;
+
+  /* Layout */
+  --radius:16px;
+  --shadow:0 10px 28px rgba(20,20,20,.10);
+  --shadow-soft:0 6px 16px rgba(20,20,20,.08);
   --max:1180px;
 }
 *{box-sizing:border-box} html,body{height:100%}
