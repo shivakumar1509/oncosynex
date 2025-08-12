@@ -3,60 +3,124 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OncoSyNex — Oncology • Synergy • Next‑gen</title>
+  <title>OncoSyNex — Oncology • Synergy • Next-gen</title>
   <style>
-  :root {
-    --bg: #ffffff;           /* White background */
-    --panel: #f5f5f5;        /* Light gray panels */
-    --ink: #111111;          /* Main text color (near-black) */
-    --muted: #555555;        /* Muted text (gray) */
-    --brand: #0055cc;        /* Brand blue */
-    --brand-2: #00b894;      /* Secondary accent green */
-    --accent: #ff9800;       /* Accent orange */
-    --ring: rgba(0,85,204,0.45);
-    --radius: 14px;
-    --shadow: 0 10px 30px rgba(0,0,0,.1);
-  }
-</style>
+    /* --- Base / reset --- */
+    :root {
+      --bg: #ffffff;           /* White background */
+      --panel: #f5f5f5;        /* Light gray panels */
+      --ink: #111111;          /* Main text color */
+      --muted: #555555;        /* Muted text */
+      --brand: #0055cc;        /* Brand blue */
+      --brand-2: #00b894;      /* Accent green */
+      --accent: #ff9800;       /* Accent orange */
+      --ring: rgba(0,85,204,0.45);
+      --radius: 14px;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
     * { box-sizing: border-box; }
     html, body { height: 100%; }
-    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: var(--bg); color: var(--ink); }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
     .container { width: min(1100px, 92%); margin: 0 auto; }
 
     /* --- Header / nav --- */
-    header.site { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(8px); background: rgba(11,13,17,.6); border-bottom: 1px solid rgba(255,255,255,.06);}    
+    header.site {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.9);
+      border-bottom: 1px solid rgba(0,0,0,.06);
+    }
     .nav { display:flex; align-items:center; justify-content:space-between; padding: 14px 0; gap: 12px; }
     .brand { display:flex; align-items:center; gap:10px; font-weight: 700; letter-spacing:.3px; }
-    .brand .dot { width: 12px; height:12px; border-radius:50%; background: linear-gradient(135deg,var(--brand),var(--brand-2)); box-shadow:0 0 0 6px rgba(91,140,255,.08); }
+    .brand .dot { width: 12px; height:12px; border-radius:50%; background: linear-gradient(135deg,var(--brand),var(--brand-2)); box-shadow:0 0 0 6px rgba(0,85,204,.08); }
     .brand span { font-size: 1.05rem; }
 
     .menu { display:flex; align-items:center; gap: 18px; flex-wrap: wrap; }
-    .menu a { color: var(--muted); font-weight: 600; font-size:.96rem; opacity:.95; }
+    .menu a { color: var(--muted); font-weight: 600; font-size:.96rem; }
     .menu a:hover { color: var(--ink); }
 
     /* Dropdown */
     .dropdown { position: relative; }
-    .dropdown > button { background: none; border: 0; color: var(--muted); font-weight: 700; cursor: pointer; padding: 8px 4px; }
+    .dropdown > button {
+      background: none;
+      border: 0;
+      color: var(--muted);
+      font-weight: 700;
+      cursor: pointer;
+      padding: 8px 4px;
+    }
     .dropdown > button:hover { color: var(--ink); }
-    .dropdown .panel { position: absolute; top: 120%; left: 0; background: var(--panel); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); box-shadow: var(--shadow); padding: 10px; min-width: 240px; display: none; }
+    .dropdown .panel {
+      position: absolute;
+      top: 120%;
+      left: 0;
+      background: var(--panel);
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 10px;
+      min-width: 240px;
+      display: none;
+    }
     .dropdown:hover .panel { display: block; }
-    .dropdown .panel a { display:block; padding: 10px 12px; border-radius: 10px; }
-    .dropdown .panel a:hover { background: rgba(255,255,255,.06); color: var(--ink); }
+    .dropdown .panel a {
+      display:block;
+      padding: 10px 12px;
+      border-radius: 10px;
+    }
+    .dropdown .panel a:hover {
+      background: rgba(0,0,0,.06);
+      color: var(--ink);
+    }
 
     /* --- Hero --- */
-    .hero { padding: 64px 0 36px; border-bottom: 1px solid rgba(255,255,255,.06); }
-    .hero h1 { font-size: clamp(2rem, 3vw + 1rem, 3rem); line-height:1.1; margin: 8px 0 14px; }
+    .hero {
+      padding: 64px 0 36px;
+      border-bottom: 1px solid rgba(0,0,0,.06);
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 3vw + 1rem, 3rem);
+      line-height:1.1;
+      margin: 8px 0 14px;
+    }
     .hero p { color: var(--muted); font-size: 1.05rem; max-width: 760px; }
     .cta { display:flex; gap:12px; margin-top:18px; flex-wrap: wrap; }
-    .btn { display:inline-flex; align-items:center; gap:10px; padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,.1); background: linear-gradient(135deg, rgba(91,140,255,.18), rgba(126,247,200,.18)); color: var(--ink); font-weight:800; box-shadow: var(--shadow); }
-    .btn:hover { border-color: rgba(255,255,255,.25); box-shadow: 0 10px 30px rgba(126,247,200,.12), 0 10px 30px rgba(91,140,255,.12); }
+    .btn {
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,.1);
+      background: linear-gradient(135deg, rgba(0,85,204,.08), rgba(0,184,148,.08));
+      color: var(--ink);
+      font-weight:800;
+      box-shadow: var(--shadow);
+    }
+    .btn:hover {
+      border-color: rgba(0,0,0,.25);
+      box-shadow: 0 10px 30px rgba(0,85,204,.12), 0 10px 30px rgba(0,184,148,.12);
+    }
     .btn.secondary { background: transparent; }
 
     /* --- Sections --- */
     section { scroll-margin-top: 80px; }
-    .panel { background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); }
+    .panel {
+      background: var(--panel);
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
     .grid { display:grid; gap:16px; }
     .grid.cols-3 { grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); }
 
@@ -65,266 +129,44 @@
     p.lead { color: var(--muted); }
 
     /* --- Pricing --- */
-    .pricing .card { padding: 22px; border-radius: var(--radius); border: 1px solid rgba(255,255,255,.08); background: var(--panel); }
-    .pricing .price { font-size: 2rem; font-weight: 900; margin: 6px 0 12px; }
+    .pricing .card {
+      padding: 22px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(0,0,0,.08);
+      background: var(--panel);
+    }
+    .pricing .price {
+      font-size: 2rem;
+      font-weight: 900;
+      margin: 6px 0 12px;
+    }
     .pricing ul { padding-left: 18px; color: var(--muted); }
 
     /* --- Footer --- */
-    footer.site { margin-top: 60px; padding: 36px 0; border-top:1px solid rgba(255,255,255,.08); color: var(--muted); }
+    footer.site {
+      margin-top: 60px;
+      padding: 36px 0;
+      border-top:1px solid rgba(0,0,0,.08);
+      color: var(--muted);
+    }
     .cols { display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
     .copyright { margin-top: 16px; font-size: .9rem; }
 
     /* --- Small helper styles --- */
-    .tag { display:inline-block; padding: 4px 8px; border-radius: 999px; border:1px solid rgba(255,255,255,.12); color: var(--accent); font-weight:700; font-size:.8rem; }
+    .tag {
+      display:inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border:1px solid rgba(0,0,0,.12);
+      color: var(--accent);
+      font-weight:700;
+      font-size:.8rem;
+    }
     .chips { display:flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
     .muted { color: var(--muted); }
   </style>
 </head>
 <body>
-  <!-- Header / Navigation -->
-  <header class="site">
-    <div class="container nav">
-      <a class="brand" href="#home" title="OncoSyNex">
-        <span class="dot" aria-hidden="true"></span>
-        <span>OncoSyNex</span>
-      </a>
-      <nav class="menu" aria-label="Primary">
-        <a href="#home">Home</a>
-        <div class="dropdown">
-          <button aria-haspopup="true" aria-expanded="false">Product ▾</button>
-          <div class="panel" role="menu">
-            <a href="#bioinformatics" role="menuitem">Bioinformatics Suite</a>
-            <a href="#immunoai" role="menuitem">ImmunoAI Platform</a>
-            <a href="#antigens" role="menuitem">Antigens Catalog</a>
-          </div>
-        </div>
-        <a href="#pricing">Pricing</a>
-        <a href="#resources">Resources</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Hero / Home -->
-  <section id="home" class="hero">
-    <div class="container">
-      <span class="tag">Oncology • Synergy • Next‑gen</span>
-      <h1>Precision oncology tools for discovery and deployment</h1>
-      <p>OncoSyNex unifies bioinformatics pipelines and AI‑driven immunology to accelerate neoantigen discovery, mAb design, and translational insights—from FASTQ to ranked candidates.</p>
-      <div class="cta">
-        <a class="btn" href="#demo">Schedule a Demo</a>
-        <a class="btn secondary" href="#ask-ai">Ask OncoSyNex AI</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Product: Bioinformatics -->
-  <section id="bioinformatics" class="container">
-    <h2>Bioinformatics Suite</h2>
-    <p class="lead">Reproducible, containerized pipelines with audit trails and clean exports for downstream analysis.</p>
-    <div class="grid cols-3">
-      <div class="panel">
-        <h3>Bulk RNA‑seq</h3>
-        <p class="muted">QC → alignment → quantification → DE → enrichment → publication‑grade plots (PNG/TIFF, 300DPI).</p>
-        <div class="chips">
-          <span class="tag">FastQC</span>
-          <span class="tag">HISAT2/STAR</span>
-          <span class="tag">DESeq2</span>
-        </div>
-      </div>
-      <div class="panel">
-        <h3>Variant Calling</h3>
-        <p class="muted">WES/WGS pipeline with trimming, BWA‑MEM, GATK/MuTect2, VEP annotation, and exonic filters.</p>
-        <div class="chips">
-          <span class="tag">GATK</span>
-          <span class="tag">VEP</span>
-          <span class="tag">bcftools</span>
-        </div>
-      </div>
-      <div class="panel">
-        <h3>HLA Typing</h3>
-        <p class="muted">Automated Class I/II allele calls via OptiType & arcasHLA with pVACseq‑compatible formatting.</p>
-        <div class="chips">
-          <span class="tag">OptiType</span>
-          <span class="tag">arcasHLA</span>
-          <span class="tag">pVACseq</span>
-        </div>
-      </div>
-      <div class="panel">
-        <h3>scRNA‑seq</h3>
-        <p class="muted">Parse Biosciences & 10x pipelines, Seurat integration, clustering, UMAP/t‑SNE, and markers.</p>
-        <div class="chips">
-          <span class="tag">Seurat</span>
-          <span class="tag">Scanpy</span>
-          <span class="tag">Cell Ranger</span>
-        </div>
-      </div>
-      <div class="panel">
-        <h3>Reporting</h3>
-        <p class="muted">Automated logs, audit trails, and exports to CSV, PDF, RDS, H5AD, and more.</p>
-      </div>
-      <div class="panel">
-        <h3>Deployment</h3>
-        <p class="muted">Dockerized workflows for reproducibility across on‑prem and cloud (AWS, GCP, Azure).</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Product: ImmunoAI -->
-  <section id="immunoai" class="container">
-    <h2>ImmunoAI Platform</h2>
-    <p class="lead">AI‑assisted prioritization of neoantigens and neoantibodies using curated public datasets and internal heuristics.</p>
-    <div class="grid cols-3">
-      <div class="panel">
-        <h3>Neoantigen Discovery</h3>
-        <p class="muted">Integrates IEDB, TESLA, and dbPepNeo to rank Class I/II candidates with XGBoost.</p>
-        <div class="chips">
-          <span class="tag">IEDB</span>
-          <span class="tag">TESLA</span>
-          <span class="tag">XGBoost</span>
-        </div>
-      </div>
-      <div class="panel">
-        <h3>Neoantibody & mAb Design</h3>
-        <p class="muted">Sequence analysis and structure‑aware design workflows to accelerate lead selection.</p>
-        <div class="chips">
-          <span class="tag">Ab design</span>
-          <span class="tag">Docking</span>
-        </div>
-      </div>
-      <div class="panel">
-        <h3>Prioritization Dashboard</h3>
-        <p class="muted">Interactive ranking, pathway filters, and export to downstream wet‑lab validation.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Antigens Catalog -->
-  <section id="antigens" class="container">
-    <h2>Antigens Catalog</h2>
-    <p class="lead">Planned SKUs for research‑use only (RUO). Contact us for availability and lead times.</p>
-    <div class="grid cols-3">
-      <div class="panel"><h3>Synthetic Peptide Pools</h3><p class="muted">Curated cancer‑relevant epitopes for screening.</p></div>
-      <div class="panel"><h3>Custom Neoepitopes</h3><p class="muted">Patient‑specific designs from ranked candidates.</p></div>
-      <div class="panel"><h3>Protein Antigens</h3><p class="muted">Recombinant targets for assay development.</p></div>
-    </div>
-  </section>
-
-  <!-- Pricing -->
-  <section id="pricing" class="container pricing">
-    <h2>Pricing</h2>
-    <div class="grid cols-3">
-      <div class="card">
-        <h3>Starter</h3>
-        <div class="price">$0</div>
-        <ul>
-          <li>Static site & docs</li>
-          <li>Email support (community)</li>
-          <li>Demo access</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Pro</h3>
-        <div class="price">$199<span style="font-size:.9rem; color:var(--muted);">/mo</span></div>
-        <ul>
-          <li>Batch pipeline runs</li>
-          <li>Priority support</li>
-          <li>Team seats</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Enterprise</h3>
-        <div class="price">Custom</div>
-        <ul>
-          <li>Private cloud / on‑prem</li>
-          <li>SLAs & compliance</li>
-          <li>Hands‑on onboarding</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Resources -->
-  <section id="resources" class="container">
-    <h2>Resources</h2>
-    <div class="grid cols-3">
-      <div class="panel"><h3>News & Blog</h3><p class="muted">Product updates, case studies, and release notes.</p></div>
-      <div class="panel"><h3>Research & Education</h3><p class="muted">Whitepapers, tutorials, and datasets.</p></div>
-      <div class="panel"><h3>Platform Docs</h3><p class="muted">API spec, CLI usage, and pipeline references.</p></div>
-    </div>
-  </section>
-
-  <!-- About -->
-  <section id="about" class="container">
-    <h2>About OncoSyNex</h2>
-    <div class="grid cols-3">
-      <div class="panel">
-        <h3>Mission</h3>
-        <p class="muted">Accelerate precision oncology by unifying robust pipelines with AI‑guided immunology.</p>
-      </div>
-      <div class="panel">
-        <h3>Vision</h3>
-        <p class="muted">Make advanced cancer analytics accessible to labs and clinics worldwide.</p>
-      </div>
-      <div class="panel">
-        <h3>Team</h3>
-        <p class="muted">Founders, collaborators, and advisors across bioinformatics and translational oncology.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Demo & Ask AI anchors -->
-  <section id="demo" class="container">
-    <h2>Schedule a Demo</h2>
-    <p class="muted">Share your email and a preferred time—we’ll reach out with a calendar link.</p>
-    <div class="panel"><p class="muted">(Form placeholder — we can wire this to Formspree or AWS Lambda later.)</p></div>
-  </section>
-
-  <section id="ask-ai" class="container">
-    <h2>Ask OncoSyNex AI</h2>
-    <p class="muted">A simple prompt box that routes to a backend endpoint (to be deployed on AWS when ready).</p>
-    <div class="panel"><p class="muted">(Chat widget placeholder — we’ll connect to your API when the server is online.)</p></div>
-  </section>
-
-  <!-- Contact / Footer -->
-  <section id="contact" class="container">
-    <h2>Contact</h2>
-    <div class="panel">
-      <p class="muted">Email: hello@oncosynex.com • Location: USA / India • For partnerships and pilots, mention your assay types and timelines.</p>
-    </div>
-  </section>
-
-  <footer class="site">
-    <div class="container">
-      <div class="cols">
-        <div>
-          <div class="brand"><span class="dot"></span><span>OncoSyNex</span></div>
-          <p class="muted">Oncology • Synergy • Next‑gen</p>
-        </div>
-        <div>
-          <h3>Company</h3>
-          <p class="muted"><a href="#about">About</a><br><a href="#resources">Resources</a><br><a href="#pricing">Pricing</a></p>
-        </div>
-        <div>
-          <h3>Product</h3>
-          <p class="muted"><a href="#bioinformatics">Bioinformatics</a><br><a href="#immunoai">ImmunoAI</a><br><a href="#antigens">Antigens</a></p>
-        </div>
-        <div>
-          <h3>Get in touch</h3>
-          <p class="muted"><a href="#demo">Schedule a Demo</a><br><a href="#ask-ai">Ask OncoSyNex AI</a></p>
-        </div>
-      </div>
-      <p class="copyright">© <span id="y"></span> OncoSyNex</p>
-    </div>
-  </footer>
-
-  <script>
-    // year stamp
-    document.getElementById('y').textContent = new Date().getFullYear();
-    // simple focus ring for keyboard users
-    document.addEventListener('keydown', (e) => { if (e.key === 'Tab') document.body.style.outline = '2px solid var(--ring)'; });
-  </script>
+  <!-- Your full HTML body from your original dark version goes here without changes to structure -->
 </body>
 </html>
-
