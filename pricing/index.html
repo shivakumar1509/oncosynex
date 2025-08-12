@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OncoSyNex — Pricing</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <header class="site">
+    <div class="container nav">
+      <a class="brand" href="../"><span class="logo"></span><span>OncoSyNex</span></a>
+      <nav class="menu">
+        <a href="../">Home</a>
+        <a href="../pricing/">Pricing</a>
+        <a href="../resources/">Resources</a>
+        <a href="../about/" target="_blank" rel="noopener">About</a>
+        <a class="cta" href="../contact/" target="_blank" rel="noopener">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="container">
+    <h2>Pricing</h2>
+    <p class="lead">Start free. Scale as you grow.</p>
+    <div class="mega cols" style="position:static;display:grid;box-shadow:none;border:0;padding:0;grid-template-columns:repeat(3,1fr);gap:16px">
+      <div class="card"><h3>Starter</h3><div class="muted" style="font-size:2rem;font-weight:900">$0</div><ul><li>Static site & docs</li><li>Community email support</li><li>Demo access</li></ul></div>
+      <div class="card"><h3>Pro</h3><div class="muted" style="font-size:2rem;font-weight:900">$199<span style="font-size:.9rem;color:var(--muted)">/mo</span></div><ul><li>Batch pipeline runs</li><li>Priority support</li><li>Team seats</li></ul></div>
+      <div class="card"><h3>Enterprise</h3><div class="muted" style="font-size:2rem;font-weight:900">Custom</div><ul><li>Private cloud / on-prem</li><li>SLAs & compliance</li><li>Hands-on onboarding</li></ul></div>
+    </div>
+  </section>
+
+  <footer class="site"><div class="container"><p class="copyright">© <span id="y"></span> OncoSyNex</p></div></footer>
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
