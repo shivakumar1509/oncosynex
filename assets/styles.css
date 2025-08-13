@@ -101,7 +101,7 @@ h2{ font-size:1.8rem; margin:0 0 12px; color:var(--ink) }
 /* ===== FOOTER ===== */
 footer.site{
   margin-top:12px; border-top:2px solid #6fa0ff; background:#0b2456;
-  padding:12px 0; color:var(--muted);
+  padding:12px 0; color:#muted;
 }
 .footer-cols{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; align-items:start; text-align:left; }
 .footer-cols > div{ padding:4px 0; }
@@ -126,7 +126,7 @@ footer.site{
 }
 .dropdown:hover .mega{ display:block }
 
-/* Products dropdown */
+/* Products dropdown (stacked headings) */
 .product-dd .mega{
   right:0;
   background:var(--bg);
@@ -141,7 +141,7 @@ footer.site{
 }
 .product-dd .mega a{
   display:block; padding:10px 12px; border-radius:10px;
-  text-decoration:none; font-weight:600; font-size:.95rem;
+  text-decoration:none; font-weight:700; font-size:.95rem;
   transition: background .25s ease, box-shadow .25s ease, transform .2s ease;
 }
 .product-dd .mega a:hover{
@@ -151,7 +151,7 @@ footer.site{
 }
 .product-dd .mega a:hover, .product-dd .mega a:hover *{ color:#ffffff }
 
-/* Resources dropdown */
+/* Resources dropdown (now identical to product: stacked headings only) */
 .resources-dd .mega{
   right:0;
   background:var(--bg);
@@ -166,7 +166,7 @@ footer.site{
 }
 .resources-dd .mega a{
   display:block; padding:10px 12px; border-radius:10px;
-  text-decoration:none; font-weight:600; font-size:.95rem;
+  text-decoration:none; font-weight:700; font-size:.95rem;
   transition: background .25s ease, box-shadow .25s ease, transform .2s ease;
 }
 .resources-dd .mega a:hover{
