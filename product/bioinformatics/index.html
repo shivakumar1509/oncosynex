@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bioinformatics Suite — OncoSyNex</title>
+  <link rel="stylesheet" href="../../assets/styles.css?v=30" />
+</head>
+<body>
+  <header class="site">
+    <div class="container nav">
+      <a class="brand" href="../../"><span class="logo"></span><span class="brand-text">OncoSyNex</span></a>
+      <nav class="menu">
+        <a href="../../">Home</a>
+        <a href="../immunoai/">ImmunoAI</a>
+        <a href="../bioinformatics/">Bioinformatics</a>
+        <a href="../antigens/">Antigens</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Bioinformatics Suite</h1>
+      <p class="lead">Pick a pipeline to learn more.</p>
+      <div class="grid cols-3" style="margin-top:18px">
+        <a class="card" href="./bulk-rna-seq.html"><h3>Bulk RNA-seq</h3></a>
+        <a class="card" href="./variant-calling.html"><h3>Variant Calling</h3></a>
+        <a class="card" href="./hla-typing.html"><h3>HLA Typing</h3></a>
+        <a class="card" href="./scrna-seq.html"><h3>scRNA-seq</h3></a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site"><div class="container"><p class="copyright">© <span id="y"></span> OncoSyNex</p></div></footer>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>
