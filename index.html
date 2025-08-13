@@ -4,65 +4,72 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OncoSyNex — Home</title>
-  <!-- Load CSS from the project root on GitHub Pages -->
-  <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=37" />
+  <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=38" />
 </head>
 <body>
-  <!-- HEADER: brand left, menu right -->
+  <!-- HEADER: brand left, white action tabs right -->
   <header class="site">
-    <div class="container nav">
-      <a class="brand" href="./" aria-label="OncoSyNex Home">
+    <div class="container header-row">
+      <a class="brand" href="/oncosynex/" aria-label="OncoSyNex Home">
         <span class="logo" aria-hidden="true"></span>
         <span class="brand-text">OncoSyNex</span>
       </a>
 
-      <nav class="menu" aria-label="Primary">
-        <a href="./">Home</a>
-
-        <!-- PRODUCT (stacked headings only) -->
-        <div class="dropdown product-dd">
-          <button aria-haspopup="true" aria-expanded="false">Product ▾</button>
-          <div class="mega slim" role="menu">
-            <div class="cols three">
-              <a class="mega-link" href="./product/immunoai/"><h4>ImmunoAI Platform</h4></a>
-              <a class="mega-link" href="./product/bioinformatics/"><h4>Bioinformatics Suite</h4></a>
-              <a class="mega-link" href="./product/antigens/"><h4>Antigens Catalog</h4></a>
-            </div>
-          </div>
-        </div>
-
-        <a href="./pricing/">Pricing</a>
-
-        <!-- RESOURCES (now same as product: stacked headings only) -->
-        <div class="dropdown resources-dd">
-          <button aria-haspopup="true" aria-expanded="false">Resources ▾</button>
-          <div class="mega slim" role="menu">
-            <div class="cols three">
-              <a class="mega-link" href="./resources/news/"><h4>News & Blogs</h4></a>
-              <a class="mega-link" href="./resources/research/"><h4>Research & Education</h4></a>
-              <a class="mega-link" href="./resources/platform/"><h4>Platform Resources</h4></a>
-            </div>
-          </div>
-        </div>
-
-        <a href="./about/" target="_blank" rel="noopener">About</a>
-        <a href="./contact/" target="_blank" rel="noopener">Contact</a>
-      </nav>
+      <div class="top-actions">
+        <a class="tab" href="/oncosynex/contact/#demo" target="_blank" rel="noopener">Get a personalized demo</a>
+        <a class="tab" href="/oncosynex/resources/platform/" target="_blank" rel="noopener">Read the docs</a>
+        <a class="tab" href="/oncosynex/ai/" target="_blank" rel="noopener">Ask OncoSyNex AI</a>
+      </div>
     </div>
   </header>
 
   <!-- HERO -->
   <section class="hero">
     <div class="container">
+      <!-- Subnav moved into blue region -->
+      <nav class="subnav" aria-label="Primary">
+        <a href="/oncosynex/">Home</a>
+
+        <!-- PRODUCT (stacked headings only) -->
+        <div class="dropdown product-dd">
+          <button aria-haspopup="true" aria-expanded="false">Product ▾</button>
+          <div class="mega slim" role="menu">
+            <div class="cols three">
+              <a class="mega-link" href="/oncosynex/product/immunoai/"><h4>ImmunoAI Platform</h4></a>
+              <a class="mega-link" href="/oncosynex/product/bioinformatics/"><h4>Bioinformatics Suite</h4></a>
+              <a class="mega-link" href="/oncosynex/product/antigens/"><h4>Antigens Catalog</h4></a>
+            </div>
+          </div>
+        </div>
+
+        <a href="/oncosynex/pricing/">Pricing</a>
+
+        <!-- RESOURCES (same as product: stacked headings only) -->
+        <div class="dropdown resources-dd">
+          <button aria-haspopup="true" aria-expanded="false">Resources ▾</button>
+          <div class="mega slim" role="menu">
+            <div class="cols three">
+              <a class="mega-link" href="/oncosynex/resources/news/"><h4>News & Blogs</h4></a>
+              <a class="mega-link" href="/oncosynex/resources/research/"><h4>Research & Education</h4></a>
+              <a class="mega-link" href="/oncosynex/resources/platform/"><h4>Platform Resources</h4></a>
+            </div>
+          </div>
+        </div>
+
+        <a href="/oncosynex/about/" target="_blank" rel="noopener">About</a>
+        <a href="/oncosynex/contact/" target="_blank" rel="noopener">Contact</a>
+      </nav>
+
       <span class="wordmark">OncoSyNex</span>
       <h1>
         AI-powered multi-omics for immunotherapy, vaccine development, and translational research
         <span class="badge ee">end-to-end</span>
       </h1>
       <p class="lead"><strong>Antigens and plasmids</strong> for diagnostics and immunotherapy.</p>
+
       <div class="cta-row">
-        <a class="btn primary" href="./contact/#demo">Get a personalized demo</a>
-        <a class="btn" href="./resources/platform/">Read the docs</a>
+        <a class="btn primary" href="/oncosynex/contact/#demo">Get a personalized demo</a>
+        <a class="btn" href="/oncosynex/resources/platform/">Read the docs</a>
       </div>
     </div>
   </section>
@@ -75,16 +82,16 @@
         <div>
           <h3>Navigate</h3>
           <p class="muted">
-            <a href="./pricing/">Pricing</a><br>
-            <a href="./resources/">Resources</a><br>
-            <a href="./about/" target="_blank" rel="noopener">About</a>
+            <a href="/oncosynex/pricing/">Pricing</a><br>
+            <a href="/oncosynex/resources/">Resources</a><br>
+            <a href="/oncosynex/about/" target="_blank" rel="noopener">About</a>
           </p>
         </div>
         <div>
           <h3>Get in touch</h3>
           <p class="muted">
-            <a href="./contact/" target="_blank" rel="noopener">Contact</a><br>
-            <a href="./contact/#demo" target="_blank" rel="noopener">Schedule a demo</a>
+            <a href="/oncosynex/contact/" target="_blank" rel="noopener">Contact</a><br>
+            <a href="/oncosynex/contact/#demo" target="_blank" rel="noopener">Schedule a demo</a>
           </p>
         </div>
       </div>
@@ -92,8 +99,6 @@
     </div>
   </footer>
 
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
 </html>
