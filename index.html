@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OncoSyNex — Home</title>
-  <!-- bump cache so new CSS loads -->
-  <link rel="stylesheet" href="./assets/styles.css?v=36" />
+  <!-- Load CSS from the project root on GitHub Pages -->
+  <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=37" />
 </head>
 <body>
   <!-- HEADER: brand left, menu right -->
@@ -34,7 +34,7 @@
         <a href="./pricing/">Pricing</a>
 
         <!-- RESOURCES (dark, stacked) -->
-        <div class="dropdown">
+        <div class="dropdown resources-dd">
           <button aria-haspopup="true" aria-expanded="false">Resources ▾</button>
           <div class="mega" role="menu">
             <div class="cols">
@@ -92,6 +92,8 @@
     </div>
   </footer>
 
-  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
