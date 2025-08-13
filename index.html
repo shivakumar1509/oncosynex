@@ -4,8 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OncoSyNex — Home</title>
-  <!-- Cache-buster so you see fresh CSS -->
-  <link rel="stylesheet" href="./assets/styles.css?v=14" />
+  <link rel="stylesheet" href="./assets/styles.css?v=18" />
 </head>
 <body>
   <!-- HEADER: brand left, menu right -->
@@ -28,61 +27,53 @@
               <div>
                 <h4>ImmunoAI Platform</h4>
                 <p>AI-assisted prioritization of neoantigens and neoantibodies using curated public datasets and internal heuristics.</p>
-
-                <div class="card">
+                <a class="card" href="#">
                   <b>Neoantigen Discovery</b>
                   <p class="muted">Integrates IEDB, TESLA, and dbPepNeo to rank Class I/II candidates with XGBoost.</p>
                   <div class="chipset"><span class="chip">IEDB</span><span class="chip">TESLA</span><span class="chip">XGBoost</span></div>
-                </div>
-                <div class="card">
+                </a>
+                <a class="card" href="#">
                   <b>Neoantibody & mAb Design</b>
                   <p class="muted">Sequence analysis and structure-aware design workflows to accelerate lead selection.</p>
                   <div class="chipset"><span class="chip">Ab design</span><span class="chip">Docking</span></div>
-                </div>
-                <div class="card">
+                </a>
+                <a class="card" href="#">
                   <b>Prioritization Dashboard</b>
                   <p class="muted">Interactive ranking, pathway filters, and export to wet-lab validation.</p>
-                </div>
+                </a>
               </div>
 
               <!-- Bioinformatics -->
               <div>
                 <h4>Bioinformatics Suite</h4>
                 <p>Reproducible, containerized pipelines with audit trails and exports for downstream analysis.</p>
-
-                <div class="card">
-                  <b>Bulk RNA-seq</b>
+                <a class="card" href="#"><b>Bulk RNA-seq</b>
                   <p class="muted">QC → alignment → quantification → DE → enrichment → publication-grade plots.</p>
                   <div class="chipset"><span class="chip">FastQC</span><span class="chip">HISAT2/STAR</span><span class="chip">DESeq2</span></div>
-                </div>
-                <div class="card">
-                  <b>Variant Calling</b>
+                </a>
+                <a class="card" href="#"><b>Variant Calling</b>
                   <p class="muted">WES/WGS, trimming, BWA-MEM, GATK/MuTect2, VEP annotation, exonic filters.</p>
                   <div class="chipset"><span class="chip">GATK</span><span class="chip">VEP</span><span class="chip">bcftools</span></div>
-                </div>
-                <div class="card">
-                  <b>HLA Typing</b>
+                </a>
+                <a class="card" href="#"><b>HLA Typing</b>
                   <p class="muted">Class I/II calls via OptiType & arcasHLA with pVACseq formatting.</p>
                   <div class="chipset"><span class="chip">OptiType</span><span class="chip">arcasHLA</span><span class="chip">pVACseq</span></div>
-                </div>
-                <div class="card">
-                  <b>scRNA-seq</b>
+                </a>
+                <a class="card" href="#"><b>scRNA-seq</b>
                   <p class="muted">Parse/10x pipelines, Seurat integration, UMAP/t-SNE, markers.</p>
                   <div class="chipset"><span class="chip">Seurat</span><span class="chip">Scanpy</span><span class="chip">Cell Ranger</span></div>
-                </div>
-                <div class="card"><b>Reporting</b><p class="muted">Logs, audit trails, exports to CSV, PDF, RDS, H5AD.</p></div>
-                <div class="card"><b>Deployment</b><p class="muted">Dockerized workflows for on-prem & cloud (AWS, GCP, Azure).</p></div>
+                </a>
+                <a class="card" href="#"><b>Reporting</b><p class="muted">Logs, audit trails, exports to CSV, PDF, RDS, H5AD.</p></a>
+                <a class="card" href="#"><b>Deployment</b><p class="muted">Dockerized workflows for on-prem & cloud (AWS, GCP, Azure).</p></a>
               </div>
 
               <!-- Antigens -->
               <div>
                 <h4>Antigens Catalog</h4>
                 <p>Planned SKUs for research-use only (RUO). Contact for availability and lead times.</p>
-                <div class="list">
-                  <div class="card"><b>Synthetic Peptide Pools</b><p class="muted">Curated cancer-relevant epitopes for screening.</p></div>
-                  <div class="card"><b>Custom Neoepitopes</b><p class="muted">Patient-specific designs from ranked candidates.</p></div>
-                  <div class="card"><b>Protein Antigens</b><p class="muted">Recombinant targets for assay development.</p></div>
-                </div>
+                <a class="card" href="#"><b>Synthetic Peptide Pools</b><p class="muted">Curated cancer-relevant epitopes for screening.</p></a>
+                <a class="card" href="#"><b>Custom Neoepitopes</b><p class="muted">Patient-specific designs from ranked candidates.</p></a>
+                <a class="card" href="#"><b>Protein Antigens</b><p class="muted">Recombinant targets for assay development.</p></a>
               </div>
             </div>
 
@@ -95,7 +86,7 @@
 
         <a href="./pricing/">Pricing</a>
 
-        <!-- Resources (white panel) -->
+        <!-- RESOURCES (transparent list) -->
         <div class="dropdown">
           <button aria-haspopup="true" aria-expanded="false">Resources ▾</button>
           <div class="mega" role="menu" style="min-width:420px">
@@ -130,39 +121,33 @@
     </div>
   </section>
 
-  /* ==== FIX FOOTER LAYOUT: 3 clear columns + separators ==== */
-footer.site{
-  border-top:1px solid #2e4a8e;
-  padding:8px 0;                 /* keep it compact */
-  color:var(--muted);
-}
-.footer-cols{
-  display:grid;
-  grid-template-columns: 1fr 1fr 1fr;   /* fixed 3 columns */
-  gap:20px;
-  align-items:start;
-  text-align:left;                      /* no centering */
-}
-.footer-cols > div{
-  padding:4px 0;
-}
-.footer-cols > div + div{
-  border-left:1px solid #2e4a8e;        /* subtle vertical divider */
-  padding-left:16px;
-}
-.footer-cols h3{ margin:0 0 6px; font-size:.9rem; }
-.footer-cols p, .footer-cols a{ font-size:.9rem; line-height:1.3; }
-/* Stack nicely on phones */
-@media (max-width: 640px){
-  .footer-cols{
-    grid-template-columns: 1fr;
-    gap:10px;
-  }
-  .footer-cols > div + div{
-    border-left:0;
-    padding-left:0;
-    border-top:1px solid #2e4a8e;
-    padding-top:8px;
-    margin-top:6px;
-  }
-}
+  <!-- FOOTER -->
+  <footer class="site">
+    <div class="container">
+      <div class="footer-cols">
+        <div>
+          <p class="muted">Oncology • Synergy • Next-gen</p>
+        </div>
+        <div>
+          <h3>Navigate</h3>
+          <p class="muted">
+            <a href="./pricing/">Pricing</a><br>
+            <a href="./resources/">Resources</a><br>
+            <a href="./about/" target="_blank" rel="noopener">About</a>
+          </p>
+        </div>
+        <div>
+          <h3>Get in touch</h3>
+          <p class="muted">
+            <a href="./contact/" target="_blank" rel="noopener">Contact</a><br>
+            <a href="./contact/#demo" target="_blank" rel="noopener">Schedule a demo</a>
+          </p>
+        </div>
+      </div>
+      <p class="copyright">© <span id="y"></span> OncoSyNex</p>
+    </div>
+  </footer>
+
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>
