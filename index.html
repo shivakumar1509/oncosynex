@@ -5,18 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OncoSyNex — Home</title>
 
-  <!-- Cache-buster ?v=5 forces browsers to fetch the new CSS -->
-  <link rel="stylesheet" href="./assets/styles.css?v=5" />
+  <!-- Cache-buster so you see changes immediately -->
+  <link rel="stylesheet" href="./assets/styles.css?v=7" />
 </head>
 <body>
-  <!-- HEADER -->
+  <!-- HEADER (brand removed; menu only) -->
   <header class="site">
     <div class="container nav">
-      <a class="brand" href="./">
-        <span class="logo" aria-hidden="true"></span>
-        <span>OncoSyNex</span>
-      </a>
-
       <nav class="menu" aria-label="Primary">
         <a href="./">Home</a>
 
@@ -25,7 +20,7 @@
           <button aria-haspopup="true" aria-expanded="false">Product ▾</button>
           <div class="mega" role="menu">
             <div class="cols">
-              <!-- 1) ImmunoAI FIRST -->
+              <!-- ImmunoAI -->
               <div>
                 <h4>ImmunoAI Platform</h4>
                 <p>AI-assisted prioritization of neoantigens and neoantibodies using curated public datasets and internal heuristics.</p>
@@ -35,20 +30,18 @@
                   <p class="muted">Integrates IEDB, TESLA, and dbPepNeo to rank Class I/II candidates with XGBoost.</p>
                   <div class="chipset"><span class="chip">IEDB</span><span class="chip">TESLA</span><span class="chip">XGBoost</span></div>
                 </div>
-
                 <div class="card">
                   <b>Neoantibody & mAb Design</b>
                   <p class="muted">Sequence analysis and structure-aware design workflows to accelerate lead selection.</p>
                   <div class="chipset"><span class="chip">Ab design</span><span class="chip">Docking</span></div>
                 </div>
-
                 <div class="card">
                   <b>Prioritization Dashboard</b>
                   <p class="muted">Interactive ranking, pathway filters, and export to wet-lab validation.</p>
                 </div>
               </div>
 
-              <!-- 2) Bioinformatics SECOND -->
+              <!-- Bioinformatics -->
               <div>
                 <h4>Bioinformatics Suite</h4>
                 <p>Reproducible, containerized pipelines with audit trails and exports for downstream analysis.</p>
@@ -58,33 +51,29 @@
                   <p class="muted">QC → alignment → quantification → DE → enrichment → publication-grade plots (PNG/TIFF, 300DPI).</p>
                   <div class="chipset"><span class="chip">FastQC</span><span class="chip">HISAT2/STAR</span><span class="chip">DESeq2</span></div>
                 </div>
-
                 <div class="card">
                   <b>Variant Calling</b>
                   <p class="muted">WES/WGS with trimming, BWA-MEM, GATK/MuTect2, VEP annotation, exonic filters.</p>
                   <div class="chipset"><span class="chip">GATK</span><span class="chip">VEP</span><span class="chip">bcftools</span></div>
                 </div>
-
                 <div class="card">
                   <b>HLA Typing</b>
-                  <p class="muted">Automated Class I/II allele calls via OptiType & arcasHLA with pVACseq-compatible formatting.</p>
+                  <p class="muted">Automated Class I/II allele calls via OptiType & arcasHLA with pVACseq formatting.</p>
                   <div class="chipset"><span class="chip">OptiType</span><span class="chip">arcasHLA</span><span class="chip">pVACseq</span></div>
                 </div>
-
                 <div class="card">
                   <b>scRNA-seq</b>
                   <p class="muted">Parse/10x pipelines, Seurat integration, UMAP/t-SNE, markers.</p>
                   <div class="chipset"><span class="chip">Seurat</span><span class="chip">Scanpy</span><span class="chip">Cell Ranger</span></div>
                 </div>
-
                 <div class="card"><b>Reporting</b><p class="muted">Logs, audit trails, exports to CSV, PDF, RDS, H5AD.</p></div>
                 <div class="card"><b>Deployment</b><p class="muted">Dockerized workflows for on-prem & cloud (AWS, GCP, Azure).</p></div>
               </div>
 
-              <!-- 3) Antigens THIRD -->
+              <!-- Antigens -->
               <div>
                 <h4>Antigens Catalog</h4>
-                <p>Planned SKUs for research-use only (RUO). Contact us for availability and lead times.</p>
+                <p>Planned SKUs for research-use only (RUO). Contact for availability and lead times.</p>
                 <div class="list">
                   <div class="card"><b>Synthetic Peptide Pools</b><p class="muted">Curated cancer-relevant epitopes for screening.</p></div>
                   <div class="card"><b>Custom Neoepitopes</b><p class="muted">Patient-specific designs from ranked candidates.</p></div>
@@ -127,8 +116,8 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container">
-      <!-- Big black logo (left of “modern”) -->
-      <span class="hero-logo" aria-hidden="true"></span>
+      <!-- Big wordmark instead of black square -->
+      <span class="wordmark">OncoSyNex</span>
       <span class="eyebrow">modern</span>
 
       <h1>The multi-omics platform for <span class="accent">translational discovery</span></h1>
@@ -144,7 +133,7 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- FOOTER (kept; just more compact via CSS) -->
   <footer class="site">
     <div class="container">
       <div class="footer-cols">
