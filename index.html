@@ -130,33 +130,39 @@
     </div>
   </section>
 
-  <!-- FOOTER (super tiny) -->
-  <footer class="site">
-    <div class="container">
-      <div class="footer-cols">
-        <div>
-          <p class="muted">Oncology • Synergy • Next-gen</p>
-        </div>
-        <div>
-          <h3>Navigate</h3>
-          <p class="muted">
-            <a href="./pricing/">Pricing</a><br>
-            <a href="./resources/">Resources</a><br>
-            <a href="./about/" target="_blank" rel="noopener">About</a>
-          </p>
-        </div>
-        <div>
-          <h3>Get in touch</h3>
-          <p class="muted">
-            <a href="./contact/" target="_blank" rel="noopener">Contact</a><br>
-            <a href="./contact/#demo" target="_blank" rel="noopener">Schedule a demo</a>
-          </p>
-        </div>
-      </div>
-      <p class="copyright">© <span id="y"></span> OncoSyNex</p>
-    </div>
-  </footer>
-
-  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
-</body>
-</html>
+  /* ==== FIX FOOTER LAYOUT: 3 clear columns + separators ==== */
+footer.site{
+  border-top:1px solid #2e4a8e;
+  padding:8px 0;                 /* keep it compact */
+  color:var(--muted);
+}
+.footer-cols{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;   /* fixed 3 columns */
+  gap:20px;
+  align-items:start;
+  text-align:left;                      /* no centering */
+}
+.footer-cols > div{
+  padding:4px 0;
+}
+.footer-cols > div + div{
+  border-left:1px solid #2e4a8e;        /* subtle vertical divider */
+  padding-left:16px;
+}
+.footer-cols h3{ margin:0 0 6px; font-size:.9rem; }
+.footer-cols p, .footer-cols a{ font-size:.9rem; line-height:1.3; }
+/* Stack nicely on phones */
+@media (max-width: 640px){
+  .footer-cols{
+    grid-template-columns: 1fr;
+    gap:10px;
+  }
+  .footer-cols > div + div{
+    border-left:0;
+    padding-left:0;
+    border-top:1px solid #2e4a8e;
+    padding-top:8px;
+    margin-top:6px;
+  }
+}
