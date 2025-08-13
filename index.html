@@ -10,17 +10,18 @@
   <!-- HEADER -->
   <header class="site">
     <div class="container nav">
-      <a class="brand" href="./"><span class="logo" aria-hidden="true"></span><span>OncoSyNex</span></a>
+      <a class="brand" href="./">
+        <span class="logo" aria-hidden="true"></span><span>OncoSyNex</span>
+      </a>
 
       <nav class="menu" aria-label="Primary">
         <a href="./">Home</a>
 
-        <!-- PRODUCT (mega dropdown) -->
-        <div class="dropdown">
+        <!-- PRODUCT (black mega dropdown) -->
+        <div class="dropdown product-dd">
           <button aria-haspopup="true" aria-expanded="false">Product ▾</button>
           <div class="mega" role="menu">
             <div class="cols">
-
               <!-- 1) ImmunoAI FIRST -->
               <div>
                 <h4>ImmunoAI Platform</h4>
@@ -69,27 +70,26 @@
 
                 <div class="card">
                   <b>scRNA-seq</b>
-                  <p class="muted">Parse Biosciences & 10x pipelines, Seurat integration, clustering, UMAP/t-SNE, and markers.</p>
+                  <p class="muted">Parse & 10x pipelines, Seurat integration, UMAP/t-SNE, markers.</p>
                   <div class="chipset"><span class="chip">Seurat</span><span class="chip">Scanpy</span><span class="chip">Cell Ranger</span></div>
                 </div>
 
                 <div class="card"><b>Reporting</b><p class="muted">Automated logs, audit trails, and exports to CSV, PDF, RDS, H5AD, and more.</p></div>
-                <div class="card"><b>Deployment</b><p class="muted">Dockerized workflows for reproducibility across on-prem and cloud (AWS, GCP, Azure).</p></div>
+                <div class="card"><b>Deployment</b><p class="muted">Dockerized workflows for on-prem and cloud (AWS, GCP, Azure).</p></div>
               </div>
 
               <!-- 3) Antigens THIRD -->
               <div>
                 <h4>Antigens Catalog</h4>
                 <p>Planned SKUs for research-use only (RUO). Contact us for availability and lead times.</p>
-
                 <div class="list">
                   <div class="card"><b>Synthetic Peptide Pools</b><p class="muted">Curated cancer-relevant epitopes for screening.</p></div>
                   <div class="card"><b>Custom Neoepitopes</b><p class="muted">Patient-specific designs from ranked candidates.</p></div>
                   <div class="card"><b>Protein Antigens</b><p class="muted">Recombinant targets for assay development.</p></div>
                 </div>
               </div>
-
             </div>
+
             <div class="cta-row">
               <a class="btn" href="./resources/">View docs</a>
               <a class="btn primary" href="./contact/#demo">Schedule a demo</a>
@@ -97,10 +97,9 @@
           </div>
         </div>
 
-        <!-- Pricing goes to separate page -->
         <a href="./pricing/">Pricing</a>
 
-        <!-- Resources dropdown linking to anchors on resources page -->
+        <!-- Resources (white panel) -->
         <div class="dropdown">
           <button aria-haspopup="true" aria-expanded="false">Resources ▾</button>
           <div class="mega" role="menu" style="min-width:420px">
@@ -116,7 +115,6 @@
           </div>
         </div>
 
-        <!-- About & Contact open in new tab -->
         <a href="./about/" target="_blank" rel="noopener">About</a>
         <a href="./contact/" target="_blank" rel="noopener">Contact</a>
       </nav>
@@ -126,7 +124,10 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container">
+      <!-- Big black logo (left of “modern”) -->
+      <span class="hero-logo" aria-hidden="true"></span>
       <span class="eyebrow">modern</span>
+
       <h1>The multi-omics platform for <span class="accent">translational discovery</span></h1>
       <p class="lead">Click <b>Product</b> to explore ImmunoAI, Bioinformatics services, and Antigens—then jump to Pricing, Resources, About, or Contact.</p>
       <div class="cta-row">
@@ -140,14 +141,23 @@
   <footer class="site">
     <div class="container">
       <div class="footer-cols">
-        <div><div class="brand"><span class="logo"></span><span style="font-weight:900">OncoSyNex</span></div><p class="muted">Oncology • Synergy • Next-gen</p></div>
-        <div><h3>Navigate</h3><p class="muted"><a href="./pricing/">Pricing</a><br><a href="./resources/">Resources</a><br><a href="./about/" target="_blank" rel="noopener">About</a></p></div>
-        <div><h3>Get in touch</h3><p class="muted"><a href="./contact/" target="_blank" rel="noopener">Contact</a><br><a href="./contact/#demo" target="_blank" rel="noopener">Schedule a demo</a></p></div>
+        <div>
+          <div class="brand"><span class="logo"></span><span style="font-weight:900">OncoSyNex</span></div>
+          <p class="muted">Oncology • Synergy • Next-gen</p>
+        </div>
+        <div>
+          <h3>Navigate</h3>
+          <p class="muted"><a href="./pricing/">Pricing</a><br><a href="./resources/">Resources</a><br><a href="./about/" target="_blank" rel="noopener">About</a></p>
+        </div>
+        <div>
+          <h3>Get in touch</h3>
+          <p class="muted"><a href="./contact/" target="_blank" rel="noopener">Contact</a><br><a href="./contact/#demo" target="_blank" rel="noopener">Schedule a demo</a></p>
+        </div>
       </div>
       <p class="copyright">© <span id="y"></span> OncoSyNex</p>
     </div>
   </footer>
 
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
 </html>
