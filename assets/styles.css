@@ -116,13 +116,13 @@ h2{font-size:1.8rem;margin:0 0 12px;color:var(--ink)}
 /* COMPACT FOOTER (~half height) */
 footer.site{
   border-top:1px solid #2e4a8e;
-  padding:16px 0;          /* was ~38px */
+  padding:16px 0;          /* tighten more: 12px */
   color:var(--muted);
 }
 .footer-cols{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:10px;                /* tighter */
+  gap:10px;
   align-items:start;
 }
 .footer-cols h3{margin:0 0 4px;font-size:1rem}
