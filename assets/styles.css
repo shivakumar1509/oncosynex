@@ -37,7 +37,12 @@ header.site{
   background:#ffffffd9; backdrop-filter:blur(8px); border-bottom:1px solid #e6ebf4;
 }
 .header-row{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:10px 0; }
-header.site .container.header-row{ width:100%; max-width:none; margin:0; padding-inline:var(--edge); }
+/* Match header container width to main container */
+header.site .container.header-row {
+  width: min(var(--max), calc(100% - 2*var(--edge)));
+  margin: 0 auto;       /* center horizontally */
+  padding-inline: 0;    /* remove extra side padding */
+}
 
 /* Brand */
 .brand{ display:flex; align-items:center; gap:10px; font-weight:900; color:#1b2340; text-decoration:none; }
