@@ -36,3 +36,54 @@
 .menu > .dropdown:not(.product-dd) .mega-link:hover{
   background:#1a2235;
 }
+
+/* --- FIX: black dropdowns + stacked items --- */
+
+/* PRODUCT: stack the three options vertically */
+.mega .cols.three{
+  grid-template-columns: 1fr !important;  /* one per line */
+  gap: 6px;
+}
+/* Keep Product panel dark + readable links */
+.product-dd .mega.slim{
+  background:#0b0d11;
+  border:1px solid #1f273a;
+  color:#e5ecff;
+}
+.product-dd .mega-link{ color:#e5ecff; }
+.product-dd .mega-link:hover{ background:#1a2235; }
+
+/* RESOURCES: make panel black and stack items; show headings only */
+.menu > .dropdown:not(.product-dd) .mega{
+  background:#0b0d11 !important;
+  border:1px solid #1f273a !important;
+  color:#e5ecff !important;
+  min-width:260px !important;
+  padding:12px !important;
+  border-radius:14px !important;
+  box-shadow:var(--shadow) !important;
+}
+.menu > .dropdown:not(.product-dd) .mega .cols{
+  display:grid !important;
+  grid-template-columns: 1fr !important;  /* one per line */
+  gap:6px !important;
+}
+/* Turn the existing card links into simple heading rows */
+.menu > .dropdown:not(.product-dd) .mega .card{
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  padding:10px 12px !important;
+  border-radius:10px !important;
+  color:#e5ecff !important;
+  display:block !important;
+}
+.menu > .dropdown:not(.product-dd) .mega .card:hover{
+  background:#1a2235 !important;
+}
+.menu > .dropdown:not(.product-dd) .mega .card p{
+  display:none !important;   /* hide the descriptions */
+}
+.menu > .dropdown:not(.product-dd) .mega .card b{
+  font-weight:900 !important; /* heading weight */
+}
