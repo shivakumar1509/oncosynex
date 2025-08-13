@@ -198,3 +198,19 @@ footer.site{
 
 /* Keep copyright tiny */
 .copyright{margin-top:6px; font-size:.8rem; color:#aab7d7}
+
+/* "end-to-end" badge in the hero */
+.badge.ee{
+  display:inline-block;
+  font-weight:900;
+  font-size:.45em;                 /* smaller than the H1 */
+  letter-spacing:.3px;
+  padding:.28em .6em;
+  border-radius:999px;
+  background:#FFD166;              /* warm amber = strong contrast on blue */
+  color:#0b2456;                   /* dark ink for readability */
+  vertical-align:middle;
+  margin-left:.5rem;
+  box-shadow:0 4px 10px rgba(0,0,0,.15);
+  border:1px solid rgba(0,0,0,.08);
+}
