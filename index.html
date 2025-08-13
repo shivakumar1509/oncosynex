@@ -4,12 +4,18 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OncoSyNex — Home</title>
-  <link rel="stylesheet" href="./assets/styles.css?v=10" />
+  <!-- Cache-buster so you see fresh CSS -->
+  <link rel="stylesheet" href="./assets/styles.css?v=14" />
 </head>
 <body>
-  <!-- HEADER (menu only, LEFT-aligned) -->
+  <!-- HEADER: brand left, menu right -->
   <header class="site">
     <div class="container nav">
+      <a class="brand" href="./" aria-label="OncoSyNex Home">
+        <span class="logo" aria-hidden="true"></span>
+        <span class="brand-text">OncoSyNex</span>
+      </a>
+
       <nav class="menu" aria-label="Primary">
         <a href="./">Home</a>
 
@@ -111,7 +117,7 @@
     </div>
   </header>
 
-  <!-- HERO (your snippet) -->
+  <!-- HERO -->
   <section class="hero">
     <div class="container">
       <span class="wordmark">OncoSyNex</span>
@@ -124,7 +130,7 @@
     </div>
   </section>
 
-  <!-- FOOTER (extra compact) -->
+  <!-- FOOTER (super tiny) -->
   <footer class="site">
     <div class="container">
       <div class="footer-cols">
