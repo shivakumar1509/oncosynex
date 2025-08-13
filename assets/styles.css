@@ -233,3 +233,25 @@ footer.site{
   box-shadow:0 4px 10px rgba(0,0,0,.15);
   border:1px solid rgba(0,0,0,.08);
 }
+
+/* ==== Headings-only Product dropdown ==== */
+.mega.slim{ min-width:540px; padding:12px; border-radius:14px; }
+.mega .cols.three{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+
+.mega .mega-link{
+  display:block;
+  padding:10px 12px;
+  border-radius:10px;
+  font-weight:900;
+  color:inherit;
+}
+.mega .mega-link h4{ margin:0; font-size:1rem; }
+
+/* Keep Product panel dark */
+.product-dd .mega.slim{
+  background:#0b0d11;
+  border:1px solid #1f273a;
+  color:#e5ecff;
+}
+.product-dd .mega-link{ color:#e5ecff; }
+.product-dd .mega-link:hover{ background:#1a2235; }
