@@ -1,4 +1,4 @@
-/* OncoSyNex – blue theme, brand top-left, menu right, dark dropdowns, clear footer separation */
+/* OncoSyNex – blue theme, brand top-left, menu right, themed dropdowns, clear footer separation */
 
 :root{
   --bg:#0f2d6b;            /* main page blue */
@@ -15,6 +15,7 @@
   --shadow-soft:0 6px 16px rgba(0,0,0,.25);
   --max:1180px;
   --edge: clamp(16px, 4vw, 96px); /* side breathing room */
+  --border-blue: color-mix(in srgb, var(--bg) 70%, var(--brand) 30%);
 }
 
 *{box-sizing:border-box}
@@ -114,20 +115,21 @@ footer.site{
 }
 .copyright{ margin-top:6px; font-size:.8rem; color:#aab7d7 }
 
-/* ===== DROPDOWNS (clean: white text from start, theme-blue backgrounds) ===== */
+/* ===== DROPDOWNS (white text from start, theme-blue background, blended border) ===== */
 
 .dropdown{ position:relative }
 .dropdown .mega{
   position:absolute; top:110%; min-width:260px; border-radius:14px; padding:12px;
-  display:none; z-index:100; border:1px solid #1f273a; box-shadow:var(--shadow);
-  /* color inherits; headings/paragraphs won’t force dark colors */
+  display:none; z-index:100;
+  border:1px solid var(--border-blue);
+  box-shadow:var(--shadow);
 }
 .dropdown:hover .mega{ display:block }
 
 /* Products dropdown */
 .product-dd .mega{
   right:0;
-  background:var(--bg);            /* match main page blue */
+  background:var(--bg);
 }
 .product-dd .mega .cols{
   display:grid; grid-template-columns:1fr; gap:6px;
@@ -143,8 +145,8 @@ footer.site{
   transition: background .25s ease, box-shadow .25s ease, transform .2s ease;
 }
 .product-dd .mega a:hover{
-  background:var(--bg-hover);       /* slightly darker blue */
-  box-shadow:0 0 8px var(--brand);  /* subtle blue glow */
+  background:var(--bg-hover);
+  box-shadow:0 0 8px var(--brand);
   transform:translateY(-1px);
 }
 .product-dd .mega a:hover, .product-dd .mega a:hover *{ color:#ffffff }
@@ -152,7 +154,7 @@ footer.site{
 /* Resources dropdown */
 .resources-dd .mega{
   right:0;
-  background:var(--bg);            /* match main page blue */
+  background:var(--bg);
 }
 .resources-dd .mega .cols{
   display:grid; grid-template-columns:1fr; gap:6px;
