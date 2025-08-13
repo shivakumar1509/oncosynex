@@ -4,12 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OncoSyNex — Home</title>
-
   <!-- Cache-buster so you see changes immediately -->
-  <link rel="stylesheet" href="./assets/styles.css?v=7" />
+  <link rel="stylesheet" href="./assets/styles.css?v=8" />
 </head>
 <body>
-  <!-- HEADER (brand removed; menu only) -->
+  <!-- HEADER (menu only, right-aligned) -->
   <header class="site">
     <div class="container nav">
       <nav class="menu" aria-label="Primary">
@@ -48,17 +47,17 @@
 
                 <div class="card">
                   <b>Bulk RNA-seq</b>
-                  <p class="muted">QC → alignment → quantification → DE → enrichment → publication-grade plots (PNG/TIFF, 300DPI).</p>
+                  <p class="muted">QC → alignment → quantification → DE → enrichment → publication-grade plots.</p>
                   <div class="chipset"><span class="chip">FastQC</span><span class="chip">HISAT2/STAR</span><span class="chip">DESeq2</span></div>
                 </div>
                 <div class="card">
                   <b>Variant Calling</b>
-                  <p class="muted">WES/WGS with trimming, BWA-MEM, GATK/MuTect2, VEP annotation, exonic filters.</p>
+                  <p class="muted">WES/WGS, trimming, BWA-MEM, GATK/MuTect2, VEP annotation, exonic filters.</p>
                   <div class="chipset"><span class="chip">GATK</span><span class="chip">VEP</span><span class="chip">bcftools</span></div>
                 </div>
                 <div class="card">
                   <b>HLA Typing</b>
-                  <p class="muted">Automated Class I/II allele calls via OptiType & arcasHLA with pVACseq formatting.</p>
+                  <p class="muted">Class I/II calls via OptiType & arcasHLA with pVACseq formatting.</p>
                   <div class="chipset"><span class="chip">OptiType</span><span class="chip">arcasHLA</span><span class="chip">pVACseq</span></div>
                 </div>
                 <div class="card">
@@ -116,7 +115,7 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container">
-      <!-- Big wordmark instead of black square -->
+      <!-- Company name as plain black text (no box) -->
       <span class="wordmark">OncoSyNex</span>
       <span class="eyebrow">modern</span>
 
@@ -133,12 +132,11 @@
     </div>
   </section>
 
-  <!-- FOOTER (kept; just more compact via CSS) -->
+  <!-- FOOTER (extra compact) -->
   <footer class="site">
     <div class="container">
       <div class="footer-cols">
         <div>
-          <div class="brand"><span class="logo"></span><span style="font-weight:900">OncoSyNex</span></div>
           <p class="muted">Oncology • Synergy • Next-gen</p>
         </div>
         <div>
