@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OncoSyNex — Home</title>
-  <link rel="stylesheet" href="./assets/styles.css?v=31" />
+  <link rel="stylesheet" href="./assets/styles.css?v=30" />
 </head>
 <body>
   <!-- HEADER: brand left, menu right -->
@@ -18,11 +18,11 @@
       <nav class="menu" aria-label="Primary">
         <a href="./">Home</a>
 
-        <!-- PRODUCT (headings only, stacked) -->
+        <!-- PRODUCT (headings only) -->
         <div class="dropdown product-dd">
           <button aria-haspopup="true" aria-expanded="false">Product ▾</button>
           <div class="mega slim" role="menu">
-            <div class="list stack">
+            <div class="cols three">
               <a class="mega-link" href="./product/immunoai/"><h4>ImmunoAI Platform</h4></a>
               <a class="mega-link" href="./product/bioinformatics/"><h4>Bioinformatics Suite</h4></a>
               <a class="mega-link" href="./product/antigens/"><h4>Antigens Catalog</h4></a>
@@ -32,14 +32,18 @@
 
         <a href="./pricing/">Pricing</a>
 
-        <!-- RESOURCES (headings only, stacked, black) -->
+        <!-- RESOURCES (transparent list, unchanged) -->
         <div class="dropdown">
           <button aria-haspopup="true" aria-expanded="false">Resources ▾</button>
-          <div class="mega slim" role="menu">
-            <div class="list stack">
-              <a class="mega-link" href="./resources/#news"><h4>News & Blogs</h4></a>
-              <a class="mega-link" href="./resources/#research"><h4>Research & Education</h4></a>
-              <a class="mega-link" href="./resources/#platform"><h4>Platform Resources</h4></a>
+          <div class="mega" role="menu" style="min-width:420px">
+            <div class="cols" style="grid-template-columns:1fr 1fr;">
+              <div>
+                <a class="card" href="./resources/#news"><b>News & Blogs</b><p class="muted">Updates, case studies, releases.</p></a>
+                <a class="card" href="./resources/#research"><b>Research & Education</b><p class="muted">Whitepapers, tutorials, datasets.</p></a>
+              </div>
+              <div>
+                <a class="card" href="./resources/#platform"><b>Platform Resources</b><p class="muted">API spec, CLI usage, pipelines.</p></a>
+              </div>
             </div>
           </div>
         </div>
