@@ -124,28 +124,26 @@ header.site .container.nav{
   margin-right:12px;
   vertical-align:middle;
 }
-/* Headline (larger) */
+/* Headline (smaller) + bigger gap below it */
 .hero h1{
-  margin:14px 0 8px;
+  margin:14px 0 28px;  /* ← big gap between H1 and the subline */
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  font-size:clamp(2.8rem, 3.6vw + 1rem, 4.2rem);  /* bigger headline */
-  line-height:1.06;
+  font-size:clamp(2.2rem, 2.6vw + 0.9rem, 3.2rem);  /* ↓ smaller than before */
+  line-height:1.07;
   font-weight:900;
   letter-spacing:.2px;
 }
-.hero h1 .accent{color:#a5c7ff}
 
-/* Subline under the H1 (single rule; bigger too) */
+/* Subline (a bit smaller, comfy line-height) */
 .lead{
   max-width:820px;
   color:#d3ddf0;
-  font-weight:700;
-  font-size:clamp(2.8rem, 3.6vw + 1rem, 4.2rem);
-  line-height:1.06;
-  margin-top:0;
+  font-size:clamp(1.1rem, 1.1vw + 0.6rem, 1.4rem);  /* ↓ smaller */
+  line-height:1.35;
+  margin-top:0;  /* keep the gap controlled by the H1 margin-bottom */
 }
 
-.cta-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+.cta-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:26px}
 .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:12px; border:1px solid #e6ebf4; background:#fff; color:#12141a; font-weight:800; box-shadow:var(--shadow-soft)}
 .btn.primary{background:var(--btn); color:var(--btn-ink); border:0}
 .btn:hover{transform:translateY(-1px)}
