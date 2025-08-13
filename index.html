@@ -4,7 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OncoSyNex — Home</title>
-  <link rel="stylesheet" href="./assets/styles.css?v=30" />
+  <!-- bump cache so new CSS loads -->
+  <link rel="stylesheet" href="./assets/styles.css?v=34" />
 </head>
 <body>
   <!-- HEADER: brand left, menu right -->
@@ -32,18 +33,14 @@
 
         <a href="./pricing/">Pricing</a>
 
-        <!-- RESOURCES (transparent list, unchanged) -->
+        <!-- RESOURCES (now point to your new pages) -->
         <div class="dropdown">
           <button aria-haspopup="true" aria-expanded="false">Resources ▾</button>
-          <div class="mega" role="menu" style="min-width:420px">
-            <div class="cols" style="grid-template-columns:1fr 1fr;">
-              <div>
-                <a class="card" href="./resources/#news"><b>News & Blogs</b><p class="muted">Updates, case studies, releases.</p></a>
-                <a class="card" href="./resources/#research"><b>Research & Education</b><p class="muted">Whitepapers, tutorials, datasets.</p></a>
-              </div>
-              <div>
-                <a class="card" href="./resources/#platform"><b>Platform Resources</b><p class="muted">API spec, CLI usage, pipelines.</p></a>
-              </div>
+          <div class="mega" role="menu">
+            <div class="cols">
+              <a class="card" href="./resources/news/"><b>News & Blogs</b><p class="muted">Updates, case studies, releases.</p></a>
+              <a class="card" href="./resources/research/"><b>Research & Education</b><p class="muted">Whitepapers, tutorials, datasets.</p></a>
+              <a class="card" href="./resources/platform/"><b>Platform Resources</b><p class="muted">API spec, CLI usage, pipelines.</p></a>
             </div>
           </div>
         </div>
