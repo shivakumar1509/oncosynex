@@ -5,29 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OncoSyNex — Home</title>
 
-  <!-- Your stylesheet (keep) -->
-  <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=41" />
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=42" />
 
-  <!-- Only the dropdown fixes (kept tiny) -->
+  <!-- Tiny dropdown fix (can live here or in styles.css) -->
   <style>
     .dropdown { position: relative; }
     .dropdown .mega{
-      position: absolute;
-      top: 100%;            /* remove hover gap */
-      right: 0;
-      min-width: 260px;
-      border-radius: 14px;
-      padding: 12px;
-      display: none;
-      z-index: 100;
-      /* border/shadow/colors come from your CSS vars */
+      position: absolute; top: 100%; right: 0;
+      min-width: 260px; border-radius: 14px; padding: 12px;
+      display: none; z-index: 100;
     }
     .dropdown:hover .mega,
     .dropdown .mega:hover,
     .dropdown:focus-within .mega,
     .dropdown.open .mega { display: block; }
-    /* fix footer text color typo if styles.css had #muted */
-    footer.site { color: var(--muted); }
+    footer.site { color: var(--muted); } /* ensure correct footer color */
   </style>
 </head>
 <body>
@@ -41,7 +34,7 @@
       <div class="top-actions">
         <a class="tab" href="/oncosynex/contact/#demo" target="_blank" rel="noopener">Get a personalized demo</a>
         <a class="tab" href="/oncosynex/resources/platform/" target="_blank" rel="noopener">Read the docs</a>
-        <!-- If you deleted /ai/, make this open the widget -->
+        <!-- Open the floating widget instead of navigating -->
         <a class="tab" href="#" onclick="document.getElementById('osxFab')?.click();return false;">Ask OncoSyNex AI</a>
       </div>
     </div>
@@ -153,7 +146,7 @@
   })();
   </script>
 
-  <!-- ==== OncoSyNex AI — Floating Chat Widget ==== -->
+  <!-- ==== OncoSyNex AI — Floating Chat Widget with Blue Cartoon ==== -->
   <style>
     :root{
       --osx-brand: var(--brand, #1e64ff);
@@ -198,8 +191,23 @@
     .osx-msg .osx-bubble{ max-width:68ch; padding:10px 12px; border-radius:14px; border:1px solid var(--osx-line); background:#fff; }
     .osx-msg.user{ justify-content:flex-end; }
     .osx-msg.user .osx-bubble{ background:#e8f0ff; border-color:#d8e5ff; }
-    .osx-msg.bot .osx-avatar{ width:24px;height:24px;border-radius:8px;background: var(--osx-brand); }
+    .osx-msg.bot .osx-avatar{ width:24px;height:24px;border-radius:8px; background: none; }
 
+    /* Hero area inside chat for the cartoon + intro */
+    .osx-hero {
+      display:flex; align-items:center; gap:12px;
+      padding:12px; border-bottom:1px dashed var(--osx-line);
+      background: linear-gradient(180deg, #f6faff, #ffffff);
+      position: sticky; top: 0; z-index: 1;  /* stays visible at top of feed */
+    }
+    .osx-hero .bubble {
+      flex:1; background:#fff; border:1px solid var(--osx-line);
+      border-radius:14px; padding:10px 12px; font-weight:600;
+    }
+    .osx-hero .toon {
+      width:54px; height:54px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,.12);
+      overflow:hidden; background:#e7efff; display:grid; place-items:center; border:1px solid var(--osx-line);
+    }
     .osx-typing{ display:inline-flex; gap:4px; }
     .osx-typing span{ width:6px;height:6px;border-radius:99px;background:#c1c9dd; animation: osx-bounce 1s infinite ease-in-out; }
     .osx-typing span:nth-child(2){ animation-delay:.15s } .osx-typing span:nth-child(3){ animation-delay:.3s }
@@ -214,6 +222,7 @@
     .osx-send{ background: var(--osx-brand); color:#fff; border:0; border-radius:12px; padding:10px 14px; font-weight:800; cursor:pointer }
   </style>
 
+  <!-- Floating button -->
   <button class="osx-fab" id="osxFab" title="Ask OncoSyNex AI" aria-controls="osxChat">
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v7A2.5 2.5 0 0 1 17.5 15H12l-4.5 4v-4H6.5A2.5 2.5 0 0 1 4 12.5v-7Z" fill="currentColor"/>
@@ -222,24 +231,58 @@
     <span class="osx-dot" aria-hidden="true"></span>
   </button>
 
+  <!-- Chat box -->
   <div class="osx-chat" id="osxChat" role="dialog" aria-modal="true" aria-label="Ask OncoSyNex AI">
     <div class="osx-head">
-      <div class="osx-avatar" aria-hidden="true"></div>
+      <div class="osx-avatar" aria-hidden="true">
+        <!-- tiny avatar (robot head) -->
+        <svg viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+          <rect x="10" y="16" width="44" height="34" rx="10" fill="#1e64ff"/>
+          <circle cx="26" cy="33" r="6" fill="#ffffff"/>
+          <circle cx="38" cy="33" r="6" fill="#ffffff"/>
+          <circle cx="26" cy="33" r="3" fill="#1e64ff"/>
+          <circle cx="38" cy="33" r="3" fill="#1e64ff"/>
+          <rect x="24" y="42" width="16" height="3" rx="1.5" fill="#0b3aa4"/>
+        </svg>
+      </div>
       <h3>OncoSyNex AI • online</h3>
       <div class="osx-actions">
         <button id="osxReset">Reset</button>
         <button id="osxClose">Close</button>
       </div>
     </div>
-    <div class="osx-feed" id="osxFeed"></div>
+
+    <div class="osx-feed" id="osxFeed">
+      <!-- sticky hero with larger cartoon + intro -->
+      <div class="osx-hero" id="osxHero">
+        <div class="toon" aria-hidden="true">
+          <!-- larger blue robot -->
+          <svg viewBox="0 0 64 64" width="42" height="42" aria-hidden="true">
+            <rect x="10" y="16" width="44" height="34" rx="10" fill="#1e64ff"/>
+            <circle cx="26" cy="33" r="7" fill="#ffffff"/>
+            <circle cx="38" cy="33" r="7" fill="#ffffff"/>
+            <circle cx="26" cy="33" r="3.5" fill="#1e64ff"/>
+            <circle cx="38" cy="33" r="3.5" fill="#1e64ff"/>
+            <rect x="24" y="44" width="16" height="4" rx="2" fill="#0b3aa4"/>
+            <rect x="30" y="10" width="4" height="8" rx="2" fill="#1e64ff"/>
+            <circle cx="32" cy="10" r="3" fill="#0b3aa4"/>
+          </svg>
+        </div>
+        <div class="bubble">
+          <strong>Hi! I’m your OncoSyNex assistant.</strong><br/>
+          Ask me about <strong>ImmunoAI</strong>, <strong>Bioinformatics Suite</strong>, <strong>Antigens & plasmids</strong>, or <strong>pricing</strong>.
+        </div>
+      </div>
+    </div>
+
     <div class="osx-compose">
-      <input class="osx-input" id="osxPrompt" type="text" placeholder="Ask about ImmunoAI, Bioinformatics Suite, pricing…" />
+      <input class="osx-input" id="osxPrompt" type="text" placeholder="Type your question…" />
       <button class="osx-send" id="osxSend">Send</button>
     </div>
   </div>
 
   <script>
-  /* Preloaded Q&A (edit) */
+  /* Preloaded Q&A (edit/extend freely) */
   const OSX_QA = [
     {id:'immunoai', q:'What is the ImmunoAI Platform?', a:'ImmunoAI is our AI-powered multi-omics engine for immunotherapy and vaccine R&D, integrating variant calling, HLA typing, MHC binding and neoantigen ranking.', tags:['product','immunoai'], keywords:['immunoai','neoantigen','mhc','platform']},
     {id:'bioinfo', q:'What is included in the Bioinformatics Suite?', a:'Pipelines for bulk RNA-seq, scRNA-seq, WES/WGS, HLA typing, VEP annotation and pVACseq. Results come with QC reports and publication-ready figures.', tags:['product','bioinformatics'], keywords:['rna-seq','scrna','wes','vep','pvacseq']},
@@ -270,20 +313,20 @@
   const $ = s => document.querySelector(s);
   function el(html){ const t=document.createElement('template'); t.innerHTML=html.trim(); return t.content.firstChild; }
   function feedMsg(role, html){
-    const node = el(`<div class="osx-msg ${role}">${ role==='bot' ? '<div class="osx-avatar" aria-hidden="true"></div>' : '' }<div class="osx-bubble">${html}</div></div>`);
+    const node = el(`<div class="osx-msg ${role}">${ role==='bot' ? '<div class="osx-avatar"><svg viewBox="0 0 64 64" width="24" height="24"><rect x="10" y="16" width="44" height="34" rx="10" fill="#1e64ff"/><circle cx="26" cy="33" r="6" fill="#ffffff"/><circle cx="38" cy="33" r="6" fill="#ffffff"/><circle cx="26" cy="33" r="3" fill="#1e64ff"/><circle cx="38" cy="33" r="3" fill="#1e64ff"/></svg></div>' : '' }<div class="osx-bubble">${html}</div></div>`);
     const feed = $('#osxFeed'); feed.appendChild(node); feed.scrollTop = feed.scrollHeight; return node;
   }
   function typing(on=true){
     const id='osxTyping';
     if(on){
-      const n = el(`<div class="osx-msg bot" id="${id}"><div class="osx-avatar"></div><div class="osx-bubble"><span class="osx-typing"><span></span><span></span><span></span></span></div></div>`);
+      const n = el(`<div class="osx-msg bot" id="${id}"><div class="osx-avatar"><svg viewBox="0 0 64 64" width="24" height="24"><rect x="10" y="16" width="44" height="34" rx="10" fill="#1e64ff"/></svg></div><div class="osx-bubble"><span class="osx-typing"><span></span><span></span><span></span></span></div></div>`);
       $('#osxFeed').appendChild(n); $('#osxFeed').scrollTop = $('#osxFeed').scrollHeight;
     } else {
       const n = document.getElementById(id); if(n) n.remove();
     }
   }
 
-  /* Ask/answer */
+  /* Suggestions + Q&A */
   function suggest(){
     const chips = OSX_QA.slice(0,4).map(x=>`<button class="osx-chip" data-qid="${x.id}">${x.q}</button>`).join('');
     const node = feedMsg('bot', `<strong>Popular questions</strong><div class="osx-suggest">${chips}</div>`);
@@ -319,10 +362,11 @@
     });
   }
 
-  /* Wiring */
+  /* Start + wiring */
   function startChat(){
-    $('#osxFeed').innerHTML = '';
-    feedMsg('bot', `Hi! I’m your OncoSyNex assistant. Ask me about <strong>ImmunoAI</strong>, <strong>Bioinformatics Suite</strong>, <strong>Antigens & plasmids</strong>, or <strong>pricing</strong>.`);
+    const feed = $('#osxFeed');
+    feed.innerHTML = document.getElementById('osxHero').outerHTML; // keep hero at top
+    feedMsg('bot', `Welcome! How can I help today?`);
     suggest();
   }
   $('#osxFab').addEventListener('click', ()=>{
