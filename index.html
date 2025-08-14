@@ -1,3 +1,4 @@
+<!-- ========= UPDATED index.html ========= -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,8 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OncoSyNex — Home</title>
 
+  <!-- MAIN STYLES -->
   <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=47" />
 
+  <!-- Inline keeps your existing dropdown + nav tweaks exactly as before -->
   <style>
     /* Keep dropdown behavior clean */
     .dropdown { position: relative; }
@@ -38,10 +41,7 @@
       margin-bottom: 22px;
       width: 100%;
     }
-    .subnav > * {
-      flex: 1;
-      text-align: center;
-    }
+    .subnav > * { flex: 1; text-align: center; }
     .subnav a, .subnav button {
       background: transparent;
       border: 0;
@@ -53,9 +53,7 @@
       border-radius: 10px;
       display: inline-block;
     }
-    .subnav a:hover, .subnav button:hover {
-      background: rgba(255,255,255,.12);
-    }
+    .subnav a:hover, .subnav button:hover { background: rgba(255,255,255,.12); }
   </style>
 </head>
 <body>
@@ -76,7 +74,7 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="container">
+    <div class="container wrap"> <!-- NOTE: added .wrap to enable 2-column layout -->
       <!-- EVENLY SPACED NAV -->
       <nav class="subnav" aria-label="Primary">
         <a href="/oncosynex/">Home</a>
@@ -111,12 +109,18 @@
         <a href="/oncosynex/contact/" target="_blank" rel="noopener">Contact</a>
       </nav>
 
-      <span class="wordmark">OncoSyNex</span>
-      <h1>
-        AI-powered multi-omics for immunotherapy, vaccine development, and translational research
-        <span class="badge ee">end-to-end</span>
-      </h1>
-      <p class="lead"><strong>Antigens and plasmids</strong> for diagnostics and immunotherapy.</p>
+      <!-- LEFT: two compact, identical boxes (no 'OncoSyNex' prefix), ~4 lines each -->
+      <div class="hero-left">
+        <div class="tagline-box">
+          AI-powered multi-omics for immunotherapy, vaccine development, and translational research end-to-end.
+        </div>
+        <div class="tagline-box">
+          Antigens and plasmids for diagnostics and immunotherapy.
+        </div>
+      </div>
+
+      <!-- RIGHT: reserved space for image/video/CTA -->
+      <div class="hero-right"></div>
     </div>
   </section>
 
@@ -146,9 +150,7 @@
   </footer>
 
   <!-- JS -->
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 
   <!-- Dropdown click/tap logic -->
   <script>
@@ -182,6 +184,7 @@
   </script>
 
   <!-- Floating AI Widget -->
+  <div id="osx-widget"></div> <!-- ensure container exists -->
   <script src="/oncosynex/assets/osx_qa.js?v=1"></script>
   <script src="/oncosynex/assets/osx_widget.js?v=1" defer></script>
 </body>

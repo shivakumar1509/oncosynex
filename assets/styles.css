@@ -132,3 +132,39 @@ footer.site{
   transition: background .25s ease, box-shadow .25s ease, transform .2s ease;
 }
 .resources-dd .mega a:hover{ background:var(--bg-hover); box-shadow:0 0 8px var(--brand); transform:translateY(-1px); }
+
+/* === Compact taglines & hero layout — add at the very end of styles.css === */
+.hero .wrap{
+  display:grid;
+  grid-template-columns: 1fr 420px; /* right side reserved */
+  gap:28px;
+  align-items:start;
+}
+@media (max-width: 900px){
+  .hero .wrap{ grid-template-columns: 1fr; }
+}
+
+.tagline-box{
+  display:inline-block;
+  font-size:0.75rem;          /* smaller text */
+  background:var(--panel);
+  color:var(--bg);
+  padding:8px 10px;
+  border-radius:8px;
+  border:1px solid var(--line);
+  box-shadow:var(--shadow-soft);
+  max-width:240px;            /* narrows to roughly 4 lines */
+  line-height:1.3;
+  vertical-align:top;
+  margin:0 0 8px 0;           /* small gap between the two boxes */
+}
+
+.hero-right{
+  min-height:180px;
+  border-radius:12px;
+  border:1px dashed rgba(255,255,255,.25);
+  background:rgba(255,255,255,.08);
+}
+
+/* Ensure floating AI widget appears above sticky header */
+#osx-widget, .osx-widget{ position:fixed; bottom:16px; right:16px; z-index:9999; }
