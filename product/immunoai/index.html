@@ -4,18 +4,18 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ImmunoAI Platform — OncoSyNex</title>
-  <link rel="stylesheet" href="../../assets/styles.css?v=30" />
+  <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=30" />
 </head>
 <body>
   <header class="site">
     <div class="container nav">
-      <a class="brand" href="../../"><span class="logo"></span><span class="brand-text">OncoSyNex</span></a>
+      <a class="brand" href="/oncosynex/"><span class="logo"></span><span class="brand-text">OncoSyNex</span></a>
       <nav class="menu">
-        <a href="../../">Home</a>
-        <a href="../immunoai/">ImmunoAI</a>
-        <a href="../bioinformatics/">Bioinformatics</a>
-        <a href="../antigens/">Antigens</a>
-        <a href="../../pricing/">Pricing</a>
+        <a href="/oncosynex/">Home</a>
+        <a href="/oncosynex/product/immunoai/">ImmunoAI</a>
+        <a href="/oncosynex/product/bioinformatics/">Bioinformatics</a>
+        <a href="/oncosynex/product/antigens/">Antigens</a>
+        <a href="/oncosynex/pricing/">Pricing</a>
       </nav>
     </div>
   </header>
@@ -25,13 +25,23 @@
       <h1>ImmunoAI Platform</h1>
       <p class="lead">Choose a module to continue.</p>
       <div class="grid cols-3" style="margin-top:18px">
-        <a class="card" href="./neoantigen-discovery.html"><h3>Neoantigen Discovery</h3><p class="muted">Rank Class I/II candidates.</p></a>
-        <a class="card" href="./neoantibody-mab-design.html"><h3>Neoantibody & mAb Design</h3><p class="muted">Sequence + structure workflows.</p></a>
+        <a class="card" href="/oncosynex/product/immunoai/neoantigen-discovery.html">
+          <h3>Neoantigen Discovery</h3>
+          <p class="muted">Rank Class I/II candidates.</p>
+        </a>
+        <a class="card" href="/oncosynex/product/immunoai/neoantibody-mab-design.html">
+          <h3>Neoantibody &amp; mAb Design</h3>
+          <p class="muted">Sequence + structure workflows.</p>
+        </a>
       </div>
     </div>
   </section>
 
-  <footer class="site"><div class="container"><p class="copyright">© <span id="y"></span> OncoSyNex</p></div></footer>
+  <footer class="site">
+    <div class="container">
+      <p class="copyright">© <span id="y"></span> OncoSyNex</p>
+    </div>
+  </footer>
   <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
 </html>
