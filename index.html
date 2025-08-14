@@ -5,67 +5,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OncoSyNex — Home</title>
 
-  <!-- Your main stylesheet -->
+  <!-- Your base stylesheet -->
   <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=45" />
 
-  <!-- Minimal overrides: left-align subnav + multi-level dropdowns -->
+  <!-- Minimal overrides for header + vertical glossy dropdowns -->
   <style>
-    /* Left-align the subnav row */
+    /* ---------- Header polish ---------- */
+    .brand-text { font-size: 2em; font-weight: 900; } /* double logo text */
+    header.site{
+      background: linear-gradient(90deg, #0A1F44 0%, #124C9F 45%, #1e64ff 100%) !important;
+      border-bottom: 1px solid rgba(255,255,255,.15);
+      color: #fff;
+    }
+    header.site .brand { color:#fff; }
+    header.site .tab { background:#12141a; color:#fff; }
+
+    /* Left align the subnav row */
     .subnav{ justify-content:flex-start !important; }
 
-    /* Base dropdown container */
-    .dropdown{ position:relative }
+    /* ---------- Glossy vertical mega menu ---------- */
+    .dropdown{ position:relative; }
+    .dropdown > button{
+      background:transparent; border:0; cursor:pointer; color:#fff;
+      font-weight:800; font-size:.96rem; padding:10px 12px; border-radius:10px;
+    }
+    .dropdown > button:hover{ background:rgba(255,255,255,.12); }
+
+    /* The mega container (single column, glossy blue) */
     .dropdown .mega{
-      position:absolute; top:100%; right:0;
-      min-width:320px; border-radius:14px; padding:12px;
+      position:absolute; top:100%; left:0; /* drops straight down */
+      width:min(720px, 92vw);              /* nice readable width */
+      border-radius:14px; padding:12px;
       display:none; z-index:100;
-      border:1px solid var(--border-blue); box-shadow:var(--shadow);
-      background:var(--bg); /* keep your blue */
+      border:1px solid color-mix(in srgb, var(--bg, #0f2d6b) 70%, var(--brand, #1e64ff) 30%);
+      box-shadow:0 16px 36px rgba(0,0,0,.35);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,0)) ,
+        linear-gradient(180deg, #0f2d6b 0%, #0d2560 100%); /* glossy blue */
     }
     .dropdown:hover .mega,
     .dropdown:focus-within .mega,
     .dropdown.open .mega{ display:block; }
 
-    /* 3-column grid inside the mega */
-    .mega .cols{ display:grid; gap:10px; }
-    .mega.slim .cols.three{ grid-template-columns:repeat(3,minmax(180px,1fr)); }
-    @media (max-width:900px){ .mega.slim .cols.three{ grid-template-columns:1fr 1fr; } }
-    @media (max-width:640px){ .mega.slim .cols.three{ grid-template-columns:1fr; } }
+    /* Stack items top->bottom inside the mega */
+    .mega .stack{ display:flex; flex-direction:column; gap:8px; }
 
-    /* Top-level item that has a submenu */
-    .submenu{ position:relative; }
-    .submenu-trigger{
-      width:100%; text-align:left; border:0; cursor:pointer; background:transparent;
-      font-weight:800; font-size:.95rem; color:#fff; padding:10px 12px; border-radius:10px;
-      display:flex; align-items:center; justify-content:space-between; gap:8px;
+    /* Each top item row (has an accordion) */
+    .submenu{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:12px; overflow:hidden;
     }
-    .submenu-trigger:hover{ background:var(--bg-hover); box-shadow:0 0 8px var(--brand); }
-    .submenu-trigger svg{ width:16px;height:16px; opacity:.85 }
+    .submenu + .submenu { margin-top:8px; }
 
-    /* Fly-out panel (2nd level) */
+    .submenu-trigger{
+      width:100%; text-align:left; display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:12px; border:0; background:transparent; color:#fff; cursor:pointer; font-weight:800; font-size:.96rem;
+    }
+    .submenu-trigger:hover{ background:rgba(255,255,255,.08); }
+    .submenu-trigger svg{ width:16px;height:16px; opacity:.9; transform:rotate(0deg); transition: transform .18s ease; }
+    .submenu.open .submenu-trigger svg{ transform:rotate(90deg); }
+
+    /* Accordion panel (slides down below the trigger) */
     .submenu-panel{
-      position:absolute; top:0; left:calc(100% + 10px);
-      min-width:240px; border-radius:12px; padding:10px; display:none; z-index:110;
-      border:1px solid var(--border-blue); box-shadow:var(--shadow); background:var(--bg);
+      display:none; padding:10px; background:rgba(255,255,255,.06); border-top:1px solid rgba(255,255,255,.12);
     }
     .submenu:hover .submenu-panel,
     .submenu:focus-within .submenu-panel,
     .submenu.open .submenu-panel{ display:block; }
 
-    /* Links inside submenu/flyout */
     .submenu-panel a{
-      display:block; padding:8px 10px; border-radius:10px; color:#fff; text-decoration:none;
-      font-weight:700; font-size:.92rem;
+      display:inline-block; margin:6px 8px 0 0; padding:8px 10px; border-radius:10px;
+      color:#fff; text-decoration:none; font-weight:700; font-size:.92rem;
+      border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.04);
     }
-    .submenu-panel a:hover{ background:var(--bg-hover); box-shadow:0 0 8px var(--brand); }
+    .submenu-panel a:hover{ background:rgba(255,255,255,.12); box-shadow:0 0 8px var(--brand, #1e64ff); }
 
-    /* Simple section headings for nested groups (optional) */
     .submenu-panel h5{
-      margin:6px 0 4px; color:#cfe0ff; font-size:.8rem; letter-spacing:.3px; text-transform:uppercase;
+      margin:4px 0 6px; color:#d7e6ff; font-size:.8rem; letter-spacing:.3px; text-transform:uppercase;
     }
 
     /* Keyboard focus */
-    .subnav button:focus, .submenu-panel a:focus, .submenu-trigger:focus{
+    .subnav a:focus, .subnav button:focus, .submenu-panel a:focus, .submenu-trigger:focus{
       outline:2px solid #fff; outline-offset:2px; border-radius:10px;
     }
   </style>
@@ -81,7 +102,7 @@
       <div class="top-actions">
         <a class="tab" href="/oncosynex/contact/#demo" target="_blank" rel="noopener">Get a personalized demo</a>
         <a class="tab" href="/oncosynex/resources/platform/" target="_blank" rel="noopener">Read the docs</a>
-        <!-- Removed the AI tab (we use the floating widget instead) -->
+        <!-- Removed the AI tab (floating widget is used) -->
       </div>
     </div>
   </header>
@@ -89,16 +110,16 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container">
-      <!-- Subnav (now left-aligned) -->
+      <!-- Subnav (left-aligned) -->
       <nav class="subnav" aria-label="Primary">
         <a href="/oncosynex/">Home</a>
 
-        <!-- PRODUCT -->
+        <!-- PRODUCT (vertical glossy dropdown) -->
         <div class="dropdown product-dd">
           <button aria-haspopup="true" aria-expanded="false">Product ▾</button>
-          <div class="mega slim" role="menu">
-            <div class="cols three">
-              <!-- ImmunoAI block -->
+          <div class="mega" role="menu">
+            <div class="stack">
+              <!-- ImmunoAI -->
               <div class="submenu">
                 <button class="submenu-trigger" aria-haspopup="true" aria-expanded="false">
                   ImmunoAI Platform
@@ -113,7 +134,7 @@
                 </div>
               </div>
 
-              <!-- Bioinformatics Suite block -->
+              <!-- Bioinformatics Suite -->
               <div class="submenu">
                 <button class="submenu-trigger" aria-haspopup="true" aria-expanded="false">
                   Bioinformatics Suite
@@ -134,7 +155,7 @@
                 </div>
               </div>
 
-              <!-- Antigens Catalog block -->
+              <!-- Antigens -->
               <div class="submenu">
                 <button class="submenu-trigger" aria-haspopup="true" aria-expanded="false">
                   Antigens Catalog
@@ -154,11 +175,11 @@
 
         <a href="/oncosynex/pricing/">Pricing</a>
 
-        <!-- RESOURCES -->
+        <!-- RESOURCES (vertical glossy dropdown) -->
         <div class="dropdown resources-dd">
           <button aria-haspopup="true" aria-expanded="false">Resources ▾</button>
-          <div class="mega slim" role="menu">
-            <div class="cols three">
+          <div class="mega" role="menu">
+            <div class="stack">
               <!-- News & Blogs -->
               <div class="submenu">
                 <button class="submenu-trigger" aria-haspopup="true" aria-expanded="false">
@@ -245,7 +266,7 @@
   <!-- Footer year -->
   <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 
-  <!-- Dropdown behavior: top-level + fly-out submenus (click + hover + esc + outside) -->
+  <!-- Behavior: top dropdowns (click), accordions (click), plus hover support via CSS -->
   <script>
   (function () {
     const closeTop = (except) => {
@@ -257,7 +278,7 @@
         }
       });
     };
-    const closeSubs = (scope) => {
+    const closeAccordions = (scope) => {
       (scope || document).querySelectorAll('.submenu.open').forEach(s => {
         s.classList.remove('open');
         const t = s.querySelector('.submenu-trigger[aria-expanded="true"]');
@@ -275,27 +296,26 @@
         closeTop(dd);
         dd.classList.toggle('open', willOpen);
         btn.setAttribute('aria-expanded', String(willOpen));
-        if (!willOpen) closeSubs(dd);
+        if (!willOpen) closeAccordions(dd);
       });
-      // Esc closes this dropdown
       dd.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
           dd.classList.remove('open');
           btn.setAttribute('aria-expanded', 'false');
-          closeSubs(dd);
+          closeAccordions(dd);
           btn.focus();
         }
       });
     });
 
-    // Fly-out submenu triggers (click toggles; hover handled by CSS)
+    // Accordion triggers (click toggles; hover handled by CSS for desktop)
     document.querySelectorAll('.submenu .submenu-trigger').forEach(tr => {
       if (!tr.hasAttribute('aria-expanded')) tr.setAttribute('aria-expanded', 'false');
       tr.addEventListener('click', (e) => {
         e.preventDefault();
         const sub = tr.closest('.submenu');
         const willOpen = !sub.classList.contains('open');
-        // Close siblings
+        // Close siblings (accordion behavior)
         sub.parentElement.querySelectorAll('.submenu.open').forEach(sib => {
           if (sib !== sub) { sib.classList.remove('open'); const t = sib.querySelector('.submenu-trigger[aria-expanded="true"]'); if (t) t.setAttribute('aria-expanded','false'); }
         });
@@ -304,17 +324,17 @@
       });
     });
 
-    // Outside click closes all
+    // Outside click closes everything
     document.addEventListener('click', (e) => {
-      if (!e.target.closest('.dropdown')) { closeSubs(); closeTop(); }
+      if (!e.target.closest('.dropdown')) { closeAccordions(); closeTop(); }
     });
 
-    // Window blur closes all
-    window.addEventListener('blur', () => { closeSubs(); closeTop(); });
+    // Window blur closes everything
+    window.addEventListener('blur', () => { closeAccordions(); closeTop(); });
   })();
   </script>
 
-  <!-- ==== OncoSyNex AI widget (external files) ==== -->
+  <!-- ==== Floating AI widget (external files) ==== -->
   <script src="/oncosynex/assets/osx_qa.js?v=1"></script>
   <script src="/oncosynex/assets/osx_widget.js?v=1" defer></script>
 </body>
