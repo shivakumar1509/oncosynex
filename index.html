@@ -5,104 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OncoSyNex — Home</title>
 
-  <!-- Your base stylesheet -->
-  <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=45" />
+  <!-- Your main stylesheet (unchanged theme) -->
+  <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=46" />
 
-  <!-- Minimal overrides for header + vertical glossy dropdowns -->
+  <!-- Only dropdown behavior overrides (keep your look) -->
   <style>
-    /* ---------- Header polish ---------- */
-    .brand-text { font-size: 2em; font-weight: 900; } /* double logo text */
-    header.site{
-      background: linear-gradient(90deg, #0A1F44 0%, #124C9F 45%, #1e64ff 100%) !important;
-      border-bottom: 1px solid rgba(255,255,255,.15);
-      color: #fff;
-    }
-    header.site .brand { color:#fff; }
-    header.site .tab { background:#12141a; color:#fff; }
-
-    /* Left align the subnav row */
-    .subnav{ justify-content:flex-start !important; }
-
-    /* ---------- Glossy vertical mega menu ---------- */
-    .dropdown{ position:relative; }
-    .dropdown > button{
-      background:transparent; border:0; cursor:pointer; color:#fff;
-      font-weight:800; font-size:.96rem; padding:10px 12px; border-radius:10px;
-    }
-    .dropdown > button:hover{ background:rgba(255,255,255,.12); }
-
-    /* The mega container (single column, glossy blue) */
+    /* Keep mega directly under the button so hover doesn't break */
+    .dropdown { position: relative; }
     .dropdown .mega{
-      position:absolute; top:100%; left:0; /* drops straight down */
-      width:min(720px, 92vw);              /* nice readable width */
-      border-radius:14px; padding:12px;
-      display:none; z-index:100;
-      border:1px solid color-mix(in srgb, var(--bg, #0f2d6b) 70%, var(--brand, #1e64ff) 30%);
-      box-shadow:0 16px 36px rgba(0,0,0,.35);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,0)) ,
-        linear-gradient(180deg, #0f2d6b 0%, #0d2560 100%); /* glossy blue */
+      position: absolute;
+      top: 100%;
+      right: 0;
+      min-width: 260px;
+      border-radius: 14px;
+      padding: 12px;
+      display: none;
+      z-index: 100; /* above hero */
+      /* border/shadow/colors come from your CSS variables in styles.css */
     }
+    /* Show on hover, keyboard focus, or when toggled via JS (.open) */
     .dropdown:hover .mega,
     .dropdown:focus-within .mega,
-    .dropdown.open .mega{ display:block; }
-
-    /* Stack items top->bottom inside the mega */
-    .mega .stack{ display:flex; flex-direction:column; gap:8px; }
-
-    /* Each top item row (has an accordion) */
-    .submenu{
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:12px; overflow:hidden;
-    }
-    .submenu + .submenu { margin-top:8px; }
-
-    .submenu-trigger{
-      width:100%; text-align:left; display:flex; align-items:center; justify-content:space-between; gap:10px;
-      padding:12px; border:0; background:transparent; color:#fff; cursor:pointer; font-weight:800; font-size:.96rem;
-    }
-    .submenu-trigger:hover{ background:rgba(255,255,255,.08); }
-    .submenu-trigger svg{ width:16px;height:16px; opacity:.9; transform:rotate(0deg); transition: transform .18s ease; }
-    .submenu.open .submenu-trigger svg{ transform:rotate(90deg); }
-
-    /* Accordion panel (slides down below the trigger) */
-    .submenu-panel{
-      display:none; padding:10px; background:rgba(255,255,255,.06); border-top:1px solid rgba(255,255,255,.12);
-    }
-    .submenu:hover .submenu-panel,
-    .submenu:focus-within .submenu-panel,
-    .submenu.open .submenu-panel{ display:block; }
-
-    .submenu-panel a{
-      display:inline-block; margin:6px 8px 0 0; padding:8px 10px; border-radius:10px;
-      color:#fff; text-decoration:none; font-weight:700; font-size:.92rem;
-      border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.04);
-    }
-    .submenu-panel a:hover{ background:rgba(255,255,255,.12); box-shadow:0 0 8px var(--brand, #1e64ff); }
-
-    .submenu-panel h5{
-      margin:4px 0 6px; color:#d7e6ff; font-size:.8rem; letter-spacing:.3px; text-transform:uppercase;
+    .dropdown.open .mega {
+      display: block;
     }
 
-    /* Keyboard focus */
-    .subnav a:focus, .subnav button:focus, .submenu-panel a:focus, .submenu-trigger:focus{
-      outline:2px solid #fff; outline-offset:2px; border-radius:10px;
-    }
+    /* Optional: bigger logo text like before */
+    .brand-text { font-size: 2em; font-weight: 900; }
   </style>
 </head>
 <body>
-  <!-- HEADER -->
+  <!-- HEADER: brand left, black tabs right -->
   <header class="site">
     <div class="container header-row">
       <a class="brand" href="/oncosynex/" aria-label="OncoSyNex Home">
         <span class="logo" aria-hidden="true"></span>
         <span class="brand-text">OncoSyNex</span>
       </a>
+
       <div class="top-actions">
         <a class="tab" href="/oncosynex/contact/#demo" target="_blank" rel="noopener">Get a personalized demo</a>
         <a class="tab" href="/oncosynex/resources/platform/" target="_blank" rel="noopener">Read the docs</a>
-        <!-- Removed the AI tab (floating widget is used) -->
+        <!-- AI tab removed on purpose (you have the floating AI bubble) -->
       </div>
     </div>
   </header>
@@ -110,117 +54,32 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container">
-      <!-- Subnav (left-aligned) -->
+      <!-- Subnav in hero — RIGHT aligned (your original layout) -->
       <nav class="subnav" aria-label="Primary">
         <a href="/oncosynex/">Home</a>
 
-        <!-- PRODUCT (vertical glossy dropdown) -->
+        <!-- PRODUCT (stacked headings only — ORIGINAL 3 ITEMS) -->
         <div class="dropdown product-dd">
           <button aria-haspopup="true" aria-expanded="false">Product ▾</button>
-          <div class="mega" role="menu">
-            <div class="stack">
-              <!-- ImmunoAI -->
-              <div class="submenu">
-                <button class="submenu-trigger" aria-haspopup="true" aria-expanded="false">
-                  ImmunoAI Platform
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-                </button>
-                <div class="submenu-panel" role="menu">
-                  <a href="/oncosynex/product/immunoai/">Overview</a>
-                  <a href="/oncosynex/product/immunoai/features/">Key features</a>
-                  <a href="/oncosynex/product/immunoai/workflow/">Workflow & QC</a>
-                  <a href="/oncosynex/product/immunoai/neoantigens/">Neoantigen ranking</a>
-                  <a href="/oncosynex/product/immunoai/api/">API & integrations</a>
-                </div>
-              </div>
-
-              <!-- Bioinformatics Suite -->
-              <div class="submenu">
-                <button class="submenu-trigger" aria-haspopup="true" aria-expanded="false">
-                  Bioinformatics Suite
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-                </button>
-                <div class="submenu-panel" role="menu">
-                  <h5>RNA</h5>
-                  <a href="/oncosynex/product/bioinformatics/rna-seq/">Bulk RNA-seq</a>
-                  <a href="/oncosynex/product/bioinformatics/scrna/">Single-cell RNA-seq</a>
-                  <a href="/oncosynex/product/bioinformatics/fusions/">RNA fusions</a>
-                  <h5>DNA</h5>
-                  <a href="/oncosynex/product/bioinformatics/wes/">WES</a>
-                  <a href="/oncosynex/product/bioinformatics/wgs/">WGS</a>
-                  <a href="/oncosynex/product/bioinformatics/cnv/">CNV & SV</a>
-                  <h5>Typing & Annotation</h5>
-                  <a href="/oncosynex/product/bioinformatics/hla/">HLA typing</a>
-                  <a href="/oncosynex/product/bioinformatics/annotation/">Variant annotation</a>
-                </div>
-              </div>
-
-              <!-- Antigens -->
-              <div class="submenu">
-                <button class="submenu-trigger" aria-haspopup="true" aria-expanded="false">
-                  Antigens Catalog
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-                </button>
-                <div class="submenu-panel" role="menu">
-                  <a href="/oncosynex/product/antigens/">All antigens</a>
-                  <a href="/oncosynex/product/antigens/recombinant/">Recombinant</a>
-                  <a href="/oncosynex/product/antigens/peptides/">Peptides</a>
-                  <a href="/oncosynex/product/antigens/plasmids/">Plasmids</a>
-                  <a href="/oncosynex/product/antigens/custom/">Custom expression</a>
-                </div>
-              </div>
+          <div class="mega slim" role="menu">
+            <div class="cols three">
+              <a class="mega-link" href="/oncosynex/product/immunoai/"><h4>ImmunoAI Platform</h4></a>
+              <a class="mega-link" href="/oncosynex/product/bioinformatics/"><h4>Bioinformatics Suite</h4></a>
+              <a class="mega-link" href="/oncosynex/product/antigens/"><h4>Antigens Catalog</h4></a>
             </div>
           </div>
         </div>
 
         <a href="/oncosynex/pricing/">Pricing</a>
 
-        <!-- RESOURCES (vertical glossy dropdown) -->
+        <!-- RESOURCES (stacked headings only — ORIGINAL 3 ITEMS) -->
         <div class="dropdown resources-dd">
           <button aria-haspopup="true" aria-expanded="false">Resources ▾</button>
-          <div class="mega" role="menu">
-            <div class="stack">
-              <!-- News & Blogs -->
-              <div class="submenu">
-                <button class="submenu-trigger" aria-haspopup="true" aria-expanded="false">
-                  News & Blogs
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-                </button>
-                <div class="submenu-panel" role="menu">
-                  <a href="/oncosynex/resources/news/">All posts</a>
-                  <a href="/oncosynex/resources/news/product/">Product updates</a>
-                  <a href="/oncosynex/resources/news/science/">Science notes</a>
-                  <a href="/oncosynex/resources/news/events/">Events</a>
-                </div>
-              </div>
-
-              <!-- Research & Education -->
-              <div class="submenu">
-                <button class="submenu-trigger" aria-haspopup="true" aria-expanded="false">
-                  Research & Education
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-                </button>
-                <div class="submenu-panel" role="menu">
-                  <a href="/oncosynex/resources/research/">Overview</a>
-                  <a href="/oncosynex/resources/research/neoantigens/">Neoantigens 101</a>
-                  <a href="/oncosynex/resources/research/scrna/">Single-cell basics</a>
-                  <a href="/oncosynex/resources/research/hla/">HLA & presentation</a>
-                </div>
-              </div>
-
-              <!-- Platform Resources -->
-              <div class="submenu">
-                <button class="submenu-trigger" aria-haspopup="true" aria-expanded="false">
-                  Platform Resources
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-                </button>
-                <div class="submenu-panel" role="menu">
-                  <a href="/oncosynex/resources/platform/">Docs home</a>
-                  <a href="/oncosynex/resources/platform/pipelines/">Pipelines</a>
-                  <a href="/oncosynex/resources/platform/api/">API reference</a>
-                  <a href="/oncosynex/resources/platform/security/">Security</a>
-                </div>
-              </div>
+          <div class="mega slim" role="menu">
+            <div class="cols three">
+              <a class="mega-link" href="/oncosynex/resources/news/"><h4>News & Blogs</h4></a>
+              <a class="mega-link" href="/oncosynex/resources/research/"><h4>Research & Education</h4></a>
+              <a class="mega-link" href="/oncosynex/resources/platform/"><h4>Platform Resources</h4></a>
             </div>
           </div>
         </div>
@@ -263,13 +122,16 @@
     </div>
   </footer>
 
-  <!-- Footer year -->
-  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+  <!-- JS -->
+  <script>
+    // Year in footer
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 
-  <!-- Behavior: top dropdowns (click), accordions (click), plus hover support via CSS -->
+  <!-- Minimal dropdown logic: hover works; click/tap toggles; outside-click closes -->
   <script>
   (function () {
-    const closeTop = (except) => {
+    const closeAll = (except) => {
       document.querySelectorAll('.dropdown.open').forEach(dd => {
         if (dd !== except) {
           dd.classList.remove('open');
@@ -278,64 +140,44 @@
         }
       });
     };
-    const closeAccordions = (scope) => {
-      (scope || document).querySelectorAll('.submenu.open').forEach(s => {
-        s.classList.remove('open');
-        const t = s.querySelector('.submenu-trigger[aria-expanded="true"]');
-        if (t) t.setAttribute('aria-expanded', 'false');
-      });
-    };
 
-    // Top-level Product/Resources buttons (click toggles)
+    // Toggle on click/tap for top-level dropdown buttons
     document.querySelectorAll('.dropdown > button').forEach(btn => {
       const dd = btn.parentElement;
       if (!btn.hasAttribute('aria-expanded')) btn.setAttribute('aria-expanded', 'false');
+
       btn.addEventListener('click', (e) => {
         e.preventDefault();
         const willOpen = !dd.classList.contains('open');
-        closeTop(dd);
+        closeAll(dd);
         dd.classList.toggle('open', willOpen);
         btn.setAttribute('aria-expanded', String(willOpen));
-        if (!willOpen) closeAccordions(dd);
       });
+
+      // Close this dropdown on Escape
       dd.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
           dd.classList.remove('open');
           btn.setAttribute('aria-expanded', 'false');
-          closeAccordions(dd);
           btn.focus();
         }
       });
     });
 
-    // Accordion triggers (click toggles; hover handled by CSS for desktop)
-    document.querySelectorAll('.submenu .submenu-trigger').forEach(tr => {
-      if (!tr.hasAttribute('aria-expanded')) tr.setAttribute('aria-expanded', 'false');
-      tr.addEventListener('click', (e) => {
-        e.preventDefault();
-        const sub = tr.closest('.submenu');
-        const willOpen = !sub.classList.contains('open');
-        // Close siblings (accordion behavior)
-        sub.parentElement.querySelectorAll('.submenu.open').forEach(sib => {
-          if (sib !== sub) { sib.classList.remove('open'); const t = sib.querySelector('.submenu-trigger[aria-expanded="true"]'); if (t) t.setAttribute('aria-expanded','false'); }
-        });
-        sub.classList.toggle('open', willOpen);
-        tr.setAttribute('aria-expanded', String(willOpen));
-      });
-    });
-
-    // Outside click closes everything
+    // Click outside closes any open dropdown
     document.addEventListener('click', (e) => {
-      if (!e.target.closest('.dropdown')) { closeAccordions(); closeTop(); }
+      if (!e.target.closest('.dropdown')) closeAll();
     });
 
-    // Window blur closes everything
-    window.addEventListener('blur', () => { closeAccordions(); closeTop(); });
+    // Optional: close on window blur (e.g., switching apps on mobile)
+    window.addEventListener('blur', () => closeAll());
   })();
   </script>
 
-  <!-- ==== Floating AI widget (external files) ==== -->
+  <!-- ==== OncoSyNex AI widget (floating bubble) ==== -->
+  <!-- Ensure these files exist at these paths -->
   <script src="/oncosynex/assets/osx_qa.js?v=1"></script>
   <script src="/oncosynex/assets/osx_widget.js?v=1" defer></script>
+  <!-- ============================================== -->
 </body>
 </html>
