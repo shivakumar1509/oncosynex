@@ -23,7 +23,12 @@
   // Inject CSS that overrides earlier styles
   // -------------------------
   const CSS = `
-    #osx-widget { position: fixed; bottom: 16px; right: 16px; z-index: 9999; }
+    #osx-widget {
+      position: fixed;
+      bottom: 16px;
+      right: max(16px, calc((100vw - min(var(--max), 100% - 2*var(--edge)))/2));
+      z-index: 9999;
+    }
 
     /* FAB */
     .osx-fab {
