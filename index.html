@@ -150,11 +150,13 @@
   <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 
   <!-- Load data FIRST -->
-  <script src="/oncosynex/assets/osx_qa.js?v=2"></script>
+  <script src="/oncosynex/assets/osx_qa.js?v=3"></script>
   <!-- Then load widget logic -->
   <script src="/oncosynex/assets/osx_widget.js?v=3" defer></script>
-
+  <!-- 3) (Optional) Provide an explicit mount target; if missing, the script creates it automatically -->
+  <div id="osx-widget"></div> 
   <!-- Your existing dropdown toggle (kept) -->
+   
   <script>
     (function () {
       const closeAll = (except) => {
