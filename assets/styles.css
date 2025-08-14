@@ -168,3 +168,32 @@ footer.site{
 
 /* Ensure floating AI widget appears above sticky header */
 #osx-widget, .osx-widget{ position:fixed; bottom:16px; right:16px; z-index:9999; }
+
+/* === Small white hero taglines (no overrides) === */
+.mini-hero {
+  margin: 10px 0 16px;
+}
+
+.mini-line {
+  color: #fff;                 /* white text */
+  font-size: 0.95rem;          /* smaller than current hero text */
+  line-height: 1.35;
+  font-weight: 600;            /* slightly lighter than bold-900 */
+  max-width: 420px;            /* narrow to encourage ~4 lines */
+  margin: 0 0 6px 0;
+}
+
+/* Keep wrap to ~4 lines even on wide screens */
+@media (min-width: 1200px) {
+  .mini-line {
+    max-width: 380px;          /* adjust 360–420px to fit your preference */
+  }
+}
+
+/* Slightly smaller on mobile */
+@media (max-width: 520px) {
+  .mini-line {
+    font-size: 0.9rem;
+    max-width: 90%;
+  }
+}

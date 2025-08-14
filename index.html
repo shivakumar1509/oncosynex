@@ -1,60 +1,10 @@
-<!-- ========= UPDATED index.html ========= -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OncoSyNex — Home</title>
-
-  <!-- MAIN STYLES -->
   <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=47" />
-
-  <!-- Inline keeps your existing dropdown + nav tweaks exactly as before -->
-  <style>
-    /* Keep dropdown behavior clean */
-    .dropdown { position: relative; }
-    .dropdown .mega {
-      position: absolute;
-      top: 100%;
-      right: 0;
-      min-width: 260px;
-      border-radius: 14px;
-      padding: 12px;
-      display: none;
-      z-index: 100;
-    }
-    .dropdown:hover .mega,
-    .dropdown:focus-within .mega,
-    .dropdown.open .mega {
-      display: block;
-    }
-
-    /* Bigger logo */
-    .brand-text { font-size: 2em; font-weight: 900; }
-
-    /* Spread nav items evenly from left to right */
-    .subnav {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 20px;
-      margin-bottom: 22px;
-      width: 100%;
-    }
-    .subnav > * { flex: 1; text-align: center; }
-    .subnav a, .subnav button {
-      background: transparent;
-      border: 0;
-      cursor: pointer;
-      color: #fff !important;
-      font-weight: 800;
-      font-size: 1rem;
-      padding: 10px 8px;
-      border-radius: 10px;
-      display: inline-block;
-    }
-    .subnav a:hover, .subnav button:hover { background: rgba(255,255,255,.12); }
-  </style>
 </head>
 <body>
   <!-- HEADER -->
@@ -74,12 +24,11 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="container wrap"> <!-- NOTE: added .wrap to enable 2-column layout -->
-      <!-- EVENLY SPACED NAV -->
+    <div class="container wrap">
+      <!-- NAV -->
       <nav class="subnav" aria-label="Primary">
         <a href="/oncosynex/">Home</a>
 
-        <!-- PRODUCT (3 ITEMS) -->
         <div class="dropdown product-dd">
           <button aria-haspopup="true" aria-expanded="false">Product ▾</button>
           <div class="mega slim" role="menu">
@@ -93,7 +42,6 @@
 
         <a href="/oncosynex/pricing/">Pricing</a>
 
-        <!-- RESOURCES (3 ITEMS) -->
         <div class="dropdown resources-dd">
           <button aria-haspopup="true" aria-expanded="false">Resources ▾</button>
           <div class="mega slim" role="menu">
@@ -109,18 +57,20 @@
         <a href="/oncosynex/contact/" target="_blank" rel="noopener">Contact</a>
       </nav>
 
-      <!-- LEFT: two compact, identical boxes (no 'OncoSyNex' prefix), ~4 lines each -->
-      <div class="hero-left">
-        <div class="tagline-box">
+      <!-- NEW SMALL WHITE TAGLINES -->
+      <div class="mini-hero">
+        <p class="mini-line">
           AI-powered multi-omics for immunotherapy, vaccine development, and translational research end-to-end.
-        </div>
-        <div class="tagline-box">
+        </p>
+        <p class="mini-line">
           Antigens and plasmids for diagnostics and immunotherapy.
-        </div>
+        </p>
       </div>
 
-      <!-- RIGHT: reserved space for image/video/CTA -->
-      <div class="hero-right"></div>
+      <!-- RIGHT COLUMN -->
+      <div class="hero-right">
+        <!-- Add your image/CTA here -->
+      </div>
     </div>
   </section>
 
@@ -150,41 +100,41 @@
   </footer>
 
   <!-- JS -->
-  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
-
-  <!-- Dropdown click/tap logic -->
   <script>
-  (function () {
-    const closeAll = (except) => {
-      document.querySelectorAll('.dropdown.open').forEach(dd => {
-        if (dd !== except) {
-          dd.classList.remove('open');
-          const b = dd.querySelector('> button[aria-expanded]');
-          if (b) b.setAttribute('aria-expanded', 'false');
-        }
-      });
-    };
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 
-    document.querySelectorAll('.dropdown > button').forEach(btn => {
-      const dd = btn.parentElement;
-      btn.setAttribute('aria-expanded', 'false');
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const willOpen = !dd.classList.contains('open');
-        closeAll(dd);
-        dd.classList.toggle('open', willOpen);
-        btn.setAttribute('aria-expanded', String(willOpen));
+  <!-- Dropdown Logic -->
+  <script>
+    (function () {
+      const closeAll = (except) => {
+        document.querySelectorAll('.dropdown.open').forEach(dd => {
+          if (dd !== except) {
+            dd.classList.remove('open');
+            const b = dd.querySelector('> button[aria-expanded]');
+            if (b) b.setAttribute('aria-expanded', 'false');
+          }
+        });
+      };
+      document.querySelectorAll('.dropdown > button').forEach(btn => {
+        const dd = btn.parentElement;
+        btn.setAttribute('aria-expanded', 'false');
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const willOpen = !dd.classList.contains('open');
+          closeAll(dd);
+          dd.classList.toggle('open', willOpen);
+          btn.setAttribute('aria-expanded', String(willOpen));
+        });
       });
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.dropdown')) closeAll();
-    });
-  })();
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.dropdown')) closeAll();
+      });
+    })();
   </script>
 
   <!-- Floating AI Widget -->
-  <div id="osx-widget"></div> <!-- ensure container exists -->
+  <div id="osx-widget"></div>
   <script src="/oncosynex/assets/osx_qa.js?v=1"></script>
   <script src="/oncosynex/assets/osx_widget.js?v=1" defer></script>
 </body>
