@@ -5,14 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OncoSyNex — Home</title>
 
-  <!-- Your main stylesheet (unchanged theme) -->
-  <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=46" />
+  <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=47" />
 
-  <!-- Only dropdown behavior overrides (keep your look) -->
   <style>
-    /* Keep mega directly under the button so hover doesn't break */
+    /* Keep dropdown behavior clean */
     .dropdown { position: relative; }
-    .dropdown .mega{
+    .dropdown .mega {
       position: absolute;
       top: 100%;
       right: 0;
@@ -20,22 +18,48 @@
       border-radius: 14px;
       padding: 12px;
       display: none;
-      z-index: 100; /* above hero */
-      /* border/shadow/colors come from your CSS variables in styles.css */
+      z-index: 100;
     }
-    /* Show on hover, keyboard focus, or when toggled via JS (.open) */
     .dropdown:hover .mega,
     .dropdown:focus-within .mega,
     .dropdown.open .mega {
       display: block;
     }
 
-    /* Optional: bigger logo text like before */
+    /* Bigger logo */
     .brand-text { font-size: 2em; font-weight: 900; }
+
+    /* Spread nav items evenly from left to right */
+    .subnav {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 22px;
+      width: 100%;
+    }
+    .subnav > * {
+      flex: 1;
+      text-align: center;
+    }
+    .subnav a, .subnav button {
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      color: #fff !important;
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 10px 8px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+    .subnav a:hover, .subnav button:hover {
+      background: rgba(255,255,255,.12);
+    }
   </style>
 </head>
 <body>
-  <!-- HEADER: brand left, black tabs right -->
+  <!-- HEADER -->
   <header class="site">
     <div class="container header-row">
       <a class="brand" href="/oncosynex/" aria-label="OncoSyNex Home">
@@ -46,7 +70,6 @@
       <div class="top-actions">
         <a class="tab" href="/oncosynex/contact/#demo" target="_blank" rel="noopener">Get a personalized demo</a>
         <a class="tab" href="/oncosynex/resources/platform/" target="_blank" rel="noopener">Read the docs</a>
-        <!-- AI tab removed on purpose (you have the floating AI bubble) -->
       </div>
     </div>
   </header>
@@ -54,11 +77,11 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container">
-      <!-- Subnav in hero — RIGHT aligned (your original layout) -->
+      <!-- EVENLY SPACED NAV -->
       <nav class="subnav" aria-label="Primary">
         <a href="/oncosynex/">Home</a>
 
-        <!-- PRODUCT (stacked headings only — ORIGINAL 3 ITEMS) -->
+        <!-- PRODUCT (3 ITEMS) -->
         <div class="dropdown product-dd">
           <button aria-haspopup="true" aria-expanded="false">Product ▾</button>
           <div class="mega slim" role="menu">
@@ -72,7 +95,7 @@
 
         <a href="/oncosynex/pricing/">Pricing</a>
 
-        <!-- RESOURCES (stacked headings only — ORIGINAL 3 ITEMS) -->
+        <!-- RESOURCES (3 ITEMS) -->
         <div class="dropdown resources-dd">
           <button aria-haspopup="true" aria-expanded="false">Resources ▾</button>
           <div class="mega slim" role="menu">
@@ -124,11 +147,10 @@
 
   <!-- JS -->
   <script>
-    // Year in footer
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 
-  <!-- Minimal dropdown logic: hover works; click/tap toggles; outside-click closes -->
+  <!-- Dropdown click/tap logic -->
   <script>
   (function () {
     const closeAll = (except) => {
@@ -141,11 +163,9 @@
       });
     };
 
-    // Toggle on click/tap for top-level dropdown buttons
     document.querySelectorAll('.dropdown > button').forEach(btn => {
       const dd = btn.parentElement;
-      if (!btn.hasAttribute('aria-expanded')) btn.setAttribute('aria-expanded', 'false');
-
+      btn.setAttribute('aria-expanded', 'false');
       btn.addEventListener('click', (e) => {
         e.preventDefault();
         const willOpen = !dd.classList.contains('open');
@@ -153,31 +173,16 @@
         dd.classList.toggle('open', willOpen);
         btn.setAttribute('aria-expanded', String(willOpen));
       });
-
-      // Close this dropdown on Escape
-      dd.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          dd.classList.remove('open');
-          btn.setAttribute('aria-expanded', 'false');
-          btn.focus();
-        }
-      });
     });
 
-    // Click outside closes any open dropdown
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.dropdown')) closeAll();
     });
-
-    // Optional: close on window blur (e.g., switching apps on mobile)
-    window.addEventListener('blur', () => closeAll());
   })();
   </script>
 
-  <!-- ==== OncoSyNex AI widget (floating bubble) ==== -->
-  <!-- Ensure these files exist at these paths -->
+  <!-- Floating AI Widget -->
   <script src="/oncosynex/assets/osx_qa.js?v=1"></script>
   <script src="/oncosynex/assets/osx_widget.js?v=1" defer></script>
-  <!-- ============================================== -->
 </body>
 </html>
