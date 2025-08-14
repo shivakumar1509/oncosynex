@@ -4,7 +4,33 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OncoSyNex — Home</title>
+
+  <!-- Keep your original stylesheet -->
   <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=40" />
+
+  <!-- Only the dropdown-specific overrides (nothing else) -->
+  <style>
+    /* ===== DROPDOWN FIXES ONLY ===== */
+    .dropdown { position: relative; }
+    .dropdown .mega{
+      position: absolute;
+      top: 100%;          /* was 110% — removes the gap so hover won't break */
+      right: 0;           /* align like before */
+      min-width: 260px;
+      border-radius: 14px;
+      padding: 12px;
+      display: none;
+      z-index: 100;       /* stay above hero */
+      /* border/shadow/colors come from your theme variables in styles.css */
+    }
+    /* Keep menu open on hover OR while focused/clicked (via .open) */
+    .dropdown:hover .mega,
+    .dropdown .mega:hover,
+    .dropdown:focus-within .mega,
+    .dropdown.open .mega {
+      display: block;
+    }
+  </style>
 </head>
 <body>
   <!-- HEADER: brand left, black tabs right -->
@@ -96,6 +122,57 @@
     </div>
   </footer>
 
-  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+  <!-- JS -->
+  <script>
+    // Year in footer
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+    /* Minimal dropdown logic: hover works, plus click/tap toggle with outside-click close */
+    (function () {
+      const closeAll = (except) => {
+        document.querySelectorAll('.dropdown.open').forEach(dd => {
+          if (dd !== except) {
+            dd.classList.remove('open');
+            const b = dd.querySelector('button[aria-expanded]');
+            if (b) b.setAttribute('aria-expanded', 'false');
+          }
+        });
+      };
+
+      document.querySelectorAll('.dropdown > button').forEach(btn => {
+        const dd = btn.parentElement;
+
+        // ensure ARIA state
+        if (!btn.hasAttribute('aria-expanded')) btn.setAttribute('aria-expanded', 'false');
+
+        // toggle on click/tap
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const willOpen = !dd.classList.contains('open');
+          closeAll(dd);
+          dd.classList.toggle('open', willOpen);
+          btn.setAttribute('aria-expanded', String(willOpen));
+        });
+
+        // close on Escape
+        dd.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            dd.classList.remove('open');
+            btn.setAttribute('aria-expanded', 'false');
+            btn.focus();
+          }
+        });
+      });
+
+      // click outside -> close any open dropdown
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.dropdown')) closeAll();
+      });
+
+      // optional: window blur closes too (mobile app switch)
+      window.addEventListener('blur', () => closeAll());
+    })();
+  </script>
 </body>
 </html>
