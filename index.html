@@ -5,91 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OncoSyNex — Home</title>
 
-  <!-- Your main stylesheet (unchanged) -->
+  <!-- Your main stylesheet -->
   <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=48" />
 
-  <!-- Minimal, targeted overrides ONLY (nav spread + hero lead + widget base) -->
+  <!-- Minimal overrides: hero size + left alignment + nav spread -->
   <style>
-    /* === NAV: spread items from left to right (not squeezed) === */
-    .subnav {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;      /* distribute across width */
-      gap: 16px;
-      width: 100%;
-      margin-bottom: 22px;
+    /* --- NAV spread (left → right, not squeezed) --- */
+    .subnav{
+      display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+      justify-content:flex-start;          /* keep starting on the left */
+      margin-bottom:22px; width:100%;
     }
-    .subnav > * { flex: 0 0 auto; }        /* keep each item compact */
-
-    /* Keep dropdown buttons looking like links */
-    .subnav a, .subnav button {
-      background: transparent;
-      border: 0;
-      cursor: pointer;
-      color: #fff !important;
-      font-weight: 800;
-      font-size: 1rem;                     /* readable size */
-      padding: 10px 8px;
-      border-radius: 10px;
+    .subnav a,.subnav button{
+      background:transparent; border:0; cursor:pointer; color:#fff !important;
+      font-weight:800; font-size:1rem; padding:10px 8px; border-radius:10px;
     }
-    .subnav a:hover, .subnav button:hover { background: rgba(255,255,255,.12); }
+    .subnav a:hover,.subnav button:hover{ background:rgba(255,255,255,.12) }
 
-    /* === HERO: large left-aligned text with “end-to-end” pill === */
-    .hero .wrap { display: grid; grid-template-columns: 1fr 420px; gap: 28px; align-items: start; }
-    @media (max-width: 900px){ .hero .wrap { grid-template-columns: 1fr; } }
-
+    /* --- HERO: single column, smaller text, left aligned --- */
+    .hero .wrap{ display:block; }          /* kill any 2-col grid that pushed right */
     .lead{
-      color:#fff;
-      margin:0;
-      max-width:980px;
-      font-weight:900;
-      line-height:1.15;
-      font-size: clamp(3rem, 3.6vw + 1rem, 4.6rem); /* ~2× */
-      letter-spacing:.2px;
-      text-align:left;                       /* anchor left */
+      color:#fff; margin:0; max-width:980px; font-weight:900; line-height:1.18;
+      font-size: clamp(1.8rem, 1.8vw + 0.6rem, 2.6rem);   /* << smaller overall */
+      letter-spacing:.2px; text-align:left;
     }
-    .lead br{
-      content:"";
-      display:block;
-      margin-top:32px;                       /* big gap to second line */
+    .lead br{ content:""; display:block; margin-top:24px; } /* gap between lines */
+    .lead .highlight-box{
+      font-size:0.7em; background:#fff; color:#000; padding:4px 8px;
+      border-radius:6px; font-weight:700; display:inline-block; vertical-align:middle;
     }
-    .highlight-box{
-      font-size:0.6em;                       /* smaller than main hero text */
-      background:#fff;
-      color:#000;
-      padding:4px 8px;
-      border-radius:6px;
-      font-weight:700;
-      display:inline-block;
-      vertical-align:middle;
-    }
+    /* If you want ONLY the first sentence smaller, uncomment:
+    .lead .lead-intro{ font-size: .9em; }
+    */
 
-    /* === Floating AI widget base (kept tiny so it stays on top) === */
-    #osx-widget { position: fixed; bottom: 16px; right: 16px; z-index: 9999; }
-    .osx-fab {
-      border: 0; border-radius: 999px; padding: 10px 14px;
-      background: var(--btn); color: var(--btn-ink); box-shadow: var(--shadow-soft);
-      font-weight: 800; cursor: pointer; font-size: 0.95rem;
-    }
-    .osx-fab:hover { transform: translateY(-1px); }
-    .osx-panel {
-      position: fixed; bottom: 70px; right: 16px; width: 340px;
-      background: var(--panel); color: #0b1b3a;
-      border: 1px solid #e6ebf4; border-radius: 12px; box-shadow: var(--shadow);
-      display: none; overflow: hidden;
-    }
-    .osx-panel.open { display: block; }
-    .osx-panel-head {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 10px 12px; background: var(--bg); color: #fff;
-    }
-    .osx-close { background: transparent; border: 0; color: #fff; font-size: 18px; cursor: pointer; }
-    .osx-panel-body { padding: 10px 12px; }
-    .osx-input { width: 100%; padding: 8px 10px; border: 1px solid #d7e0f7; border-radius: 8px; }
-    .osx-log { max-height: 220px; overflow-y: auto; margin-top: 10px; display: grid; gap: 8px; }
-    .osx-q { font-weight: 700; }
-    .osx-a { background: #f8fbff; border: 1px solid #e6ebf4; border-radius: 8px; padding: 8px; }
+    /* --- Widget base (kept tiny and consistent) --- */
+    #osx-widget{ position:fixed; bottom:16px; right:16px; z-index:9999; }
   </style>
 </head>
 
@@ -112,11 +62,11 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container wrap">
-      <!-- NAV ACROSS THE TOP (spread left → right) -->
+      <!-- NAV -->
       <nav class="subnav" aria-label="Primary">
         <a href="/oncosynex/">Home</a>
 
-        <!-- PRODUCT DROPDOWN -->
+        <!-- PRODUCT -->
         <div class="dropdown product-dd">
           <button aria-haspopup="true" aria-expanded="false">Product ▾</button>
           <div class="mega slim" role="menu">
@@ -130,7 +80,7 @@
 
         <a href="/oncosynex/pricing/">Pricing</a>
 
-        <!-- RESOURCES DROPDOWN -->
+        <!-- RESOURCES -->
         <div class="dropdown resources-dd">
           <button aria-haspopup="true" aria-expanded="false">Resources ▾</button>
           <div class="mega slim" role="menu">
@@ -146,15 +96,13 @@
         <a href="/oncosynex/contact/" target="_blank" rel="noopener">Contact</a>
       </nav>
 
-      <!-- LEFT COLUMN: LARGE HERO TAGLINE WITH “end-to-end” PILL -->
+      <!-- LEFT HERO COPY -->
       <p class="lead">
-        AI-powered multi-omics for immunotherapy, vaccine development, and translational research
+        <!-- Wrap first sentence in .lead-intro only if you want it smaller (see CSS comment) -->
+        <span class="lead-intro">AI-powered multi-omics for immunotherapy, vaccine development, and translational research</span>
         <span class="highlight-box">end-to-end</span>.<br>
         Antigens and plasmids for diagnostics and immunotherapy.
       </p>
-
-      <!-- RIGHT COLUMN: RESERVED SPACE (optional art/cta/video) -->
-      <div class="hero-right"><!-- add your media here --></div>
     </div>
   </section>
 
@@ -183,20 +131,14 @@
     </div>
   </footer>
 
-  <!-- Year -->
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 
-  <!-- Q&A data MUST load first -->
+  <!-- Load Q&A first, then widget -->
   <script src="/oncosynex/assets/osx_qa.js?v=3"></script>
-  <!-- Widget logic AFTER data -->
   <script src="/oncosynex/assets/osx_widget.js?v=6" defer></script>
-
-  <!-- Single mount target for widget (only once) -->
   <div id="osx-widget"></div>
 
-  <!-- Dropdown click/tap logic (kept from your version) -->
+  <!-- Dropdown logic (unchanged) -->
   <script>
   (function () {
     const closeAll = (except) => {
@@ -208,7 +150,6 @@
         }
       });
     };
-
     document.querySelectorAll('.dropdown > button').forEach(btn => {
       const dd = btn.parentElement;
       btn.setAttribute('aria-expanded', 'false');
@@ -220,7 +161,6 @@
         btn.setAttribute('aria-expanded', String(willOpen));
       });
     });
-
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.dropdown')) closeAll();
     });
