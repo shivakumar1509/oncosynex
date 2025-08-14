@@ -1,6 +1,6 @@
 // /oncosynex/assets/osx_widget.js
 (function () {
-  // ---- Inject minimal CSS so the widget is visible and on top ----
+  // ---- Minimal CSS (widget, illustration, bottom popular + input) ----
   const CSS = `
     #osx-widget { position: fixed; bottom: 16px; right: 16px; z-index: 9999; }
     .osx-fab { border: 0; border-radius: 999px; padding: 10px 14px;
@@ -8,22 +8,40 @@
       box-shadow: var(--shadow-soft, 0 6px 16px rgba(0,0,0,.25));
       font-weight: 800; cursor: pointer; font-size: 0.95rem; }
     .osx-fab:hover { transform: translateY(-1px); }
-    .osx-panel { position: fixed; bottom: 70px; right: 16px; width: 340px;
+
+    .osx-panel { position: fixed; bottom: 70px; right: 16px; width: 360px;
       background: var(--panel, #fff); color: #0b1b3a;
       border: 1px solid #e6ebf4; border-radius: 12px;
       box-shadow: var(--shadow, 0 10px 28px rgba(0,0,0,.35));
       display: none; overflow: hidden; }
     .osx-panel.open { display: block; }
+
     .osx-panel-head { display:flex; align-items:center; justify-content:space-between;
       padding:10px 12px; background: var(--bg, #0f2d6b); color:#fff; }
     .osx-close { background: transparent; border: 0; color: #fff; font-size: 18px; cursor: pointer; }
-    .osx-panel-body { padding: 10px 12px; }
-    .osx-input { width:100%; padding:8px 10px; border:1px solid #d7e0f7; border-radius:8px; }
-    .osx-suggestions { margin-top: 8px; display:flex; flex-wrap:wrap; gap:6px; }
-    .osx-sugg { border: 1px solid #d7e0f7; border-radius:999px; padding:6px 10px; background:#f6f9ff; cursor:pointer; }
-    .osx-log { max-height: 220px; overflow-y:auto; margin-top:10px; display:grid; gap:8px; }
+
+    .osx-panel-body { padding: 10px 12px 0 12px; display:grid; gap:10px; }
+    .osx-hero { display:flex; align-items:center; gap:10px; }
+    .osx-illwrap { flex:0 0 64px; width:64px; height:64px; }
+    .osx-illwrap svg { width:64px; height:64px; display:block; }
+    .osx-hero-text { font-size: 0.9rem; color:#223257; line-height:1.3; }
+
+    .osx-log { max-height: 220px; overflow-y:auto; margin-top:6px; display:grid; gap:8px; padding-bottom:8px; }
+    .osx-exchange { display:grid; gap:4px; }
     .osx-q { font-weight:700; }
     .osx-a { background:#f8fbff; border:1px solid #e6ebf4; border-radius:8px; padding:8px; }
+
+    /* Bottom area: popular + input row */
+    .osx-bottom { border-top:1px solid #e6ebf4; background:#fbfdff; display:grid; gap:6px; padding:8px 12px; }
+    .osx-popular-title { font-size: 0.8rem; font-weight:800; color:#314579; }
+    .osx-popular-buttons { display:flex; flex-wrap:wrap; gap:6px; }
+    .osx-sugg { border: 1px solid #d7e0f7; border-radius:999px; padding:6px 10px; background:#f6f9ff; cursor:pointer; font-size:0.85rem; }
+
+    .osx-input-row { display:flex; align-items:center; gap:6px; }
+    .osx-input { flex:1; min-width:0; padding:8px 10px; border:1px solid #d7e0f7; border-radius:8px; font-size:0.9rem; }
+    .osx-send { flex:0 0 auto; border:0; border-radius:8px; padding:8px 10px;
+      background: var(--btn, #1e64ff); color: var(--btn-ink, #fff); font-weight:800; cursor:pointer; }
+    .osx-send:hover { filter: brightness(1.05); }
   `;
   if (!document.getElementById('osx-widget-base-css')) {
     const s = document.createElement('style');
@@ -31,6 +49,9 @@
     s.textContent = CSS;
     document.head.appendChild(s);
   }
+
+  // Choose EXACTLY three popular items by ID
+  const POPULAR_IDS = ['gen-01', 'supp-01', 'pr-01'];
 
   // ---- Init after DOM ready ----
   const ready = (fn) => (document.readyState === "loading")
@@ -67,9 +88,23 @@
         <button class="osx-close" aria-label="Close">×</button>
       </div>
       <div class="osx-panel-body">
-        <input class="osx-input" placeholder="Ask a question…" />
-        <div class="osx-suggestions"></div>
+        <div class="osx-hero">
+          <div class="osx-illwrap" aria-hidden="true">
+            ${ladySVG()}
+          </div>
+          <div class="osx-hero-text">
+            Ask product, pricing, or workflow questions. Use the box below and press <b>Enter</b>.
+          </div>
+        </div>
         <div class="osx-log"></div>
+      </div>
+      <div class="osx-bottom">
+        <div class="osx-popular-title">Popular questions</div>
+        <div class="osx-popular-buttons"></div>
+        <div class="osx-input-row">
+          <input class="osx-input" placeholder="Type your question…" aria-label="Type your question" />
+          <button class="osx-send" type="button" aria-label="Send">Send</button>
+        </div>
       </div>
     `;
 
@@ -78,13 +113,15 @@
 
     const closeBtn = panel.querySelector(".osx-close");
     const input = panel.querySelector(".osx-input");
-    const sugg = panel.querySelector(".osx-suggestions");
+    const sendBtn = panel.querySelector(".osx-send");
     const log = panel.querySelector(".osx-log");
+    const popularWrap = panel.querySelector(".osx-popular-buttons");
 
-    // Seed suggestions (top 5)
-    sugg.innerHTML = (QA.slice(0, 5).map(x =>
-      `<button class="osx-sugg" type="button">${escapeHtml(x.q)}</button>`
-    ).join("")) || "";
+    // --- Bottom "Popular questions" (exactly three) ---
+    const popularItems = getPopular(QA, POPULAR_IDS, 3);
+    popularWrap.innerHTML = popularItems.map(x =>
+      `<button class="osx-sugg" type="button" data-q="${escapeAttr(x.q)}">${escapeHtml(x.q)}</button>`
+    ).join("");
 
     // Events
     btn.addEventListener("click", () => panel.classList.add("open"));
@@ -93,8 +130,9 @@
     panel.addEventListener("click", (e) => {
       const b = e.target.closest(".osx-sugg");
       if (!b) return;
-      input.value = b.textContent;
-      answer(b.textContent);
+      const q = b.getAttribute('data-q') || b.textContent;
+      input.value = q;
+      answer(q);
     });
 
     input.addEventListener("keydown", (e) => {
@@ -102,6 +140,9 @@
         e.preventDefault();
         answer(input.value.trim());
       }
+    });
+    sendBtn.addEventListener("click", () => {
+      answer(input.value.trim());
     });
 
     function answer(qtext) {
@@ -119,12 +160,50 @@
       `;
       log.appendChild(wrap);
       log.scrollTop = log.scrollHeight;
+      // keep the typed text for quick edits; comment next line to clear
+      // input.value = '';
     }
+  }
 
-    function escapeHtml(s) {
-      return String(s).replace(/[&<>"']/g, m => ({
-        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
-      }[m]));
+  function getPopular(QA, ids, max) {
+    const byId = new Map(QA.map(x => [x.id, x]));
+    const picked = [];
+    ids.forEach(id => { if (byId.has(id) && picked.length < max) picked.push(byId.get(id)); });
+    if (picked.length < max) {
+      for (let i = 0; i < QA.length && picked.length < max; i++) {
+        if (!ids.includes(QA[i].id)) picked.push(QA[i]);
+      }
     }
+    return picked.slice(0, max);
+  }
+
+  function ladySVG() {
+    return `
+<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Assistant illustration">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6fa0ff"/><stop offset="1" stop-color="#1e64ff"/>
+    </linearGradient>
+  </defs>
+  <circle cx="64" cy="64" r="64" fill="url(#g1)" opacity="0.18"/>
+  <path d="M34 58c0-18 13-30 30-30s30 12 30 30v14c0 8-6 14-14 14H48c-8 0-14-6-14-14V58z" fill="#2b2b50"/>
+  <circle cx="64" cy="60" r="20" fill="#ffddb7"/>
+  <rect x="38" y="28" width="52" height="10" rx="5" fill="#1e64ff"/>
+  <rect x="28" y="48" width="12" height="22" rx="6" fill="#1e64ff"/>
+  <rect x="88" y="48" width="12" height="22" rx="6" fill="#1e64ff"/>
+  <circle cx="56" cy="58" r="2.5" fill="#23233a"/>
+  <circle cx="72" cy="58" r="2.5" fill="#23233a"/>
+  <path d="M56 68c2 3 6 5 8 5s6-2 8-5" stroke="#c86a3a" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M42 92c5-8 13-12 22-12s17 4 22 12v10H42V92z" fill="#1e64ff" opacity="0.85"/>
+</svg>`;
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, m => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    }[m]));
+  }
+  function escapeAttr(s) {
+    return String(s).replace(/"/g, '&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
 })();
