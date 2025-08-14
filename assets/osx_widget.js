@@ -1,19 +1,39 @@
 // /oncosynex/assets/osx_widget.js
 (function () {
-  // ---- Minimal CSS (widget, illustration, bottom popular + input) ----
+  // -------------------------
+  // Sizing knobs (edit here)
+  // -------------------------
+  // Approx. +1/2 inch = +48px
+  const PANEL_WIDTH_PX = 388;        // was ~340; add ~48px
+  const LOG_MAX_HEIGHT_PX = 268;     // was ~220; add ~48px
+
+  // Typewriter speed (milliseconds per character)
+  const TYPE_SPEED_MS = 15;
+
+  // Popular question IDs (must exist in OSX_QA)
+  const POPULAR_IDS = ['gen-01', 'supp-01', 'pr-01'];
+
+  // -------------------------
+  // Inject CSS that overrides any earlier styles
+  // -------------------------
   const CSS = `
     #osx-widget { position: fixed; bottom: 16px; right: 16px; z-index: 9999; }
-    .osx-fab { border: 0; border-radius: 999px; padding: 10px 14px;
+
+    .osx-fab {
+      border: 0; border-radius: 999px; padding: 10px 14px;
       background: var(--btn, #1e64ff); color: var(--btn-ink, #fff);
       box-shadow: var(--shadow-soft, 0 6px 16px rgba(0,0,0,.25));
-      font-weight: 800; cursor: pointer; font-size: 0.95rem; }
+      font-weight: 800; cursor: pointer; font-size: 0.95rem;
+    }
     .osx-fab:hover { transform: translateY(-1px); }
 
-    .osx-panel { position: fixed; bottom: 70px; right: 16px; width: 360px;
+    .osx-panel {
+      position: fixed; bottom: 70px; right: 16px; width: ${PANEL_WIDTH_PX}px;
       background: var(--panel, #fff); color: #0b1b3a;
       border: 1px solid #e6ebf4; border-radius: 12px;
       box-shadow: var(--shadow, 0 10px 28px rgba(0,0,0,.35));
-      display: none; overflow: hidden; }
+      display: none; overflow: hidden;
+    }
     .osx-panel.open { display: block; }
 
     .osx-panel-head { display:flex; align-items:center; justify-content:space-between;
@@ -21,17 +41,13 @@
     .osx-close { background: transparent; border: 0; color: #fff; font-size: 18px; cursor: pointer; }
 
     .osx-panel-body { padding: 10px 12px 0 12px; display:grid; gap:10px; }
-    .osx-hero { display:flex; align-items:center; gap:10px; }
-    .osx-illwrap { flex:0 0 64px; width:64px; height:64px; }
-    .osx-illwrap svg { width:64px; height:64px; display:block; }
-    .osx-hero-text { font-size: 0.9rem; color:#223257; line-height:1.3; }
 
-    .osx-log { max-height: 220px; overflow-y:auto; margin-top:6px; display:grid; gap:8px; padding-bottom:8px; }
+    .osx-log { max-height: ${LOG_MAX_HEIGHT_PX}px; overflow-y:auto; margin-top:6px;
+      display:grid; gap:8px; padding-bottom:8px; }
     .osx-exchange { display:grid; gap:4px; }
     .osx-q { font-weight:700; }
-    .osx-a { background:#f8fbff; border:1px solid #e6ebf4; border-radius:8px; padding:8px; }
+    .osx-a { background:#f8fbff; border:1px solid #e6ebf4; border-radius:8px; padding:8px; white-space:pre-wrap; }
 
-    /* Bottom area: popular + input row */
     .osx-bottom { border-top:1px solid #e6ebf4; background:#fbfdff; display:grid; gap:6px; padding:8px 12px; }
     .osx-popular-title { font-size: 0.8rem; font-weight:800; color:#314579; }
     .osx-popular-buttons { display:flex; flex-wrap:wrap; gap:6px; }
@@ -43,24 +59,24 @@
       background: var(--btn, #1e64ff); color: var(--btn-ink, #fff); font-weight:800; cursor:pointer; }
     .osx-send:hover { filter: brightness(1.05); }
   `;
-  if (!document.getElementById('osx-widget-base-css')) {
-    const s = document.createElement('style');
-    s.id = 'osx-widget-base-css';
-    s.textContent = CSS;
-    document.head.appendChild(s);
-  }
 
-  // Choose EXACTLY three popular items by ID
-  const POPULAR_IDS = ['gen-01', 'supp-01', 'pr-01'];
+  const ready = (fn) =>
+    (document.readyState === "loading")
+      ? document.addEventListener("DOMContentLoaded", fn)
+      : fn();
 
-  // ---- Init after DOM ready ----
-  const ready = (fn) => (document.readyState === "loading")
-    ? document.addEventListener("DOMContentLoaded", fn)
-    : fn();
   ready(init);
 
   function init() {
-    // Ensure mount exists; if not, create it.
+    // Ensure style overrides load last
+    if (!document.getElementById('osx-widget-css')) {
+      const s = document.createElement('style');
+      s.id = 'osx-widget-css';
+      s.textContent = CSS;
+      document.head.appendChild(s);
+    }
+
+    // Mount target
     let mount = document.getElementById("osx-widget");
     if (!mount) {
       mount = document.createElement('div');
@@ -68,13 +84,17 @@
       document.body.appendChild(mount);
     }
 
-    // Pull Q&A from global
-    const QA = (window && Array.isArray(window.OSX_QA)) ? window.OSX_QA : [];
-    if (QA.length === 0) {
-      console.warn('[OSX] window.OSX_QA missing or empty. Make sure osx_qa.js is loaded BEFORE this file.');
+    // Get Q&A data
+    let QA;
+    try {
+      // eslint-disable-next-line no-undef
+      QA = (typeof OSX_QA !== "undefined") ? OSX_QA : (window.OSX_QA || []);
+    } catch (e) {
+      QA = window.OSX_QA || [];
     }
+    if (!Array.isArray(QA)) QA = [];
 
-    // --- Build UI ---
+    // UI
     const btn = document.createElement("button");
     btn.className = "osx-fab";
     btn.type = "button";
@@ -88,14 +108,6 @@
         <button class="osx-close" aria-label="Close">×</button>
       </div>
       <div class="osx-panel-body">
-        <div class="osx-hero">
-          <div class="osx-illwrap" aria-hidden="true">
-            ${ladySVG()}
-          </div>
-          <div class="osx-hero-text">
-            Ask product, pricing, or workflow questions. Use the box below and press <b>Enter</b>.
-          </div>
-        </div>
         <div class="osx-log"></div>
       </div>
       <div class="osx-bottom">
@@ -117,14 +129,25 @@
     const log = panel.querySelector(".osx-log");
     const popularWrap = panel.querySelector(".osx-popular-buttons");
 
-    // --- Bottom "Popular questions" (exactly three) ---
-    const popularItems = getPopular(QA, POPULAR_IDS, 3);
-    popularWrap.innerHTML = popularItems.map(x =>
+    // Popular (exactly 3)
+    const popular = pickPopular(QA, POPULAR_IDS, 3);
+    popularWrap.innerHTML = popular.map(x =>
       `<button class="osx-sugg" type="button" data-q="${escapeAttr(x.q)}">${escapeHtml(x.q)}</button>`
     ).join("");
 
+    let greeted = false;
+
     // Events
-    btn.addEventListener("click", () => panel.classList.add("open"));
+    btn.addEventListener("click", () => {
+      panel.classList.add("open");
+      // Greet once per session, with typewriter
+      if (!greeted) {
+        greeted = true;
+        typeAssistant("How can I help you?");
+      }
+      input.focus();
+    });
+
     closeBtn.addEventListener("click", () => panel.classList.remove("open"));
 
     panel.addEventListener("click", (e) => {
@@ -141,61 +164,65 @@
         answer(input.value.trim());
       }
     });
-    sendBtn.addEventListener("click", () => {
-      answer(input.value.trim());
-    });
 
+    sendBtn.addEventListener("click", () => answer(input.value.trim()));
+
+    // -------------------------
+    // Core: answer with typewriter
+    // -------------------------
     function answer(qtext) {
       if (!qtext) return;
+
+      // Show user's question
+      const wrap = document.createElement("div");
+      wrap.className = "osx-exchange";
+      wrap.innerHTML = `<div class="osx-q">${escapeHtml(qtext)}</div><div class="osx-a"></div>`;
+      log.appendChild(wrap);
+      log.scrollTop = log.scrollHeight;
+
+      // Find best preset
       const qlow = qtext.toLowerCase();
       const found = QA.find(x => (x.q || '').toLowerCase() === qlow)
                 || QA.find(x => (x.keywords || []).join(' ').toLowerCase().includes(qlow))
                 || null;
 
+      const answerEl = wrap.querySelector(".osx-a");
+      const text = found ? String(found.a) : "I don’t have a preset answer for that yet.";
+      typewriter(answerEl, text, TYPE_SPEED_MS);
+    }
+
+    function typeAssistant(text) {
       const wrap = document.createElement("div");
       wrap.className = "osx-exchange";
-      wrap.innerHTML = `
-        <div class="osx-q">${escapeHtml(qtext)}</div>
-        <div class="osx-a">${found ? escapeHtml(found.a) : "I don’t have a preset answer for that yet."}</div>
-      `;
+      wrap.innerHTML = `<div class="osx-a"></div>`;
       log.appendChild(wrap);
       log.scrollTop = log.scrollHeight;
-      // keep the typed text for quick edits; comment next line to clear
-      // input.value = '';
+      const answerEl = wrap.querySelector(".osx-a");
+      typewriter(answerEl, text, TYPE_SPEED_MS);
     }
   }
 
-  function getPopular(QA, ids, max) {
-    const byId = new Map(QA.map(x => [x.id, x]));
-    const picked = [];
-    ids.forEach(id => { if (byId.has(id) && picked.length < max) picked.push(byId.get(id)); });
-    if (picked.length < max) {
-      for (let i = 0; i < QA.length && picked.length < max; i++) {
-        if (!ids.includes(QA[i].id)) picked.push(QA[i]);
-      }
-    }
-    return picked.slice(0, max);
+  // -------------------------
+  // Helpers
+  // -------------------------
+  function typewriter(el, text, speed) {
+    el.textContent = "";
+    let i = 0;
+    const timer = setInterval(() => {
+      el.textContent += text.charAt(i++);
+      if (i >= text.length) clearInterval(timer);
+      el.parentElement?.parentElement?.scrollTop && (el.parentElement.parentElement.scrollTop = el.parentElement.parentElement.scrollHeight);
+    }, speed);
   }
 
-  function ladySVG() {
-    return `
-<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Assistant illustration">
-  <defs>
-    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#6fa0ff"/><stop offset="1" stop-color="#1e64ff"/>
-    </linearGradient>
-  </defs>
-  <circle cx="64" cy="64" r="64" fill="url(#g1)" opacity="0.18"/>
-  <path d="M34 58c0-18 13-30 30-30s30 12 30 30v14c0 8-6 14-14 14H48c-8 0-14-6-14-14V58z" fill="#2b2b50"/>
-  <circle cx="64" cy="60" r="20" fill="#ffddb7"/>
-  <rect x="38" y="28" width="52" height="10" rx="5" fill="#1e64ff"/>
-  <rect x="28" y="48" width="12" height="22" rx="6" fill="#1e64ff"/>
-  <rect x="88" y="48" width="12" height="22" rx="6" fill="#1e64ff"/>
-  <circle cx="56" cy="58" r="2.5" fill="#23233a"/>
-  <circle cx="72" cy="58" r="2.5" fill="#23233a"/>
-  <path d="M56 68c2 3 6 5 8 5s6-2 8-5" stroke="#c86a3a" stroke-width="2" fill="none" stroke-linecap="round"/>
-  <path d="M42 92c5-8 13-12 22-12s17 4 22 12v10H42V92z" fill="#1e64ff" opacity="0.85"/>
-</svg>`;
+  function pickPopular(QA, ids, max) {
+    const map = new Map(QA.map(x => [x.id, x]));
+    const out = [];
+    ids.forEach(id => { if (map.has(id) && out.length < max) out.push(map.get(id)); });
+    for (let i = 0; i < QA.length && out.length < max; i++) {
+      if (!ids.includes(QA[i].id)) out.push(QA[i]);
+    }
+    return out.slice(0, max);
   }
 
   function escapeHtml(s) {
