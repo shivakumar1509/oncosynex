@@ -183,5 +183,5 @@ footer.site{
 .lead br {
   content: "";
   display: block;
-  margin-top: 32px;   /* increase to 40px+ if you want more space */
+  margin-top: 64px;   /* increase to 40px+ if you want more space */
 }
