@@ -6,62 +6,70 @@
   <title>OncoSyNex — Home</title>
 
   <!-- Your main stylesheet -->
-  <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=50" />
+  <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=48" />
 
-  <!-- Minimal overrides: nav + hero left + glossy dropdowns/pills -->
+  <!-- Minimal, targeted overrides ONLY for what you asked -->
   <style>
-    /* --- NAV spread (left → right, not squeezed) --- */
+    /* ================= NAV: center + nicely spread ================= */
     .subnav{
-      display:flex; align-items:center; gap:20px; flex-wrap:wrap;
-      justify-content:flex-start;          /* keep starting on the left */
-      margin-bottom:22px; width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;        /* center as a group */
+      flex-wrap:wrap;
+      gap: 28px;                     /* even spacing between items */
+      margin-bottom:22px;
+      width:100%;
     }
-    .subnav a,.subnav button{
-      background:transparent; border:0; cursor:pointer; color:#fff !important;
-      font-weight:800; font-size:1rem; padding:10px 8px; border-radius:10px;
+    .subnav a,
+    .subnav button{
+      background:transparent;
+      border:0;
+      cursor:pointer;
+      color:#fff !important;
+      font-weight:800;
+      font-size:1rem;
+      padding:10px 12px;
+      border-radius:10px;
     }
-    .subnav a:hover,.subnav button:hover{ background:rgba(255,255,255,.12) }
+    .subnav a:hover,
+    .subnav button:hover{
+      background:rgba(255,255,255,.12);
+    }
 
-    /* ----- GLOSSY DROPDOWNS (white cards under the trigger) ----- */
-    .dropdown{ position:relative }
+    /* ================ DROPDOWNS: glossy blue panels ================= */
+    .dropdown { position: relative; }
     .dropdown .mega{
-      position:absolute; top:100%; left:0;
-      min-width:260px; border-radius:14px; padding:12px;
-      background:#fff; color:#12141a;
-      border:1px solid #e6ebf4;
-      box-shadow:0 10px 28px rgba(0,0,0,.35);
-      display:none; z-index:100;
+      position:absolute; top:100%; right:0; z-index:100;
+      min-width:260px; border-radius:14px; padding:12px; display:none;
+
+      /* glossy gradient that matches the page */
+      background: linear-gradient(180deg, rgba(67,118,221,0.95), rgba(22,54,122,0.98));
+      border:1px solid var(--border-blue);
+      box-shadow: var(--shadow);
+      color:#fff;
     }
-    .dropdown.open .mega,
     .dropdown:hover .mega,
-    .dropdown:focus-within .mega{ display:block; }
+    .dropdown:focus-within .mega,
+    .dropdown.open .mega{ display:block; }
+
+    .dropdown .mega .cols{ display:grid; grid-template-columns:1fr; gap:6px; }
     .dropdown .mega a{
       display:block; padding:10px 12px; border-radius:10px;
-      text-decoration:none; font-weight:700; font-size:.95rem; color:#12141a;
-      transition: background .2s ease, transform .15s ease, box-shadow .2s ease;
+      text-decoration:none; font-weight:800; font-size:.95rem; color:#fff;
+      transition: transform .15s ease, background .2s ease, box-shadow .2s ease;
     }
     .dropdown .mega a:hover{
-      background:#f4f7ff; transform:translateY(-1px);
-      box-shadow:0 4px 10px rgba(0,0,0,.08);
+      background: rgba(255,255,255,.10);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.15) inset;
+      transform: translateY(-1px);
     }
-    .dropdown .mega h4{ margin:0; font-size:1rem; color:#12141a }
+    .dropdown .mega h4{ margin:0; color:#fff; }
 
-    /* ----- RIGHT-SIDE GLOSSY PILL BUTTONS ----- */
-    .top-actions{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
-    .tab{
-      display:inline-flex; align-items:center; gap:6px;
-      padding:10px 16px; border-radius:999px;
-      background:#12141a; color:#fff; font-weight:800; font-size:.95rem;
-      border:1px solid #12141a;
-      box-shadow:0 8px 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06);
-      text-decoration:none;
-    }
-    .tab:hover{ transform:translateY(-1px); filter:brightness(1.05); }
-
-    /* --- HERO: single column, left aligned (sizes kept modest) --- */
-    .hero .wrap{ display:block; }          /* avoid 2-col push to the right */
+    /* ================ HERO: left aligned (unchanged content) ======== */
+    .hero .wrap{ display:block; } /* prevents two-column push-right */
     .lead{
-      color:#fff; margin:0; max-width:980px; font-weight:900; line-height:1.18;
+      color:#fff; margin:0;
+      max-width:980px; font-weight:900; line-height:1.18;
       font-size: clamp(1.8rem, 1.8vw + 0.6rem, 2.6rem);
       letter-spacing:.2px; text-align:left;
     }
@@ -71,8 +79,25 @@
       border-radius:6px; font-weight:700; display:inline-block; vertical-align:middle;
     }
 
-    /* --- Widget base (kept consistent) --- */
-    #osx-widget{ position:fixed; bottom:16px; right:16px; z-index:9999; }
+    /* ================== FOOTER: 3 columns + white links ============== */
+    footer.site{ text-align:left; }
+    .footer-cols{
+      display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; align-items:start;
+    }
+    .footer-cols > div + div{ border-left:1px solid #2e4a8e; padding-left:16px; }
+    .footer-cols h3{ margin:0 0 6px; font-size:.95rem; color:#ffffff; }
+    .footer-cols p, .footer-cols a{
+      font-size:.95rem; line-height:1.35; color:#ffffff; text-decoration:none;
+    }
+    .footer-cols a:hover{ text-decoration:underline; }
+
+    /* ================== Widget: keep on right, aligned to container === */
+    #osx-widget{
+      position: fixed;
+      bottom: 16px;
+      right: max(16px, calc((100vw - min(var(--max,1180px), 100% - 2*var(--edge,16px)))/2));
+      z-index: 9999;
+    }
   </style>
 </head>
 
@@ -95,7 +120,7 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container wrap">
-      <!-- NAV -->
+      <!-- NAV (centered & evenly spaced) -->
       <nav class="subnav" aria-label="Primary">
         <a href="/oncosynex/">Home</a>
 
@@ -129,9 +154,9 @@
         <a href="/oncosynex/contact/" target="_blank" rel="noopener">Contact</a>
       </nav>
 
-      <!-- LEFT HERO COPY -->
+      <!-- HERO COPY (left) -->
       <p class="lead">
-        <span class="lead-intro">AI-powered multi-omics for immunotherapy, vaccine development, and translational research</span>
+        AI-powered multi-omics for immunotherapy, vaccine development, and translational research
         <span class="highlight-box">end-to-end</span>.<br>
         Antigens and plasmids for diagnostics and immunotherapy.
       </p>
@@ -142,10 +167,12 @@
   <footer class="site">
     <div class="container">
       <div class="footer-cols">
-        <div><p class="muted">Oncology • Synergy • Next-gen</p></div>
+        <div>
+          <p>Oncology • Synergy • Next-gen</p>
+        </div>
         <div>
           <h3>Navigate</h3>
-          <p class="muted">
+          <p>
             <a href="/oncosynex/pricing/">Pricing</a><br>
             <a href="/oncosynex/resources/">Resources</a><br>
             <a href="/oncosynex/about/" target="_blank" rel="noopener">About</a>
@@ -153,7 +180,7 @@
         </div>
         <div>
           <h3>Get in touch</h3>
-          <p class="muted">
+          <p>
             <a href="/oncosynex/contact/" target="_blank" rel="noopener">Contact</a><br>
             <a href="/oncosynex/contact/#demo" target="_blank" rel="noopener">Schedule a demo</a>
           </p>
@@ -163,14 +190,17 @@
     </div>
   </footer>
 
-  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+  <!-- Year -->
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 
   <!-- Load Q&A first, then widget -->
   <script src="/oncosynex/assets/osx_qa.js?v=3"></script>
-  <script src="/oncosynex/assets/osx_widget.js?v=9" defer></script>
+  <script src="/oncosynex/assets/osx_widget.js?v=7" defer></script>
   <div id="osx-widget"></div>
 
-  <!-- Dropdown logic (unchanged) -->
+  <!-- Dropdown open/close logic (unchanged) -->
   <script>
   (function () {
     const closeAll = (except) => {
