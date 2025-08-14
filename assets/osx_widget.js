@@ -1,11 +1,15 @@
 // /oncosynex/assets/osx_widget.js
 (function () {
   // -------- Sizing knobs --------
-  const PANEL_WIDTH_PX  = 388;  // + ~1/2 inch wider
-  const PANEL_HEIGHT_PX = 468;  // + ~1/2 inch taller
-  const LOG_MAX_HEIGHT_PX = 300; // scrollable chat area
-  const TYPE_SPEED_MS = 15;      // typewriter speed
+  const PANEL_WIDTH_PX   = 436;  // + ~1/2 inch wider
+  const PANEL_HEIGHT_PX  = 516;  // + ~1/2 inch taller
+  const LOG_MAX_HEIGHT_PX = 300; // scrollable chat area height
+  const TYPE_SPEED_MS     = 15;  // typewriter speed (ms per character)
+
+  // Popular question IDs (must exist in OSX_QA)
   const POPULAR_IDS = ['gen-01', 'supp-01', 'pr-01'];
+
+  // Cartoon asset
   const CARTOON_URL = "/oncosynex/assets/assistant-lady.svg";
 
   // -------- CSS (with safe fallbacks) --------
@@ -66,18 +70,35 @@
       padding: 10px 12px 12px;
       gap: 10px;
     }
+
     .osx-log {
-      max-height: ${LOG_MAX_HEIGHT_PX}px; overflow-y:auto;
-      display:grid; gap:8px; padding-right:4px;
-    }
-    .osx-exchange { display:grid; gap:4px; }
-    .osx-q { font-weight:700; }
-    .osx-a {
-      background:#f8fbff; border:1px solid #e6ebf4;
-      border-radius:8px; padding:8px; white-space:pre-wrap;
+      max-height: ${LOG_MAX_HEIGHT_PX}px;
+      overflow-y: auto;
+      display: grid;
+      gap: 8px;
+      padding-right: 4px;
     }
 
-    .osx-bottom { border-top:1px solid #e6ebf4; background:#fbfdff; display:grid; gap:6px; padding:8px 12px; }
+    .osx-exchange { display: grid; gap: 4px; }
+
+    .osx-q {
+      font-weight: 700;
+      font-size: 0.85rem;  /* match popular question font size */
+    }
+
+    .osx-a {
+      background: #f8fbff;
+      border: 1px solid #e6ebf4;
+      border-radius: 8px;
+      padding: 8px;
+      white-space: pre-wrap;
+      font-size: 0.85rem;  /* match popular question font size */
+    }
+
+    .osx-bottom {
+      border-top:1px solid #e6ebf4; background:#fbfdff;
+      display:grid; gap:6px; padding:8px 12px;
+    }
     .osx-popular-title { font-size: 0.8rem; font-weight:800; color:#314579; }
     .osx-popular-buttons { display:flex; flex-wrap:wrap; gap:6px; }
     .osx-sugg {
@@ -167,11 +188,11 @@
     mount.appendChild(btn);
     mount.appendChild(panel);
 
-    const closeBtn = panel.querySelector(".osx-close");
-    const input = panel.querySelector(".osx-input");
-    const sendBtn = panel.querySelector(".osx-send");
-    const log = panel.querySelector(".osx-log");
-    const popularWrap = panel.querySelector(".osx-popular-buttons");
+    const closeBtn   = panel.querySelector(".osx-close");
+    const input      = panel.querySelector(".osx-input");
+    const sendBtn    = panel.querySelector(".osx-send");
+    const log        = panel.querySelector(".osx-log");
+    const popularWrap= panel.querySelector(".osx-popular-buttons");
 
     // 3 popular buttons
     const popular = pickPopular(QA, POPULAR_IDS, 3);
