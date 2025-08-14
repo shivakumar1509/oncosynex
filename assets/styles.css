@@ -103,3 +103,69 @@ footer.site{
   color:#c7d2e8;
   text-align:center;
 }
+
+/* ===== MAIN NAV (left → right, like your screenshot) ===== */
+.mainnav{
+  display:flex;
+  align-items:center;
+  gap:26px;
+  flex-wrap:wrap;
+  margin: 14px 0 8px;            /* sits nicely under the header band */
+}
+.mainnav > a,
+.mainnav > .dropdown > button{
+  background:transparent;
+  border:0;
+  color:#fff !important;
+  font-weight:800;
+  font-size:1rem;
+  padding:10px 8px;
+  border-radius:10px;
+  cursor:pointer;
+}
+.mainnav > a:hover,
+.mainnav > .dropdown > button:hover{
+  background:rgba(255,255,255,.12);
+}
+
+/* Keep the nav aligned from the LEFT edge of the container */
+.hero .wrap { grid-template-columns: 1fr 420px; }
+@media (max-width: 900px){ .hero .wrap { grid-template-columns: 1fr; }}
+
+/* ===== GLOSSY DROPDOWNS (white cards) ===== */
+.dropdown{ position:relative }
+.dropdown .mega{
+  position:absolute; top:100%; left:0;       /* open under the trigger, not off to the right */
+  min-width:260px; border-radius:14px; padding:12px;
+  background:#fff; color:#12141a;
+  border:1px solid #e6ebf4;
+  box-shadow:0 10px 28px rgba(0,0,0,.35);     /* glossy card shadow */
+  display:none; z-index:100;
+}
+.dropdown.open .mega,
+.dropdown:hover .mega,
+.dropdown:focus-within .mega{ display:block; }
+
+/* Items inside the dropdown */
+.dropdown .mega a{
+  display:block; padding:10px 12px; border-radius:10px;
+  text-decoration:none; font-weight:700; font-size:.95rem; color:#12141a;
+  transition: background .2s ease, transform .15s ease, box-shadow .2s ease;
+}
+.dropdown .mega a:hover{
+  background:#f4f7ff; transform:translateY(-1px);
+  box-shadow:0 4px 10px rgba(0,0,0,.08);
+}
+.dropdown .mega h4{ margin:0; font-size:1rem; color:#12141a }
+
+/* ===== RIGHT-SIDE GLOSSY PILL BUTTONS ===== */
+.top-actions{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.tab{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:10px 16px; border-radius:999px;
+  background: #12141a;              /* deep glossy */
+  color:#fff; font-weight:800; font-size:.95rem;
+  border:1px solid #12141a;
+  box-shadow: 0 8px 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06);
+}
+.tab:hover{ transform:translateY(-1px); filter: brightness(1.05); }
