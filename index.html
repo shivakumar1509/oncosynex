@@ -4,8 +4,57 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OncoSyNex — Home</title>
+
+  <!-- Your main stylesheet (unchanged) -->
   <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=47" />
+
+  <!-- Widget CSS (kept here so it always shows on top) -->
+  <style>
+    /* Floating widget container (always on top) */
+    #osx-widget { position: fixed; bottom: 16px; right: 16px; z-index: 9999; }
+
+    /* Floating Action Button */
+    .osx-fab {
+      border: 0; border-radius: 999px; padding: 10px 14px;
+      background: var(--btn); color: var(--btn-ink); box-shadow: var(--shadow-soft);
+      font-weight: 800; cursor: pointer; font-size: 0.95rem;
+    }
+    .osx-fab:hover { transform: translateY(-1px); }
+
+    /* Slide-up panel */
+    .osx-panel {
+      position: fixed; bottom: 70px; right: 16px; width: 340px;
+      background: var(--panel); color: #0b1b3a;
+      border: 1px solid #e6ebf4; border-radius: 12px; box-shadow: var(--shadow);
+      display: none; overflow: hidden;
+    }
+    .osx-panel.open { display: block; }
+
+    .osx-panel-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 12px; background: var(--bg); color: #fff;
+    }
+    .osx-close { background: transparent; border: 0; color: #fff; font-size: 18px; cursor: pointer; }
+
+    .osx-panel-body { padding: 10px 12px; }
+    .osx-input { width: 100%; padding: 8px 10px; border: 1px solid #d7e0f7; border-radius: 8px; }
+    .osx-suggestions { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .osx-sugg { border: 1px solid #d7e0f7; border-radius: 999px; padding: 6px 10px; background: #f6f9ff; cursor: pointer; }
+    .osx-log { max-height: 220px; overflow-y: auto; margin-top: 10px; display: grid; gap: 8px; }
+    .osx-q { font-weight: 700; }
+    .osx-a { background: #f8fbff; border: 1px solid #e6ebf4; border-radius: 8px; padding: 8px; }
+
+    /* Small white hero lines (fresh classes; do not override your h1/lead) */
+    .mini-hero { margin: 10px 0 16px; }
+    .mini-line {
+      color: #fff; font-size: 0.95rem; line-height: 1.35; font-weight: 600;
+      max-width: 420px; margin: 0 0 6px 0;
+    }
+    @media (min-width: 1200px) { .mini-line { max-width: 380px; } }
+    @media (max-width: 520px) { .mini-line { font-size: 0.9rem; max-width: 90%; } }
+  </style>
 </head>
+
 <body>
   <!-- HEADER -->
   <header class="site">
@@ -57,7 +106,7 @@
         <a href="/oncosynex/contact/" target="_blank" rel="noopener">Contact</a>
       </nav>
 
-      <!-- NEW SMALL WHITE TAGLINES -->
+      <!-- SMALL WHITE TAGLINES (no boxes) -->
       <div class="mini-hero">
         <p class="mini-line">
           AI-powered multi-omics for immunotherapy, vaccine development, and translational research end-to-end.
@@ -67,10 +116,8 @@
         </p>
       </div>
 
-      <!-- RIGHT COLUMN -->
-      <div class="hero-right">
-        <!-- Add your image/CTA here -->
-      </div>
+      <!-- Right column space (optional image/CTA) -->
+      <div class="hero-right"><!-- add your media here --></div>
     </div>
   </section>
 
@@ -99,12 +146,15 @@
     </div>
   </footer>
 
-  <!-- JS -->
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+  <!-- YEAR -->
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 
-  <!-- Dropdown Logic -->
+  <!-- Load data FIRST -->
+  <script src="/oncosynex/assets/osx_qa.js?v=2"></script>
+  <!-- Then load widget logic -->
+  <script src="/oncosynex/assets/osx_widget.js?v=3" defer></script>
+
+  <!-- Your existing dropdown toggle (kept) -->
   <script>
     (function () {
       const closeAll = (except) => {
@@ -133,9 +183,7 @@
     })();
   </script>
 
-  <!-- Floating AI Widget -->
+  <!-- Mount target for widget -->
   <div id="osx-widget"></div>
-  <script src="/oncosynex/assets/osx_qa.js?v=1"></script>
-  <script src="/oncosynex/assets/osx_widget.js?v=1" defer></script>
 </body>
 </html>
