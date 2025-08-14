@@ -174,5 +174,213 @@
       window.addEventListener('blur', () => closeAll());
     })();
   </script>
+  <!-- ==== OncoSyNex AI — Floating Chat Widget (drop-in) ==== -->
+<style>
+  /* Uses your theme vars if present; has safe fallbacks */
+  :root{
+    --osx-brand: var(--brand, #1e64ff);
+    --osx-bg: var(--panel, #ffffff);
+    --osx-ink: #0f1a2a;
+    --osx-line: var(--line, #e6ebf4);
+    --osx-shadow: var(--shadow, 0 16px 36px rgba(0,0,0,.28));
+    --osx-radius: var(--radius, 16px);
+  }
+  .osx-fab{
+    position: fixed; right: 18px; bottom: 18px;
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 12px 14px; border-radius: 999px;
+    background: var(--osx-brand); color: #fff; font-weight: 900;
+    border: 0; box-shadow: var(--osx-shadow); cursor: pointer; z-index: 120;
+  }
+  .osx-fab .osx-dot{
+    width:10px;height:10px;border-radius:99px;background:#22c55e;
+    box-shadow:0 0 0 3px rgba(34,197,94,.18);
+  }
+  .osx-fab svg{ width:20px;height:20px; }
+
+  .osx-chat{
+    position: fixed; right: 18px; bottom: 80px; width: min(420px, 92vw);
+    background: var(--osx-bg); color: var(--osx-ink);
+    border: 1px solid var(--osx-line); border-radius: var(--osx-radius);
+    box-shadow: var(--osx-shadow); overflow: hidden; z-index: 130; display: none;
+    transform-origin: bottom right; animation: osx-pop .18s ease-out;
+  }
+  .osx-chat.open{ display:block; }
+  @keyframes osx-pop{ from{ transform: scale(.94); opacity:0 } to{ transform: scale(1); opacity:1 } }
+
+  .osx-head{ display:flex; align-items:center; gap:10px; padding:12px 14px;
+    border-bottom:1px solid var(--osx-line);
+    background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.85));
+  }
+  .osx-head .osx-avatar{ width:28px;height:28px;border-radius:8px;background: var(--osx-brand); position: relative; }
+  .osx-head .osx-avatar::after{ content:''; position:absolute; right:-3px; bottom:-3px; width:10px;height:10px;border-radius:99px;background:#22c55e; box-shadow:0 0 0 2px #fff; }
+  .osx-head h3{ margin:0; font-size: .98rem; }
+  .osx-head .osx-actions{ margin-left:auto; display:flex; gap:6px; }
+  .osx-head .osx-actions button{ border:1px solid var(--osx-line); background:#f6f8ff; padding:6px 8px; border-radius:10px; cursor:pointer; font-weight:700 }
+
+  .osx-feed{ height:min(60vh, 520px); overflow:auto; padding:14px; background:linear-gradient(180deg, #f8fbff, #fff); }
+  .osx-msg{ display:flex; gap:10px; margin:10px 0; align-items:flex-start; }
+  .osx-msg .osx-bubble{ max-width:68ch; padding:10px 12px; border-radius:14px; border:1px solid var(--osx-line); background:#fff; }
+  .osx-msg.user{ justify-content:flex-end; }
+  .osx-msg.user .osx-bubble{ background:#e8f0ff; border-color:#d8e5ff; }
+  .osx-msg.bot .osx-avatar{ width:24px;height:24px;border-radius:8px;background: var(--osx-brand); }
+
+  .osx-typing{ display:inline-flex; gap:4px; }
+  .osx-typing span{ width:6px;height:6px;border-radius:99px;background:#c1c9dd; animation: osx-bounce 1s infinite ease-in-out; }
+  .osx-typing span:nth-child(2){ animation-delay:.15s } .osx-typing span:nth-child(3){ animation-delay:.3s }
+  @keyframes osx-bounce{ 0%,80%,100%{ transform:translateY(0) } 40%{ transform:translateY(-4px) } }
+
+  .osx-suggest{ display:flex; flex-wrap:wrap; gap:8px; margin-top:6px }
+  .osx-chip{ background:#f2f6ff; border:1px solid var(--osx-line); border-radius:999px; padding:6px 10px; cursor:pointer; font-weight:700; font-size:.88rem }
+  .osx-chip:hover{ background:#e8f0ff }
+
+  .osx-compose{ display:flex; gap:8px; padding:10px; border-top:1px solid var(--osx-line); background:#fff }
+  .osx-input{ flex:1; border:1px solid var(--osx-line); border-radius:12px; padding:10px 12px; font-size:1rem }
+  .osx-send{ background: var(--osx-brand); color:#fff; border:0; border-radius:12px; padding:10px 14px; font-weight:800; cursor:pointer }
+</style>
+
+<!-- Floating button -->
+<button class="osx-fab" id="osxFab" title="Ask OncoSyNex AI">
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v7A2.5 2.5 0 0 1 17.5 15H12l-4.5 4v-4H6.5A2.5 2.5 0 0 1 4 12.5v-7Z" fill="currentColor"/>
+  </svg>
+  Ask OncoSyNex AI
+  <span class="osx-dot" aria-hidden="true"></span>
+</button>
+
+<!-- Chat box -->
+<div class="osx-chat" id="osxChat" role="dialog" aria-modal="true" aria-label="Ask OncoSyNex AI">
+  <div class="osx-head">
+    <div class="osx-avatar" aria-hidden="true"></div>
+    <h3>OncoSyNex AI • online</h3>
+    <div class="osx-actions">
+      <button id="osxReset">Reset</button>
+      <button id="osxClose">Close</button>
+    </div>
+  </div>
+  <div class="osx-feed" id="osxFeed"></div>
+  <div class="osx-compose">
+    <input class="osx-input" id="osxPrompt" type="text" placeholder="Ask about ImmunoAI, Bioinformatics Suite, pricing…" />
+    <button class="osx-send" id="osxSend">Send</button>
+  </div>
+</div>
+
+<script>
+/* ===== 0) YOUR PRELOADED Q&A (edit freely) ===== */
+const OSX_QA = [
+  {id:'immunoai', q:'What is the ImmunoAI Platform?',
+   a:'ImmunoAI is our AI-powered multi-omics engine for immunotherapy and vaccine R&D, integrating variant calling, HLA typing, MHC binding and neoantigen ranking.' ,
+   tags:['product','immunoai'], keywords:['immunoai','neoantigen','mhc','platform']},
+  {id:'bioinfo', q:'What is included in the Bioinformatics Suite?',
+   a:'Pipelines for bulk RNA-seq, scRNA-seq, WES/WGS, HLA typing, VEP annotation and pVACseq. Results come with QC reports and publication-ready figures.',
+   tags:['product','bioinformatics'], keywords:['rna-seq','scrna','wes','vep','pvacseq']},
+  {id:'antigens', q:'Do you supply antigens and plasmids?',
+   a:'Yes. We offer a curated catalog of recombinant antigens and plasmids for diagnostics and immunotherapy research, with COA and custom expression on request.',
+   tags:['products'], keywords:['antigens','plasmids']},
+  {id:'pricing', q:'How does pricing work?',
+   a:'Software is tiered (Starter/Pro/Enterprise). Services are quoted per project/sample. Academic discounts available. See /oncosynex/pricing/ for details.',
+   tags:['pricing'], keywords:['pricing','quote','cost']},
+  {id:'demo', q:'Can I schedule a personalized demo?',
+   a:'Absolutely. Visit /oncosynex/contact/#demo to book a walkthrough tailored to your data and workflows.',
+   tags:['demo'], keywords:['demo','schedule','contact']},
+  {id:'security', q:'How do you handle data security?',
+   a:'Encrypted in transit/at rest, role-based access, audit logs, and configurable retention. HIPAA/GDPR workflows on request.',
+   tags:['security'], keywords:['security','compliance','hipaa','gdpr']},
+];
+
+/* ===== 1) Tiny matcher (no libs) ===== */
+const norm = s => s.toLowerCase().replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
+const toks = s => norm(s).split(' ').filter(Boolean);
+const jacc = (a,b)=>{const A=new Set(a),B=new Set(b);const I=[...A].filter(x=>B.has(x)).length;const U=new Set([...A,...B]).size;return U?I/U:0};
+function score(q,item){
+  const qt=toks(q), it=toks(item.q+' '+(item.keywords||[]).join(' '));
+  let s=jacc(qt,it);
+  (item.keywords||[]).forEach(k=>{ if(norm(q).includes(norm(k))) s+=.15; });
+  if(/price|cost|rate|subscription/.test(q) && item.tags?.includes('pricing')) s+=.2;
+  if(/demo|trial|walkthrough|contact/.test(q) && item.tags?.includes('demo')) s+=.2;
+  if(/security|privacy|compliance|hipaa|gdpr/.test(q) && item.tags?.includes('security')) s+=.2;
+  return s;
+}
+function match(q,limit=3){
+  return OSX_QA.map(x=>({...x,_s:score(q,x)})).filter(x=>x._s>0).sort((a,b)=>b._s-a._s).slice(0,limit);
+}
+
+/* ===== 2) UI helpers ===== */
+const $ = s => document.querySelector(s);
+function el(html){ const t=document.createElement('template'); t.innerHTML=html.trim(); return t.content.firstChild; }
+function feedMsg(role, html){
+  const node = el(`<div class="osx-msg ${role}">${ role==='bot' ? '<div class="osx-avatar" aria-hidden="true"></div>' : '' }<div class="osx-bubble">${html}</div></div>`);
+  const feed = $('#osxFeed'); feed.appendChild(node); feed.scrollTop = feed.scrollHeight; return node;
+}
+function typing(on=true){
+  const id='osxTyping';
+  if(on){
+    const n = el(`<div class="osx-msg bot" id="${id}"><div class="osx-avatar"></div><div class="osx-bubble"><span class="osx-typing"><span></span><span></span><span></span></span></div></div>`);
+    $('#osxFeed').appendChild(n); $('#osxFeed').scrollTop = $('#osxFeed').scrollHeight;
+  } else {
+    const n = document.getElementById(id); if(n) n.remove();
+  }
+}
+
+/* ===== 3) Ask/Answer ===== */
+function suggest(){
+  const chips = OSX_QA.slice(0,4).map(x=>`<button class="osx-chip" data-qid="${x.id}">${x.q}</button>`).join('');
+  const node = feedMsg('bot', `<strong>Popular questions</strong><div class="osx-suggest">${chips}</div>`);
+  node.querySelectorAll('[data-qid]').forEach(btn=>{
+    btn.addEventListener('click', ()=> {
+      const item = OSX_QA.find(x=>x.id===btn.dataset.qid);
+      if(item) ask(item.q);
+    });
+  });
+}
+function answer(q){
+  const m = match(q,3);
+  if(!m.length) return {html:`I couldn’t find a match. Try rephrasing, or see <a href="/oncosynex/resources/platform/">platform resources</a> or <a href="/oncosynex/contact/#demo">schedule a demo</a>.`};
+  if(m[0]._s>=0.55){
+    const related = m.slice(1).map(x=>`<button class="osx-chip" data-qid="${x.id}">${x.q}</button>`).join('');
+    return {html: m[0].a + (related? `<div style="margin-top:8px"><em>Related:</em> ${related}</div>`:'')};
+  }
+  const opts = m.map(x=>`<li><button class="osx-chip" data-qid="${x.id}">${x.q}</button></li>`).join('');
+  return {html:`Did you mean:<ul class="osx-suggest" style="list-style:none;padding:0;margin:6px 0 0">${opts}</ul>`};
+}
+async function ask(text){
+  feedMsg('user', escapeHtml(text));
+  typing(true);
+  await new Promise(r=>setTimeout(r, 300));  // tiny delay
+  typing(false);
+  const {html} = answer(text);
+  const node = feedMsg('bot', html);
+  node.querySelectorAll('[data-qid]').forEach(btn=>{
+    btn.addEventListener('click', ()=> {
+      const item = OSX_QA.find(x=>x.id===btn.dataset.qid);
+      if(item) ask(item.q);
+    });
+  });
+}
+
+/* ===== 4) Wiring ===== */
+function startChat(){
+  $('#osxFeed').innerHTML = '';
+  feedMsg('bot', `Hi! I’m your OncoSyNex assistant. Ask me about <strong>ImmunoAI</strong>, <strong>Bioinformatics Suite</strong>, <strong>Antigens & plasmids</strong>, or <strong>pricing</strong>.`);
+  suggest();
+}
+$('#osxFab').addEventListener('click', ()=>{
+  const box = $('#osxChat'); box.classList.add('open'); startChat(); $('#osxPrompt').focus();
+});
+$('#osxClose').addEventListener('click', ()=> $('#osxChat').classList.remove('open'));
+$('#osxReset').addEventListener('click', startChat);
+$('#osxSend').addEventListener('click', submitPrompt);
+$('#osxPrompt').addEventListener('keydown', e=>{ if(e.key==='Enter') submitPrompt(); });
+
+document.addEventListener('click', (e)=>{
+  const open = $('#osxChat').classList.contains('open');
+  if(open && !e.target.closest('#osxChat') && !e.target.closest('#osxFab')) $('#osxChat').classList.remove('open');
+});
+
+/* Utils */
+function submitPrompt(){ const v=$('#osxPrompt').value.trim(); if(!v) return; $('#osxPrompt').value=''; ask(v); }
+function escapeHtml(s){ return s.replace(/[&<>"]/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])); }
+</script>
+<!-- ==== /OncoSyNex AI Widget ==== -->
 </body>
 </html>
