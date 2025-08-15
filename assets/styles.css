@@ -507,3 +507,16 @@ footer.site{
 .fig-steps .step + .step{
   margin-top: 12vh;
 }
+/* Override sizes for key headings */
+p.lead,
+p.lead.wide,
+h2.center {
+  font-size: 2rem;    /* adjust this value to what you want */
+  font-weight: 700;   /* bold */
+  line-height: 1.2;   /* tighter line height */
+}
+
+/* If you want the hero title even bigger */
+.hero .lead {
+  font-size: 2.25rem;
+}
