@@ -4,45 +4,44 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OncoSyNex — Resources: Platform</title>
-  <base href="../../">
-  <link rel="stylesheet" href="assets/styles.css?v=35" />
+  <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=35" />
 </head>
 <body>
   <header class="site">
     <div class="container nav">
-      <a class="brand" href="./" aria-label="OncoSyNex Home">
+      <a class="brand" href="/oncosynex/" aria-label="OncoSyNex Home">
         <span class="logo" aria-hidden="true"></span>
         <span class="brand-text">OncoSyNex</span>
       </a>
       <nav class="menu" aria-label="Primary">
-        <a href="./">Home</a>
+        <a href="/oncosynex/">Home</a>
         <div class="dropdown product-dd">
           <button aria-haspopup="true" aria-expanded="false">Product ▾</button>
           <div class="mega slim" role="menu">
             <div class="cols three">
-              <a class="mega-link" href="product/immunoai/"><h4>ImmunoAI Platform</h4></a>
-              <a class="mega-link" href="product/bioinformatics/"><h4>Bioinformatics Suite</h4></a>
-              <a class="mega-link" href="product/antigens/"><h4>Antigens Catalog</h4></a>
+              <a class="mega-link" href="/oncosynex/product/immunoai/"><h4>ImmunoAI Platform</h4></a>
+              <a class="mega-link" href="/oncosynex/product/bioinformatics/"><h4>Bioinformatics Suite</h4></a>
+              <a class="mega-link" href="/oncosynex/product/antigens/"><h4>Antigens Catalog</h4></a>
             </div>
           </div>
         </div>
-        <a href="pricing/">Pricing</a>
+        <a href="/oncosynex/pricing/">Pricing</a>
         <div class="dropdown">
           <button aria-haspopup="true" aria-expanded="false">Resources ▾</button>
           <div class="mega" role="menu" style="min-width:420px">
             <div class="cols" style="grid-template-columns:1fr 1fr;">
               <div>
-                <a class="card" href="resources/news/"><b>News & Blogs</b><p class="muted">Updates, case studies, releases.</p></a>
-                <a class="card" href="resources/research/"><b>Research & Education</b><p class="muted">Whitepapers, tutorials, datasets.</p></a>
+                <a class="card" href="/oncosynex/resources/news/"><b>News & Blogs</b><p class="muted">Updates, case studies, releases.</p></a>
+                <a class="card" href="/oncosynex/resources/research/"><b>Research & Education</b><p class="muted">Whitepapers, tutorials, datasets.</p></a>
               </div>
               <div>
-                <a class="card" href="resources/platform/"><b>Platform Resources</b><p class="muted">API spec, CLI usage, pipelines.</p></a>
+                <a class="card" href="/oncosynex/resources/platform/"><b>Platform Resources</b><p class="muted">API spec, CLI usage, pipelines.</p></a>
               </div>
             </div>
           </div>
         </div>
-        <a href="about/" target="_blank" rel="noopener">About</a>
-        <a href="contact/" target="_blank" rel="noopener">Contact</a>
+        <a href="/oncosynex/about/" target="_blank" rel="noopener">About</a>
+        <a href="/oncosynex/contact/" target="_blank" rel="noopener">Contact</a>
       </nav>
     </div>
   </header>
@@ -78,11 +77,18 @@
         <div><p class="muted">Oncology • Synergy • Next-gen</p></div>
         <div>
           <h3>Navigate</h3>
-          <p class="muted"><a href="pricing/">Pricing</a><br><a href="resources/">Resources</a><br><a href="about/" target="_blank" rel="noopener">About</a></p>
+          <p class="muted">
+            <a href="/oncosynex/pricing/">Pricing</a><br>
+            <a href="/oncosynex/resources/">Resources</a><br>
+            <a href="/oncosynex/about/" target="_blank" rel="noopener">About</a>
+          </p>
         </div>
         <div>
           <h3>Get in touch</h3>
-          <p class="muted"><a href="contact/" target="_blank" rel="noopener">Contact</a><br><a href="contact/#demo" target="_blank" rel="noopener">Schedule a demo</a></p>
+          <p class="muted">
+            <a href="/oncosynex/contact/" target="_blank" rel="noopener">Contact</a><br>
+            <a href="/oncosynex/contact/#demo" target="_blank" rel="noopener">Schedule a demo</a>
+          </p>
         </div>
       </div>
       <p class="copyright">© <span id="y"></span> OncoSyNex</p>
@@ -90,5 +96,32 @@
   </footer>
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+  <script>
+    (function () {
+      const closeAll = (except) => {
+        document.querySelectorAll('.dropdown.open').forEach(dd => {
+          if (dd !== except) {
+            dd.classList.remove('open');
+            const b = dd.querySelector('> button[aria-expanded]');
+            if (b) b.setAttribute('aria-expanded', 'false');
+          }
+        });
+      };
+      document.querySelectorAll('.dropdown > button').forEach(btn => {
+        const dd = btn.parentElement;
+        btn.setAttribute('aria-expanded', 'false');
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const willOpen = !dd.classList.contains('open');
+          closeAll(dd);
+          dd.classList.toggle('open', willOpen);
+          btn.setAttribute('aria-expanded', String(willOpen));
+        });
+      });
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.dropdown')) closeAll();
+      });
+    })();
+  </script>
 </body>
 </html>
