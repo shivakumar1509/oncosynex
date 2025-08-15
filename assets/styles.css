@@ -442,3 +442,21 @@ footer.site{
 
 /* Keep the widget pill styling tidy if it's in the header too */
 .top-actions .tab:last-child { white-space: nowrap; }
+/* === Unify top-right pills to the Ask OncoSyNex AI blue === */
+:root{
+  --pill-bg: linear-gradient(180deg, #4f8dfd 0%, #2e6bf8 100%);  /* same look as Ask */
+  --pill-border: rgba(0,0,0,.35);
+  --pill-shadow: 0 12px 24px rgba(46,107,248,.35), inset 0 1px 0 rgba(255,255,255,.25);
+}
+
+.top-actions .tab{
+  background: var(--pill-bg) !important;
+  color: #fff !important;
+  border: 1px solid var(--pill-border) !important;
+  box-shadow: var(--pill-shadow) !important;
+}
+
+.top-actions .tab:hover{
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
