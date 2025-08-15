@@ -164,3 +164,52 @@ footer.site{
 .hero .hero-figure img{
   width:100%; height:100%; object-fit:contain; display:block; border-radius:8px;
 }
+/* ==== HERO: one-line title, wide figure card, smaller second line ==== */
+:root{
+  --hero-figure-h: 420px;     /* tweak height if needed */
+}
+
+.hero .hero-grid.hero-vertical{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--hero-gap, 36px);
+  align-items: start;
+}
+
+.hero .hero-figure-wide{
+  width: 100%;
+  min-height: var(--hero-figure-h);
+  background: #fff;
+  border: 1px solid #e6ebf4;
+  border-radius: 12px;
+  box-shadow: 0 10px 28px rgba(0,0,0,.18);
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero .hero-figure-wide img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 8px;
+}
+
+/* One-line desktop headline */
+.hero .one-line{
+  font-size: clamp(1.4rem, 1.2vw + 0.9rem, 2rem);
+  line-height: 1.1;
+  margin: 0;
+}
+@media (min-width: 1000px){
+  .hero .one-line{ white-space: nowrap; }
+}
+
+/* Smaller second line */
+.hero .sub-lead{
+  font-size: clamp(1.2rem, 0.9vw + 0.6rem, 1.6rem);
+  line-height: 1.2;
+  font-weight: 800;
+  margin: 0;
+}
