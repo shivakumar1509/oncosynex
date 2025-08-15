@@ -6,9 +6,9 @@
   <title>OncoSyNex — Home</title>
 
   <!-- Main stylesheet -->
-  <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=57" />
+  <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=54" />
 
-  <!-- Keep the FAB aligned with the container’s right edge (panel position) -->
+  <!-- Keep the FAB aligned with the right edge of your container -->
   <style>
     #osx-widget{
       position: fixed;
@@ -31,8 +31,7 @@
       <div class="top-actions">
         <a class="tab" href="/oncosynex/contact/#demo" target="_blank" rel="noopener">Get a personalized demo</a>
         <a class="tab" href="/oncosynex/resources/platform/" target="_blank" rel="noopener">Read the docs</a>
-        <!-- NEW: Ask button (opens the hidden widget panel) -->
-        <button class="tab ask-ai" id="ask-ai-btn" type="button">Ask OncoSyNex AI</button>
+        <a class="tab" href="#osx-open" onclick="document.querySelector('.osx-panel')?.classList.add('open')">Ask OncoSyNex AI</a>
       </div>
     </div>
   </header>
@@ -40,11 +39,10 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container">
-      <!-- NAV (centered & evenly spaced) -->
+      <!-- NAV (unchanged) -->
       <nav class="subnav" aria-label="Primary">
         <a href="/oncosynex/">Home</a>
 
-        <!-- PRODUCT -->
         <div class="dropdown product-dd">
           <button aria-haspopup="true" aria-expanded="false">Product ▾</button>
           <div class="mega slim" role="menu">
@@ -58,7 +56,6 @@
 
         <a href="/oncosynex/pricing/">Pricing</a>
 
-        <!-- RESOURCES -->
         <div class="dropdown resources-dd">
           <button aria-haspopup="true" aria-expanded="false">Resources ▾</button>
           <div class="mega slim" role="menu">
@@ -74,33 +71,26 @@
         <a href="/oncosynex/contact/" target="_blank" rel="noopener">Contact</a>
       </nav>
 
-      <!-- HERO (vertical stack) -->
-      <div class="hero-grid hero-vertical">
-        <!-- One-line main headline -->
-        <p class="lead one-line">
+      <!-- HERO GRID (centered) -->
+      <div class="hero-grid">
+        <p class="lead">
           AI-powered neoantigen & vaccine design
           <span class="highlight-box">end-to-end</span>
         </p>
 
-        <!-- Figure on glossy white card + caption centered and width-matched -->
-        <figure class="hero-figure hero-figure-wide" aria-label="OncoSyNex platform illustration">
+        <aside class="hero-figure" aria-label="OncoSyNex platform illustration">
           <img
             src="/oncosynex/assets/Neoantigens_discovery.svg"
             alt="OncoSyNex platform illustration"
             loading="eager"
             decoding="async"
           />
-          <figcaption class="hero-figure-caption">
-            OncoSyNex engineered plasmids and mRNA constructs, ready for immediate use
-          </figcaption>
-        </figure>
+        </aside>
 
-        <!-- Antigens line: same font & alignment as the main headline -->
-        <p class="lead one-line tertiary">
+        <p class="lead wide">
           Antigens and plasmids for diagnostics and immunotherapy
         </p>
       </div>
-      <!-- /HERO -->
     </div>
   </section>
 
@@ -131,15 +121,14 @@
 
   <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 
-  <!-- Widget (Q&A first, then logic) -->
+  <!-- Widget -->
   <script src="/oncosynex/assets/osx_qa.js?v=3"></script>
-  <script src="/oncosynex/assets/osx_widget.js?v=10" defer></script>
+  <script src="/oncosynex/assets/osx_widget.js?v=9" defer></script>
   <div id="osx-widget"></div>
 
-  <!-- Hook the header Ask button to the hidden widget's panel -->
+  <!-- Dropdown logic -->
   <script>
     (function () {
-      // open/close helpers for dropdowns (unchanged)
       const closeAll = (except) => {
         document.querySelectorAll('.dropdown.open').forEach(dd => {
           if (dd !== except) {
@@ -163,20 +152,6 @@
       document.addEventListener('click', (e) => {
         if (!e.target.closest('.dropdown')) closeAll();
       });
-
-      // Wire the header "Ask OncoSyNex AI" to the (hidden) widget FAB
-      function wireAsk() {
-        const fab = document.querySelector('#osx-widget .osx-fab');
-        const btn = document.getElementById('ask-ai-btn');
-        if (fab && btn) {
-          fab.style.display = 'none';          // hide floating FAB
-          btn.addEventListener('click', () => fab.click());
-          return true;
-        }
-        return false;
-      }
-      const poll = setInterval(() => { if (wireAsk()) clearInterval(poll); }, 200);
-      setTimeout(() => clearInterval(poll), 8000);
     })();
   </script>
 </body>

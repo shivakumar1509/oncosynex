@@ -385,3 +385,60 @@ footer.site{
   box-shadow: 0 10px 24px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.18);
 }
 #osx-widget .osx-fab:hover{ transform: translateY(-1px); filter: brightness(1.06); }
+/* =========================
+   HERO spacing & centering
+   ========================= */
+
+/* Push content below the Home→Contact nav nicely */
+.hero {
+  padding-top: clamp(36px, 6vw, 72px);   /* more air above hero content */
+  padding-bottom: clamp(28px, 6vw, 72px);
+}
+
+/* Extra gap below the subnav (keeps the nav itself unchanged) */
+.hero .subnav {
+  margin-bottom: clamp(36px, 5.5vw, 64px);
+  justify-content: center;               /* ensure the row stays centered */
+}
+
+/* Center the hero block items and control their row gaps */
+.hero .hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;            /* stack: title, figure, second line */
+  justify-items: center;                 /* center each child horizontally */
+  row-gap: clamp(18px, 3.5vw, 28px);
+}
+
+/* Headline & second line centered */
+.hero .lead {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 1000px;
+}
+.hero .lead.wide {
+  margin-top: clamp(24px, 3.2vw, 44px);
+}
+
+/* Figure card: perfectly centered, glossy/floaty look */
+.hero .hero-figure {
+  margin: 0 auto;
+  width: min(100%, 1080px);              /* don't exceed container on large screens */
+  background: #ffffff;
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 16px;
+  /* Subtle glassy surface + soft elevation */
+  box-shadow:
+    0 12px 36px rgba(0,0,0,.22),
+    0 2px 0 rgba(255,255,255,.08) inset;
+  padding: clamp(10px, 1.2vw, 16px);
+}
+.hero .hero-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+/* Keep the widget pill styling tidy if it's in the header too */
+.top-actions .tab:last-child { white-space: nowrap; }
