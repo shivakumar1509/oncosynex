@@ -154,7 +154,7 @@
     const btn = document.createElement("button");
     btn.className = "osx-fab";
     btn.type = "button";
-    btn.textContent = "Ask OncoSyNex";
+    btn.textContent = "Ask OncoSyNex AI";
 
     const panel = document.createElement("div");
     panel.className = "osx-panel";
