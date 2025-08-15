@@ -185,3 +185,34 @@ footer.site{
   display: block;
   margin-top: 64px;   /* increase to 40px+ if you want more space */
 }
+
+/* ===== HERO layout + figure ===== */
+.hero .wrap{
+  display:grid;
+  grid-template-columns: 1fr 420px;  /* text | figure */
+  gap:28px;
+  align-items:start;
+}
+@media (max-width: 900px){
+  .hero .wrap{ grid-template-columns: 1fr; }
+}
+
+/* BIG vertical gap between the two lines */
+.hero .lead br{
+  content:"";
+  display:block;
+  margin-top:64px;   /* adjust to taste */
+}
+
+/* figure box (right side) */
+.hero-right{
+  min-height:220px;
+  border-radius:12px;
+  background: rgba(255,255,255,.06);
+  border: 1px dashed rgba(255,255,255,.25);
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+}
+.hero-right img{
+  width:100%; height:auto; display:block; object-fit:contain;
+}
