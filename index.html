@@ -80,8 +80,8 @@
 
         <aside class="hero-figure" aria-label="OncoSyNex platform illustration">
           <img
-            src="/oncosynex/assets/Neoantigens_discovery.svg"
-            alt="OncoSyNex platform illustration"
+            src="/oncosynex/assets/antigens.svg"
+            alt="Antigens"
             loading="eager"
             decoding="async"
           />
@@ -90,34 +90,35 @@
         <p class="lead wide">
           Antigens and plasmids for diagnostics and immunotherapy
         </p>
+        <!-- duplicated line (as requested) -->
+        <p class="lead wide">
+          Antigens and plasmids for diagnostics and immunotherapy
+        </p>
       </div>
 
-      <!-- ===== Pipelines: sticky figure that swaps on scroll ===== -->
+      <!-- ===== Gallery: sticky figure that swaps on scroll (now 2 items) ===== -->
       <section class="fig-scroller" aria-label="Pipelines gallery">
         <div class="fig-wrap">
           <!-- Pinned figure card; image swaps as you scroll -->
           <figure class="fig-sticky">
             <div class="fig-card">
-              <!-- NOTE: browsers can’t render .svs; use .svg/.png -->
               <img id="figSwap"
-                   src="/oncosynex/assets/bulkRNAseq.svg"
-                   alt="Bulk RNA-seq"
+                   src="/oncosynex/assets/antigens.svg"
+                   alt="Antigens"
                    loading="lazy"
                    decoding="async" />
             </div>
-            <figcaption id="figCaption" class="muted center">Bulk RNA-seq</figcaption>
+            <figcaption id="figCaption" class="muted center">Antigens</figcaption>
           </figure>
 
-          <!-- Scroll triggers -->
+          <!-- Scroll triggers (reduced to two) -->
           <div class="fig-steps">
-            <div class="step" data-img="/oncosynex/assets/bulkRNAseq.svg"           data-caption="Bulk RNA-seq"></div>
-            <div class="step" data-img="/oncosynex/assets/HLAtyping.svg"            data-caption="HLA typing"></div>
-            <div class="step" data-img="/oncosynex/assets/variant%20calling.svg"    data-caption="Variant calling"></div>
-            <div class="step" data-img="/oncosynex/assets/SCRNAseq.svg"             data-caption="scRNA-seq"></div>
+            <div class="step" data-img="/oncosynex/assets/antigens.svg"   data-caption="Antigens"></div>
+            <div class="step" data-img="/oncosynex/assets/antibodies.svg" data-caption="Antibodies"></div>
           </div>
         </div>
       </section>
-      <!-- /Pipelines -->
+      <!-- /Gallery -->
     </div>
   </section>
 
@@ -198,7 +199,7 @@
             const caption = el.dataset.caption || '';
             if (src && !img.src.endsWith(src)) {
               img.src = src;
-              img.alt = caption || 'Pipeline figure';
+              img.alt = caption || 'Figure';
               if (cap) cap.textContent = caption;
             }
           }
