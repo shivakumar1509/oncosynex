@@ -5,116 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OncoSyNex — Home</title>
 
-  <!-- Your main stylesheet -->
+  <!-- Main stylesheet (keep your version param) -->
   <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=49" />
 
-  <!-- Minimal overrides just for the hero layout & small tweaks -->
+  <!-- Small in-page CSS: keep widget flush with container on the right -->
   <style>
-    /* ---------- NAV (keep centered & glossy dropdowns you liked) ---------- */
-    .subnav{
-      display:flex; align-items:center; justify-content:center;
-      flex-wrap:wrap; gap:28px; margin-bottom:22px; width:100%;
-    }
-    .subnav a, .subnav button{
-      background:transparent; border:0; cursor:pointer;
-      color:#fff !important; font-weight:800; font-size:1rem;
-      padding:10px 12px; border-radius:10px; text-decoration:none;
-    }
-    .subnav a:hover, .subnav button:hover{ background:rgba(255,255,255,.12); }
-
-    .dropdown{ position:relative }
-    .dropdown .mega{
-      position:absolute; top:100%; right:0; z-index:100;
-      min-width:260px; border-radius:14px; padding:12px; display:none;
-      background: linear-gradient(180deg, rgba(67,118,221,0.95), rgba(22,54,122,0.98));
-      border:1px solid var(--border-blue); box-shadow: var(--shadow); color:#fff;
-    }
-    .dropdown:hover .mega, .dropdown:focus-within .mega, .dropdown.open .mega{ display:block; }
-    .dropdown .mega .cols{ display:grid; grid-template-columns:1fr; gap:6px; }
-    .dropdown .mega a{
-      display:block; padding:10px 12px; border-radius:10px; text-decoration:none; color:#fff;
-      font-weight:800; font-size:.95rem; transition: transform .15s ease, background .2s ease, box-shadow .2s ease;
-    }
-    .dropdown .mega a:hover{ background:rgba(255,255,255,.10); box-shadow:0 0 0 1px rgba(255,255,255,.15) inset; transform:translateY(-1px); }
-    .dropdown .mega h4{ margin:0; color:#fff; }
-
-    /* ------------------- HERO: exact structure you asked ------------------ */
-    /* Grid with named areas:
-       Row 1: nav (full width)
-       Row 2: lead1 (left) | figure (right)
-       Row 3: lead2 (left) | empty (right)
-    */
-    .hero .wrap{
-      display:grid;
-      grid-template-columns: 1fr 420px;
-      grid-template-areas:
-        "nav    nav"
-        "lead1  figure"
-        "lead2  figure-empty";
-      gap: 28px;
-      align-items: start;
-    }
-    /* make nav span full width */
-    .hero .wrap > .subnav{ grid-area: nav; }
-
-    /* left headline block */
-    .lead-1{ grid-area: lead1; }
-    /* right figure block */
-    .hero-figure{ grid-area: figure; }
-    /* second line block (below, left) */
-    .lead-2{ grid-area: lead2; margin-top: 12px; } /* extra breathing room */
-
-    @media (max-width: 900px){
-      .hero .wrap{
-        grid-template-columns: 1fr;
-        grid-template-areas:
-          "nav"
-          "lead1"
-          "figure"
-          "lead2";
-      }
-      .hero-figure{ max-width: 520px; }
-    }
-
-    /* Headline styling (same for both lines) */
-    .lead{
-      color:#fff; margin:0;
-      max-width:980px; font-weight:900; line-height:1.18;
-      font-size: clamp(1.8rem, 1.8vw + 0.6rem, 2.6rem);
-      letter-spacing:.2px; text-align:left;
-    }
-
-    /* Big vertical gap BETWEEN the two blocks */
-    .lead-1 + .lead-2{ margin-top: 48px; }
-
-    /* White pill around “end-to-end” */
-    .highlight-box{
-      font-size:0.7em; background:#fff; color:#000; padding:4px 8px;
-      border-radius:6px; font-weight:700; display:inline-block; vertical-align:middle;
-    }
-
-    /* Figure box: same color feel as background (no white card) */
-    .hero-figure{
-      border-radius:12px;
-      background: rgba(255,255,255,.06);           /* subtle tint only */
-      border: 1px dashed rgba(255,255,255,.25);    /* you had a dashed guide */
-      min-height: 240px;
-      display:flex; align-items:center; justify-content:center;
-      overflow:hidden;
-    }
-    .hero-figure img{
-      width:100%; height:auto; display:block; object-fit:contain;
-    }
-
-    /* Footer: 3 columns + white links */
-    footer.site{ text-align:left; }
-    .footer-cols{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; align-items:start; }
-    .footer-cols > div + div{ border-left:1px solid #2e4a8e; padding-left:16px; }
-    .footer-cols h3{ margin:0 0 6px; font-size:.95rem; color:#ffffff; }
-    .footer-cols p, .footer-cols a{ font-size:.95rem; line-height:1.35; color:#ffffff; text-decoration:none; }
-    .footer-cols a:hover{ text-decoration:underline; }
-
-    /* Keep Ask button aligned with container’s right edge */
     #osx-widget{
       position: fixed;
       bottom: 16px;
@@ -132,6 +27,7 @@
         <span class="logo" aria-hidden="true"></span>
         <span class="brand-text">OncoSyNex</span>
       </a>
+
       <div class="top-actions">
         <a class="tab" href="/oncosynex/contact/#demo" target="_blank" rel="noopener">Get a personalized demo</a>
         <a class="tab" href="/oncosynex/resources/platform/" target="_blank" rel="noopener">Read the docs</a>
@@ -142,10 +38,11 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container wrap">
-      <!-- NAV in hero -->
+      <!-- NAV (centered & evenly spaced from your CSS) -->
       <nav class="subnav" aria-label="Primary">
         <a href="/oncosynex/">Home</a>
 
+        <!-- PRODUCT -->
         <div class="dropdown product-dd">
           <button aria-haspopup="true" aria-expanded="false">Product ▾</button>
           <div class="mega slim" role="menu">
@@ -159,6 +56,7 @@
 
         <a href="/oncosynex/pricing/">Pricing</a>
 
+        <!-- RESOURCES -->
         <div class="dropdown resources-dd">
           <button aria-haspopup="true" aria-expanded="false">Resources ▾</button>
           <div class="mega slim" role="menu">
@@ -174,21 +72,30 @@
         <a href="/oncosynex/contact/" target="_blank" rel="noopener">Contact</a>
       </nav>
 
-      <!-- Row 2: Left block (AI-powered...) -->
-      <p class="lead lead-1">
-        AI-powered multi-omics for immunotherapy, vaccine development, and translational research
-        <span class="highlight-box">end-to-end</span>
-      </p>
+      <!-- ===== HERO GRID (Row1: left copy + right figure, Row2: full-width copy) ===== -->
+      <div class="hero-grid">
+        <!-- Row 1 — Left -->
+        <p class="lead">
+          AI-powered multi-omics for immunotherapy, vaccine development, and translational research
+          <span class="highlight-box">end-to-end</span>
+        </p>
 
-      <!-- Row 2: Right block (figure) -->
-      <div class="hero-figure">
-        <img src="/oncosynex/assets/Neoantigens_discovery.svg" alt="OncoSyNex platform illustration">
+        <!-- Row 1 — Right (figure on a white card) -->
+        <aside class="hero-figure" aria-label="OncoSyNex platform illustration">
+          <img
+            src="/oncosynex/assets/Neoantigens_discovery.svg"
+            alt="OncoSyNex platform illustration"
+            loading="eager"
+            decoding="async"
+          />
+        </aside>
+
+        <!-- Row 2 — Full width -->
+        <p class="lead wide">
+          Antigens and plasmids for diagnostics and immunotherapy
+        </p>
       </div>
-
-      <!-- Row 3: Left block (Antigens and plasmids...) -->
-      <p class="lead lead-2">
-        Antigens and plasmids for diagnostics and immunotherapy
-      </p>
+      <!-- ===== /HERO GRID ===== -->
     </div>
   </section>
 
@@ -196,7 +103,9 @@
   <footer class="site">
     <div class="container">
       <div class="footer-cols">
-        <div><p>Oncology • Synergy • Next-gen</p></div>
+        <div>
+          <p>Oncology • Synergy • Next-gen</p>
+        </div>
         <div>
           <h3>Navigate</h3>
           <p>
@@ -220,38 +129,38 @@
   <!-- Year -->
   <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 
-  <!-- Load Q&A first, then widget -->
+  <!-- Widget (Q&A first, then logic) -->
   <script src="/oncosynex/assets/osx_qa.js?v=3"></script>
   <script src="/oncosynex/assets/osx_widget.js?v=9" defer></script>
   <div id="osx-widget"></div>
 
   <!-- Dropdown open/close logic -->
   <script>
-  (function () {
-    const closeAll = (except) => {
-      document.querySelectorAll('.dropdown.open').forEach(dd => {
-        if (dd !== except) {
-          dd.classList.remove('open');
-          const b = dd.querySelector('> button[aria-expanded]');
-          if (b) b.setAttribute('aria-expanded', 'false');
-        }
+    (function () {
+      const closeAll = (except) => {
+        document.querySelectorAll('.dropdown.open').forEach(dd => {
+          if (dd !== except) {
+            dd.classList.remove('open');
+            const b = dd.querySelector('> button[aria-expanded]');
+            if (b) b.setAttribute('aria-expanded', 'false');
+          }
+        });
+      };
+      document.querySelectorAll('.dropdown > button').forEach(btn => {
+        const dd = btn.parentElement;
+        btn.setAttribute('aria-expanded', 'false');
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const willOpen = !dd.classList.contains('open');
+          closeAll(dd);
+          dd.classList.toggle('open', willOpen);
+          btn.setAttribute('aria-expanded', String(willOpen));
+        });
       });
-    };
-    document.querySelectorAll('.dropdown > button').forEach(btn => {
-      const dd = btn.parentElement;
-      btn.setAttribute('aria-expanded', 'false');
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const willOpen = !dd.classList.contains('open');
-        closeAll(dd);
-        dd.classList.toggle('open', willOpen);
-        btn.setAttribute('aria-expanded', String(willOpen));
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.dropdown')) closeAll();
       });
-    });
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.dropdown')) closeAll();
-    });
-  })();
+    })();
   </script>
 </body>
 </html>
