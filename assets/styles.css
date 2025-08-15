@@ -460,3 +460,50 @@ footer.site{
   filter: brightness(1.05);
   transform: translateY(-1px);
 }
+/* ===== Hero spacing tweaks: tighter white around top figure ===== */
+:root{
+  --hero-gap: 20px;            /* smaller gap between columns */
+}
+.hero .hero-figure{
+  padding: 10px;               /* reduces excess white around image */
+  margin: 0 auto;              /* ensure it centers in the container */
+}
+
+/* ===== Sticky figure scroller (below hero) ===== */
+.fig-scroller{
+  padding: 12px 0 40px;
+}
+.fig-wrap{
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.fig-sticky{
+  position: sticky;
+  top: 110px;                  /* below your header band */
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  z-index: 0;
+}
+.fig-card{
+  background: #fff;
+  border: 1px solid #e6ebf4;
+  border-radius: 12px;
+  box-shadow: 0 14px 32px rgba(0,0,0,.22); /* a bit more “floaty” */
+  width: min(980px, 100%);
+}
+.fig-card img{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+.center{ text-align:center; }
+
+.fig-steps .step{
+  height: 80vh;                /* scrolling through swaps the image */
+}
+.fig-steps .step + .step{
+  margin-top: 12vh;
+}

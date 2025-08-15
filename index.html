@@ -6,7 +6,7 @@
   <title>OncoSyNex — Home</title>
 
   <!-- Main stylesheet -->
-  <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=55" />
+  <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=56" />
 
   <!-- Keep the FAB aligned with the right edge of your container -->
   <style>
@@ -91,6 +91,33 @@
           Antigens and plasmids for diagnostics and immunotherapy
         </p>
       </div>
+
+      <!-- ===== Pipelines: sticky figure that swaps on scroll ===== -->
+      <section class="fig-scroller" aria-label="Pipelines gallery">
+        <div class="fig-wrap">
+          <!-- Pinned figure card; image swaps as you scroll -->
+          <figure class="fig-sticky">
+            <div class="fig-card">
+              <!-- NOTE: browsers can’t render .svs; use .svg/.png -->
+              <img id="figSwap"
+                   src="/oncosynex/assets/bulkRNAseq.svg"
+                   alt="Bulk RNA-seq"
+                   loading="lazy"
+                   decoding="async" />
+            </div>
+            <figcaption id="figCaption" class="muted center">Bulk RNA-seq</figcaption>
+          </figure>
+
+          <!-- Scroll triggers -->
+          <div class="fig-steps">
+            <div class="step" data-img="/oncosynex/assets/bulkRNAseq.svg"           data-caption="Bulk RNA-seq"></div>
+            <div class="step" data-img="/oncosynex/assets/HLAtyping.svg"            data-caption="HLA typing"></div>
+            <div class="step" data-img="/oncosynex/assets/variant%20calling.svg"    data-caption="Variant calling"></div>
+            <div class="step" data-img="/oncosynex/assets/SCRNAseq.svg"             data-caption="scRNA-seq"></div>
+          </div>
+        </div>
+      </section>
+      <!-- /Pipelines -->
     </div>
   </section>
 
@@ -152,6 +179,33 @@
       document.addEventListener('click', (e) => {
         if (!e.target.closest('.dropdown')) closeAll();
       });
+    })();
+  </script>
+
+  <!-- Sticky figure swapper -->
+  <script>
+    (function () {
+      const img = document.getElementById('figSwap');
+      const cap = document.getElementById('figCaption');
+      const steps = document.querySelectorAll('.fig-steps .step');
+      if (!img || !steps.length) return;
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const src = el.dataset.img;
+            const caption = el.dataset.caption || '';
+            if (src && !img.src.endsWith(src)) {
+              img.src = src;
+              img.alt = caption || 'Pipeline figure';
+              if (cap) cap.textContent = caption;
+            }
+          }
+        });
+      }, { root: null, rootMargin: '0px 0px -45% 0px', threshold: 0.35 });
+
+      steps.forEach(s => io.observe(s));
     })();
   </script>
 </body>
