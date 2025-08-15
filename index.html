@@ -6,7 +6,7 @@
   <title>OncoSyNex — Home</title>
 
   <!-- Main stylesheet -->
-  <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=56" />
+  <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=57" />
 
   <!-- Keep the FAB aligned with the right edge of your container -->
   <style>
@@ -15,6 +15,15 @@
       bottom: 16px;
       right: max(16px, calc((100vw - min(var(--max,1180px), 100% - 2*var(--edge,16px)))/2));
       z-index: 9999;
+    }
+    /* Optional: tighter hero image card look */
+    .hero-figure img{
+      display:block;
+      width:100%;
+      height:auto;
+      border-radius:16px;
+      box-shadow: 0 6px 24px rgba(0,0,0,.2);
+      background: #fff; /* in case SVG has transparency */
     }
   </style>
 </head>
@@ -71,54 +80,68 @@
         <a href="/oncosynex/contact/" target="_blank" rel="noopener">Contact</a>
       </nav>
 
-      <!-- HERO GRID (centered) -->
+      <!-- HERO GRID -->
       <div class="hero-grid">
         <p class="lead">
           AI-powered neoantigen & vaccine design
           <span class="highlight-box">end-to-end</span>
         </p>
 
-        <aside class="hero-figure" aria-label="OncoSyNex platform illustration">
+        <!-- (1) ONE SVG directly beneath the headline -->
+        <aside class="hero-figure" aria-label="Neoantigen & vaccine design illustration">
           <img
-            src="/oncosynex/assets/antigens.svg"
-            alt="Antigens"
+            src="/oncosynex/assets/Neoantigens_discovery.svg"
+            alt="Neoantigen & vaccine design"
             loading="eager"
             decoding="async"
           />
         </aside>
-
-        <p class="lead wide">
-          Antigens and plasmids for diagnostics and immunotherapy
-        </p>
-        <!-- duplicated line (as requested) -->
-        <p class="lead wide">
-          Antigens and plasmids for diagnostics and immunotherapy
-        </p>
       </div>
 
-      <!-- ===== Gallery: sticky figure that swaps on scroll (now 2 items) ===== -->
-      <section class="fig-scroller" aria-label="Pipelines gallery">
+      <!-- (2) BIOINFORMATICS SUITE — sticky gallery with FOUR SVGs -->
+      <h2 class="center" style="margin-top:2.25rem">AI-powered Bioinformatics suite</h2>
+      <section class="fig-scroller" aria-label="Bioinformatics gallery">
         <div class="fig-wrap">
-          <!-- Pinned figure card; image swaps as you scroll -->
+          <!-- Pinned figure card; image swaps on scroll -->
           <figure class="fig-sticky">
             <div class="fig-card">
-              <img id="figSwap"
-                   src="/oncosynex/assets/antigens.svg"
-                   alt="Antigens"
-                   loading="lazy"
-                   decoding="async" />
+              <img id="bioFig" src="/oncosynex/assets/bulkRNAseq.svg" alt="Bulk RNA-seq" loading="lazy" decoding="async" />
             </div>
-            <figcaption id="figCaption" class="muted center">Antigens</figcaption>
+            <figcaption id="bioCap" class="muted center">Bulk RNA-seq</figcaption>
           </figure>
 
-          <!-- Scroll triggers (reduced to two) -->
+          <!-- Scroll triggers (top-to-bottom; each reveals the next) -->
           <div class="fig-steps">
-            <div class="step" data-img="/oncosynex/assets/antigens.svg"   data-caption="Antigens"></div>
-            <div class="step" data-img="/oncosynex/assets/antibodies.svg" data-caption="Antibodies"></div>
+            <div class="step" data-target="bio" data-img="/oncosynex/assets/bulkRNAseq.svg"         data-caption="Bulk RNA-seq"></div>
+            <div class="step" data-target="bio" data-img="/oncosynex/assets/HLAtyping.svg"          data-caption="HLA typing"></div>
+            <div class="step" data-target="bio" data-img="/oncosynex/assets/variant calling.svg"    data-caption="Variant calling"></div>
+            <div class="step" data-target="bio" data-img="/oncosynex/assets/SCRNAseq.svg"           data-caption="scRNA-seq"></div>
           </div>
         </div>
       </section>
-      <!-- /Gallery -->
+
+      <!-- (3) Antigens line + TWO-SVG gallery -->
+      <p class="lead wide" style="margin-top:2.5rem">
+        Antigens and plasmids for diagnostics and immunotherapy
+      </p>
+
+      <section class="fig-scroller" aria-label="Antigens gallery">
+        <div class="fig-wrap">
+          <!-- Pinned figure card -->
+          <figure class="fig-sticky">
+            <div class="fig-card">
+              <img id="agFig" src="/oncosynex/assets/antigens.svg" alt="Antigens" loading="lazy" decoding="async" />
+            </div>
+            <figcaption id="agCap" class="muted center">Antigens</figcaption>
+          </figure>
+
+          <!-- Scroll triggers (two items) -->
+          <div class="fig-steps">
+            <div class="step" data-target="ag" data-img="/oncosynex/assets/antigens.svg"   data-caption="Antigens"></div>
+            <div class="step" data-target="ag" data-img="/oncosynex/assets/antibodies.svg" data-caption="Antibodies"></div>
+          </div>
+        </div>
+      </section>
     </div>
   </section>
 
@@ -183,30 +206,39 @@
     })();
   </script>
 
-  <!-- Sticky figure swapper -->
+  <!-- Sticky figure swappers (supports multiple galleries by data-target) -->
   <script>
     (function () {
-      const img = document.getElementById('figSwap');
-      const cap = document.getElementById('figCaption');
-      const steps = document.querySelectorAll('.fig-steps .step');
-      if (!img || !steps.length) return;
+      const galleries = [
+        { img: document.getElementById('bioFig'), cap: document.getElementById('bioCap'), name: 'bio' },
+        { img: document.getElementById('agFig'),  cap: document.getElementById('agCap'),  name: 'ag'  }
+      ].filter(g => g.img);
+
+      if (!galleries.length) return;
+
+      const byName = Object.fromEntries(galleries.map(g => [g.name, g]));
 
       const io = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const el = entry.target;
-            const src = el.dataset.img;
-            const caption = el.dataset.caption || '';
-            if (src && !img.src.endsWith(src)) {
-              img.src = src;
-              img.alt = caption || 'Figure';
-              if (cap) cap.textContent = caption;
-            }
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          const target = el.dataset.target;      // 'bio' or 'ag'
+          const src = el.dataset.img;
+          const caption = el.dataset.caption || '';
+          const g = byName[target];
+          if (!g || !src) return;
+
+          const current = g.img.getAttribute('src') || '';
+          // If the file name is the same, skip; otherwise update
+          if (!current.endsWith(src)) {
+            g.img.src = src;
+            g.img.alt = caption || 'Figure';
+            if (g.cap) g.cap.textContent = caption;
           }
         });
       }, { root: null, rootMargin: '0px 0px -45% 0px', threshold: 0.35 });
 
-      steps.forEach(s => io.observe(s));
+      document.querySelectorAll('.fig-steps .step').forEach(step => io.observe(step));
     })();
   </script>
 </body>
