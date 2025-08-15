@@ -6,9 +6,9 @@
   <title>OncoSyNex — Home</title>
 
   <!-- Main stylesheet -->
-  <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=55" />
+  <link rel="stylesheet" href="/oncosynex/assets/styles.css?v=56" />
 
-  <!-- Keep the FAB aligned with the right edge of your container -->
+  <!-- Keep the FAB aligned with the container’s right edge (panel position) -->
   <style>
     #osx-widget{
       position: fixed;
@@ -31,6 +31,8 @@
       <div class="top-actions">
         <a class="tab" href="/oncosynex/contact/#demo" target="_blank" rel="noopener">Get a personalized demo</a>
         <a class="tab" href="/oncosynex/resources/platform/" target="_blank" rel="noopener">Read the docs</a>
+        <!-- NEW: Ask button (opens the hidden widget panel) -->
+        <button class="tab ask-ai" id="ask-ai-btn" type="button">Ask OncoSyNex AI</button>
       </div>
     </div>
   </header>
@@ -42,6 +44,7 @@
       <nav class="subnav" aria-label="Primary">
         <a href="/oncosynex/">Home</a>
 
+        <!-- PRODUCT -->
         <div class="dropdown product-dd">
           <button aria-haspopup="true" aria-expanded="false">Product ▾</button>
           <div class="mega slim" role="menu">
@@ -55,6 +58,7 @@
 
         <a href="/oncosynex/pricing/">Pricing</a>
 
+        <!-- RESOURCES -->
         <div class="dropdown resources-dd">
           <button aria-haspopup="true" aria-expanded="false">Resources ▾</button>
           <div class="mega slim" role="menu">
@@ -70,7 +74,7 @@
         <a href="/oncosynex/contact/" target="_blank" rel="noopener">Contact</a>
       </nav>
 
-      <!-- HERO GRID (updated) -->
+      <!-- HERO (vertical stack) -->
       <div class="hero-grid hero-vertical">
         <!-- One-line main headline -->
         <p class="lead one-line">
@@ -78,7 +82,7 @@
           <span class="highlight-box">end-to-end</span>
         </p>
 
-        <!-- Full-width figure: white card matches the SVG bounds (no extra space) -->
+        <!-- Figure on glossy white card + caption centered and width-matched -->
         <figure class="hero-figure hero-figure-wide" aria-label="OncoSyNex platform illustration">
           <img
             src="/oncosynex/assets/Neoantigens_discovery.svg"
@@ -86,19 +90,17 @@
             loading="eager"
             decoding="async"
           />
+          <figcaption class="hero-figure-caption">
+            OncoSyNex engineered plasmids and mRNA constructs, ready for immediate use
+          </figcaption>
         </figure>
 
-        <!-- Centered one-line plasmids/mRNA sentence (smaller than main) -->
-        <p class="lead sub-lead">
-          OncoSyNex engineered plasmids and mRNA constructs, ready for immediate use
-        </p>
-
-        <!-- Bring back the Antigens sentence below -->
-        <p class="lead tertiary">
+        <!-- Antigens line: same font & alignment as the main headline -->
+        <p class="lead one-line tertiary">
           Antigens and plasmids for diagnostics and immunotherapy
         </p>
       </div>
-      <!-- /HERO GRID -->
+      <!-- /HERO -->
     </div>
   </section>
 
@@ -129,14 +131,15 @@
 
   <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 
-  <!-- Widget -->
+  <!-- Widget (Q&A first, then logic) -->
   <script src="/oncosynex/assets/osx_qa.js?v=3"></script>
   <script src="/oncosynex/assets/osx_widget.js?v=9" defer></script>
   <div id="osx-widget"></div>
 
-  <!-- Dropdown logic -->
+  <!-- Hook the header Ask button to the hidden widget's panel -->
   <script>
     (function () {
+      // open/close helpers for dropdowns (unchanged)
       const closeAll = (except) => {
         document.querySelectorAll('.dropdown.open').forEach(dd => {
           if (dd !== except) {
@@ -160,6 +163,20 @@
       document.addEventListener('click', (e) => {
         if (!e.target.closest('.dropdown')) closeAll();
       });
+
+      // Wire the header "Ask OncoSyNex AI" to the (hidden) widget FAB
+      function wireAsk() {
+        const fab = document.querySelector('#osx-widget .osx-fab');
+        const btn = document.getElementById('ask-ai-btn');
+        if (fab && btn) {
+          fab.style.display = 'none';          // hide floating FAB
+          btn.addEventListener('click', () => fab.click());
+          return true;
+        }
+        return false;
+      }
+      const poll = setInterval(() => { if (wireAsk()) clearInterval(poll); }, 200);
+      setTimeout(() => clearInterval(poll), 8000);
     })();
   </script>
 </body>

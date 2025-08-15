@@ -272,3 +272,101 @@ footer.site{
   font-weight: 900;
   margin: 12px 0 0;
 }
+/* ================= HERO refinements ================= */
+
+/* Keep hero as single-column vertical stack */
+.hero .hero-grid.hero-vertical{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--hero-gap, 28px);
+  align-items: start;
+}
+
+/* One-line headline (nowrap on wide screens) */
+.hero .one-line{
+  font-size: clamp(1.4rem, 1.2vw + 0.9rem, 2rem);
+  line-height: 1.1;
+  font-weight: 900;
+  margin: 0;
+}
+@media (min-width: 1000px){
+  .hero .one-line{ white-space: nowrap; }
+}
+
+/* --- Glossy figure card that hugs the SVG and floats a bit --- */
+:root{
+  --hero-figure-max: clamp(720px, 76vw, 1120px);
+}
+.hero .hero-figure-wide{
+  width: auto;
+  max-width: var(--hero-figure-max);
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid #e6ebf4;
+  border-radius: 14px;
+  padding: 0;                  /* no extra white border */
+  box-shadow: 0 18px 40px rgba(0,0,0,.22), 0 2px 0 rgba(255,255,255,.15) inset;
+  position: relative;
+  overflow: hidden;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.hero .hero-figure-wide::before{
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(140% 60% at 0% 0%, rgba(255,255,255,.40), rgba(255,255,255,0) 55%),
+    linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0));
+  pointer-events: none;
+}
+.hero .hero-figure-wide:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 26px 56px rgba(0,0,0,.28), 0 2px 0 rgba(255,255,255,.18) inset;
+}
+.hero .hero-figure-wide img{
+  display: block;
+  width: 100%;
+  height: auto;              /* natural aspect ratio */
+  object-fit: contain;
+  border-radius: 14px;
+}
+
+/* Caption is centered and width-matched (EXACT alignment with figure) */
+.hero .hero-figure-caption{
+  text-align: center;
+  font-weight: 800;
+  font-size: clamp(1.05rem, 0.9vw + .55rem, 1.35rem);
+  line-height: 1.2;
+  margin: 10px 14px 0 14px;
+  white-space: nowrap;       /* single line on wide screens */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Antigens line: same look as main headline (single line on wide screens) */
+.hero .tertiary{
+  font-size: clamp(1.4rem, 1.2vw + 0.9rem, 2rem);
+  line-height: 1.1;
+  font-weight: 900;
+  margin: 10px 0 0;
+}
+@media (min-width: 1000px){
+  .hero .tertiary.one-line{ white-space: nowrap; }
+}
+
+/* Optional: give more breathing room above the figure on small screens */
+@media (max-width: 720px){
+  .hero .hero-figure-wide{ border-radius: 12px; }
+}
+
+/* ================ Header: Ask button styling ================ */
+.top-actions{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.top-actions .tab.ask-ai{
+  background: #1e64ff;
+  border: 1px solid #1a56d6;
+  color: #fff;
+  font-weight: 800;
+}
+.top-actions .tab.ask-ai:hover{ filter: brightness(1.06); }
+
+/* Hide the widget's floating FAB (we launch it from the header button) */
+#osx-widget .osx-fab{ display: none !important; }
