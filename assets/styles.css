@@ -370,3 +370,18 @@ footer.site{
 
 /* Hide the widget's floating FAB (we launch it from the header button) */
 #osx-widget .osx-fab{ display: none !important; }
+
+/* Ask OncoSyNex AI color (also used for the Send button in the panel) */
+:root{
+  --btn: #2e90ff;      /* <- change this to the color you want */
+  --btn-ink: #ffffff;  /* <- text color on the button */
+}
+
+/* Optional: make only the floating pill glossy */
+#osx-widget .osx-fab{
+  background: var(--btn);
+  color: var(--btn-ink);
+  border: 1px solid rgba(0,0,0,.06);
+  box-shadow: 0 10px 24px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.18);
+}
+#osx-widget .osx-fab:hover{ transform: translateY(-1px); filter: brightness(1.06); }
